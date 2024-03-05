@@ -1,3 +1,6 @@
+TypeScript:
+  - typescript/tsconfig-examples.adoc
+
 Command Line:
   - cmdline/curl.adoc
   - cmdline/bash-brace-expansion.adoc
