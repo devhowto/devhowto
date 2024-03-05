@@ -1,0 +1,156 @@
+= Blocks :: Ruby
+:icons: font
+:toc: left
+
+== Intro
+
+=== Block 1
+
+.block_1.rb
+[source,ruby]
+----
+(1..5).inject(0) do |acc, n|
+  acc + n
+end
+----
+
+.running block_1.rb
+[source,shell-session]
+----
+$ ruby -w ./block_1.rb
+----
+
+What is the output?
+
+Nothing!
+The code runs, but no instruction to output anything is given.
+Note that if the snippet in question is run in `irb`, then it implicitly prints the result of the expression.
+
+=== Block 2 (error)
+
+.block_2.rb
+[source,ruby]
+----
+p (1..5).inject(0) do |acc, n|
+  acc + n
+end
+----
+
+Note the `p`.
+
+.running block_2.rb
+[source,shell-session]
+----
+$ ruby -w ./block_2.rb
+./block_1.rb:2:in ‘inject’: 0 is not a symbol nor a string (TypeError)
+  from ./block_2.rb:1:in ‘<main>’
+----
+
+The problem is precedence!
+
+`do end` has lower precedence than `{ }`, and it maters.
+
+What happens is that `p` will try to print `(1..5).inject(0)`, instead of the whole result of the `inject` expression and its accompanying block.
+
+Look how this results in the exact same error:
+
+[source,text]
+----
+$ irb --simple-prompt
+
+>> p (1..5).inject(0)
+(irb):1:in `inject': 0 is not a symbol nor a string (TypeError)
+        from (irb):1:in `<main>'
+----
+
+=== Block 3 (solution 1)
+
+By simply parenthesizing the argument to `p`, the problem is solved:
+
+.block_3.rb
+[source,ruby]
+----
+p ((1..5).inject(0) do |acc, n|
+  acc + n
+end)
+----
+
+.running block_3.rb
+[source,ruby]
+----
+$ ruby -w ./block_3.rb
+15
+----
+
+=== Bock 4 (solution 2)
+
+Or use `{ }` syntax, which has higher precedence and also fixes the precedence problem:
+
+
+.block_4.rb
+[source,ruby]
+----
+p (1..5).inject(0) { |acc, n|
+  acc + n
+}
+----
+
+.running block_4.rb
+[source,ruby]
+----
+$ ruby -w ./block_4.rb
+15
+----
+
+=== Block 5 (solution 3)
+
+Both solutions 1 and 2 are OK.
+However, depending on the project and on the style guide rules used, the parenthesizing the `inject` expression and using `{ }` for multiline blocks may be considered a violation.
+
+So, another solution would be to simply assign the result to a variable before printing it.
+
+.block_5.rb
+[source,ruby]
+----
+total = (1..5).inject(0) do |acc, n|
+  acc + n
+end
+
+p total
+----
+
+.running block_5.rb
+[source,text]
+----
+$ ruby -w ./block_5.rb
+15
+----
+
+This works fine because assignment has lower precedence as it is common for things on the right to be evaluated first before the assignment happens.
+
+== References
+
+* link:https://ruby-doc.com/3.2.0/syntax/calling_methods_rdoc.html#label-Block+Argument[Ruby Docs on block syntax].
+
+== Block Parameters
+
+We can replace the first parameter `|p1|` with `_1`, the second parameter `|p2` with `_2` and so on and so forth:
+
+[source,irb]
+----
+>> [*1..5].map { |x| x.to_s }
+=> ["1", "2", "3", "4", "5"]
+
+>> [*1..5].map { _1.to_s }
+=> ["1", "2", "3", "4", "5"]
+
+>> [10, 20, 30].each_with_index { |num, idx| p "#{idx}: #{num}" }
+"0: 10"
+"1: 20"
+"2: 30"
+
+>> [10, 20, 30].each_with_index { p "#{_2}: #{_1}" }
+"0: 10"
+"1: 20"
+"2: 30"
+----

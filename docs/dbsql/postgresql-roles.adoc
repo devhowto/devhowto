@@ -1,0 +1,19 @@
+= Roles (users) :: PostgreSQL
+:icons: font
+:toc: left
+
+== Alter role password
+
+NOTE: Assume the role _devel_ has admin privileges.
+
+[source,text]
+----
+$ docker compose exec db psql -U devel -d devel -W
+
+devel#=> SELECT * FROM pg_roles WHERE rolname like '%blog%';
+ rolname
+---------
+ blog1
+
+devel#=> ALTER USER blog1 WITH LOGIN PASSWORD 's3cr37';
+----

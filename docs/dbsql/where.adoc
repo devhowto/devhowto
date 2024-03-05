@@ -1,0 +1,616 @@
+= The WHERE Clause
+:page-subtitle: Databases and SQL
+:page-tags: sql where db
+:toc: left
+:icons: font
+:source-highlighter: highlight.js
+
+[NOTE]
+====
+Notes from the book Simply SQL with my own extra explanations and examples.
+====
+
+`FROM` clause produces a tabular structure, a.k.a.
+_result set_.
+
+The `WHERE` clause is optional, but when present, acts like a filter on the rows of the result set produced by the `FROM` clause.
+
+The `WHERE` clause, more than any other clause, determines how performant our queries will be.
+
+== Conditions
+
+----
+WHERE <condition that evaluate as TRUE>
+----
+
+Example:
+
+----
+SELECT name
+FROM teams
+WHERE id = 9;
+----
+
+A condition is some expression that can be evaluated by the database system, which may result in `TRUE`, `FALSE` or `UNKNOWN`.
+
+The `WHERE` clause evaluates the truth of the condition for every row.
+
+Only one row can possibly have the 9 as its `id` (as IDs have to be unique, no two entities can have the same ID).
+
+`FROM` produces all rows, then the condition _filters out_ all rows whose `id` is not 9.
+It returns `FALSE` for those rows.
+Only the row with `id = 9` will produce `TRUE`.
+
+----
+SELECT name
+FROM teams
+WHERE NOT id = 9;
+
+SELECT name
+FROM teams
+WHERE id <> 9;
+----
+
+`NOT` negates the truthy value.
+`<>` can be read as "`less than or greater than 9 (but not 9).`"
+
+The condition expressions have to produce `TRUE`, even though we want all rows where `id = 9` is `FALSE`.
+
+A `WHERE` clause can include a `NOT` keyword.
+And several conditions logically connected form a *compound condition*.
+
+Avoid using the non-standard `!=`, supported by some DB vendors.
+
+== Shopping Carts
+
+----
+CREATE DATABASE simplysql_cart_devel WITH
+    ENCODING='UTF-8'
+    OWNER=devel
+    LC_CTYPE='en_US.UTF-8'
+    LC_COLLATE='en_US.UTF-8'
+    TEMPLATE=template0
+    CONNECTION LIMIT=3;
+----
+
+[TIP]
+====
+PostgreSQL DB dumps are on my cloud share.
+====
+
+`NULL` can mean a few things (have several interpretations), including _unknown_, _not applicable_, _missing_ (in case of outer joins).
+For the `items` table, when the price is `NULL`, the best interpretation is _unknown_.
+
+If an item has price 2.22, then `WHERE price = 2.22` is `TRUE`, and `WHERE price = 2.21` is `FALSE`.
+If `price` is `NULL`, the result is `FALSE` (as 2.22 is not `NULL`), but we can also say it is `UNKNOWN`, as the price of the item itself is `UNKNOWN``.
+
+The SQL standard says that `NULL` is not equal to anything, including another `NULL`.
+Similar to `NaN` in ECMAScript, which is not equal to anything, including not being equal to itself:
+
+.psql session to test NULL
+[source,text]
+----
+SQL> \pset null '∅'
+Null display is "∅".
+SQL> SELECT 1 = 1 AS res;
+ res
+-----
+ t
+(1 row)
+
+SQL> SELECT 1 = NULL AS res;
+ res
+-----
+ ∅
+(1 row)
+
+SQL> SELECT NULL = NULL AS res;
+ res
+-----
+ ∅
+(1 row)
+----
+
+.node REPL session to test NaN
+[source,text]
+----
+> 1 === NaN
+false
+> NaN === NaN
+false
+> Number.isNaN(NaN)
+true
+----
+
+``NULL``'s are a tricky topic.
+The `WHERE` clause only retains rows for which the condition evaluates to `TRUE`, so conditions that evaluate to `FALSE` _or_ `UNKNOWN` are filtered out nonetheless.
+
+== Operators
+
+There are other operators besides the “equal to” (`=`) and the “not equal to”  (the standard `<>` or the non-standard `!=`).
+
+=== Comparison Operators
+
+Besides equality, it is possible to check whether a value is _less than_ or _more than_ some other value.
+
+These operators can be used with numbers, strings and dates.
+Numbers are compared in numerically, strings alphabetically, and dates chronologically.
+
+equal to:: `=`
+not equal to:: `<>` (or the non-standard `!=`)
+less than:: `<`
+less than or equal to:: `pass:[<=]`
+greater than:: `>`
+greater than or equal to:: `>=`
+
+[TIP]
+====
+Text and strings are compared based on the __collating sequence__ or simply __collation__.
+
+See:
+
+* link:https://en.wikipedia.org/wiki/Collation[Collation (Wikipedia)^]
+* link:https://www.postgresql.org/docs/current/collation.html[Collation Support (PostgreSQL Docs)^]
+* link:https://mariadb.com/kb/en/setting-character-sets-and-collations/[Setting Character Sets and Collations (MariDB docs)^]
+====
+
+For example, to filter based on a created date greater than or equal to some date:
+
+[source,sql]
+----
+SELECT
+    id
+  , title
+  , created
+FROM entries
+WHERE created >= '2009-01-01';
+----
+
+[source,example]
+----
+ id  |            title            |       created
+-----+-----------------------------+---------------------
+ 537 | Be Nice to Everybody        | 2009-03-02 00:00:00
+ 573 | Hello Statue                | 2009-03-17 00:00:00
+ 598 | The Size of Our Galaxy      | 2009-04-03 00:00:00
+ 524 | Uncle Karl and the Gasoline | 2009-02-28 00:00:00
+(4 rows)
+----
+
+=== The LIKE Operator
+
+The `LIKE` operator allows for pattern matching on strings using wild card characters.
+
+In standard SQL, `LIKE` provides two wildcards:
+
+The underscore ‘`_`’:: Match exactly one character (similar to
+‘`.`’ in regex).
+Percent sign ‘`%`’:: Match zero or more characters (similar to ‘`.*`’ in regex).
+
+[source,sql]
+----
+SELECT
+    name
+  , type
+FROM items
+WHERE name LIKE 'thing%';
+----
+
+[source,text]
+----
+    name     |  type
+-------------+---------
+ thingie     | widgets
+ thingamajig | widgets
+ thingamabob | doodads
+ thingum     | gizmos
+----
+
+Match “thing” followed by any (and only) two other characters:
+
+[source,sql]
+----
+SELECT
+    name
+  , type
+FROM items
+WHERE name LIKE 'thing__';
+----
+
+[source,text]
+----
+  name   |  type
+---------+---------
+ thingie | widgets
+ thingum | gizmos
+----
+
+=== The BETWEEN Operator
+
+The `BETWEEN` operator checks if a value is between the range of two values, inclusive.
+
+[source,sql]
+----
+SELECT
+    name
+  , type
+  , price
+FROM items
+WHERE price BETWEEN 4.00 AND 10.00
+ORDER BY price ASC;
+----
+
+[source,text]
+----
+    name    |  type   | price
+------------+---------+-------
+ folderol   | doodads |  4.00
+ gewgaw     | widgets |  5.00
+ jigger     | gizmos  |  6.00
+ thingie    | widgets |  9.37
+ gimmick    | doodads |  9.37
+ dingbat    | gizmos  |  9.37
+ knickknack | doodads | 10.00
+----
+
+Note that `WHERE price BETWEEN 4 and 10` is the same as:
+
+[source,sql]
+----
+WHERE price >= 5 AND price <= 10
+----
+
+Or
+
+[source,sql]
+----
+WHERE 5 <= price AND price <= 10
+----
+
+And to select something since the last 3 days:
+
+[source,sql]
+----
+SELECT title, created
+FROM entries
+WHERE created BETWEEN CURRENT_DATE - INTERVAL 5 DAY
+              AND CURRENT_DATE;
+----
+
+PostgreSQL's syntax is something like `INTERVAL '5 days'`.
+
+[WARNING]
+====
+When selecting between time intervals, make sure the earlier date comes before the later date, or no matches will be returned.
+====
+
+An example with constant dates:
+
+[source,sql]
+----
+SELECT title, created
+FROM entries
+WHERE created BETWEEN '2001-01-01' AND '2001-01-23';
+----
+
+For February, that can have 28 or 29 days, it is probably best to use compound condition with an _open-ended upper end point_:
+
+[source,sql]
+----
+SELECT title, created
+FROM entries
+WHERE '2009-02-01' <= created AND created < '2009-03-01';
+----
+
+Note the correct use of `pass:[<=]` and `<` for this particular case.
+We calculate the first day of the following month, but do not include it in the results 🤣.
+This query will correctly match a date range that includes all the days in the month of February.
+Clever and simple at the same time.
+
+== Compound Conditions with AND and OR
+
+=== OR
+
+[source,sql]
+----
+SELECT name
+FROM masters
+WHERE name = 'Aayla Secura'
+  OR  name = 'Ahsoka Tano';
+----
+
+=== AND
+
+[source,sql]
+----
+SELECT name, level
+FROM masters
+WHERE name = 'Yoda'
+AND level = 100;
+----
+
+[WARNING]
+====
+`AND` has higher precedence than `OR`.
+====
+
+This query:
+
+[source,sql]
+----
+WHERE c1 = A OR c1 = B
+  AND c2 = C
+----
+
+Especially because the first `OR` and the two first equality comparisons are write on their on line, it is easy to think this query means this:
+
+[source,sql]
+----
+WHERE (c1 = A OR c1 = B) AND c2 = C
+----
+
+But it actually means this:
+
+[source,sql]
+----
+WHERE c1 = A OR (c2 = B AND c3 = C)
+----
+
+That is because `AND` has higher precedence than `OR`.
+
+[TIP]
+====
+It may be good advice to use explicit parenthesis when writing compound conditions with `AND` and `OR`.
+It will improve understanding and reduce the chance of some semantic errors.
+====
+
+== Conditional ANDs and ORs
+
+Sometimes applications need to create `WHERE` clause in which conditions are optional (particularly for search forms).
+
+Because the `WHERE` clause requires at least one condition expression, instead of writing complicated logic to know whether or not a `WHERE` clause will be needed, you may like these better:
+
+* For ``WHERE ... AND``, simply start with `WHERE 1 = 1` and then conditionally continue with any ``AND``'s that may be required.
+* Similarly, for ``WHERE ... OR``, start with `WHERE 1 = 0` and then conditionally add any `OR`'s that may be required.
+
+== IN Conditions
+
+The `IN` condition checks if _any_ of the values inside the parentheses match, the condition evaluates as `TRUE`.
+
+[source,sql]
+----
+SELECT name, level
+FROM masters
+WHERE name IN ('Aayla Secura', 'Ahsoka Tano')
+AND battle_count > 7;
+----
+
+It is like the `IN` condition reads as “if this, or this, or this other, etc.”
+
+.From Simply SQL book
+[source,sql]
+----
+WHERE
+  customers.name IN ('A. Jones', 'B. Smith')
+    AND items.name = 'thingum';
+----
+
+And to negate the condition, one of these are valid:
+
+[source,sql]
+----
+SELECT name, level
+FROM masters
+WHERE NOT (name IN ('Aayla Secura', 'Ahsoka Tano'))
+
+SELECT name, level
+FROM masters
+WHERE name NOT IN ('Aayla Secura', 'Ahsoka Tano')
+----
+
+Note that `NOT` does not work with all operators:
+
+.OK
+[source,sql]
+----
+WHERE name = 'Aayla Secura'
+----
+
+.NOT OK
+[source,sql]
+----
+WHERE name NOT = 'Aayla Secura'
+----
+
+== IN with Subqueries
+
+A query creates a tabular structure.
+If we use a query that returns a single-column structure, that tabular result set can be passed as the data for the `IN` condition.
+
+[source,sql]
+----
+SELECT
+  cartitems.item_id
+FROM
+  cartitems
+INNER JOIN carts
+  ON carts.id = cartitems.cart_id
+WHERE carts.customer_id = 750;
+----
+
+----
+ item_id
+---------
+    5913
+    5912
+    5937
+    5913
+----
+
+We now have a list of item IDs (note 5913 shows up twice; maybe that customer bought it more than once).
+
+Let's feed that result to a query to get those items' names using an `IN` condition:
+
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  items
+WHERE
+  id IN (
+    SELECT
+      cartitems.item_id
+    FROM
+      cartitems
+    INNER JOIN carts
+      ON carts.id = cartitems.cart_id
+    WHERE
+      carts.customer_id = 750
+  );
+----
+
+In the end, the `IN` with the subquery is just like this:
+
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  items
+WHERE
+  id IN (5913, 5912, 5937, 5913);
+----
+
+As a reminder, a subquery produces a result which, “from the eyes of the man query”, is just like a table the outer query can select from.
+
+== Correlated Subqueries
+
+A correlated subquery is one that refers to (and therefore is dependent on) the parent query to be valid.
+
+It makes a reference, via a correlation variable, to the outer main query.
+
+A query that selects the latest entry (based on the `created` date) for each category:
+
+[source,sql]
+----
+SELECT
+  title
+, category
+, created
+FROM
+  entries AS t
+WHERE
+  created = (
+    SELECT
+      MAX(created)
+    FROM
+      entries
+    WHERE
+      category = t.category
+  );
+----
+
+Because of the `t.category`, it is like if it will _loop_ and find the latest entry for each category in turn.
+
+Each entry's created date is compared with the max created date returned for the subquery.
+Instead of something like
+
+[source,text]
+----
+WHERE created = '2001-01-23'
+----
+
+we instead compare created with the resultant date produced by the correlated subquery
+
+[source,text]
+----
+WHERE created = <resulting date from subquery>
+----
+
+In other words, if the entry's created date is the equal to the created date found by the subquery, that entry is returned in the result set.
+
+A subquery is tied to an object from the outer, main query.
+A join is part of the main query.
+Otherwise, they are similar and in many cases, correlated subqueries can be rewritten as joins.
+
+[source,sql]
+----
+SELECT
+  t.title
+, t.category
+, t.created
+FROM
+  entries AS t
+    INNER JOIN (
+      SELECT
+        category
+      , MAX(created) AS maxdate
+      FROM
+        entries
+      GROUP BY category
+    ) AS m
+      ON m.category = t.category
+        AND m.maxdate = t.created;
+----
+
+The subquery produces one row per category, and each row contains the latest date for that category (which is aliased as a derived table `m`)
+
+== EXISTS
+
+Similar to an `IN` condition with a subquery, the `EXISTS` condition merely needs the subquery to return _any_ rows at all in order for it to evaluate to `TRUE`.
+
+Select all customers which have items in the cart:
+
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  customers
+WHERE
+  EXISTS (
+    SELECT 1 AS yes
+      FROM
+        carts
+      WHERE
+        carts.customer_id = customers.id
+    );
+----
+
+Select all customers which do not have items in the cart:
+
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  customers
+WHERE
+  NOT EXISTS (
+    SELECT 1 AS yes
+      FROM
+        carts
+      WHERE
+        carts.customer_id = customers.id
+    );
+----
+
+Or with a join and `IS NULL`:
+
+[source,sql]
+----
+SELECT
+  C.name
+FROM
+  customers
+LEFT OUTER JOIN carts
+  ON customers.id = carts.customer_id
+WHERE carts.customer_id IS NULL;
+----
+
+== The End

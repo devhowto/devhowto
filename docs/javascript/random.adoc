@@ -1,0 +1,17 @@
+= Random JS Notes
+:page-subtitle: JavaScript
+:page-tags: javascript ecmascript tips
+
+== JavaScript Is Fun
+
+[source,shell-session]
+----
+$ node -e 'console.log("JavaScript is", (![]+[])[+[]]+([][[]]+[])[+[]]+([][[]]+[])[+!![]]);'
+JavaScript is fun
+----
+
+[source,javascript]
+----
+console.log('JavaScript is', (![]+[])[+[]]+([][[]]+[])[+[]]+([][[]]+[])[+!![]]);
+// JavaScript is fun
+----

@@ -1,0 +1,48 @@
+= Do It With Ramda Part I
+:page-subtitle: JavaScript
+:page-tags: javascript functional-programming ramda
+:icons: font
+:sectlinks:
+:sectnums!:
+:toclevels: 6
+:toc: left
+
+== Find users by name
+
+Consider this array of jedi objects:
+
+[source,javascript]
+----
+const users = [
+  { name: 'Ahsoka Tano', level: 9 },
+  { name: 'Darth Vader', level: 8 },
+  { name: 'Aayla Secura', level: 9 },
+  { name: 'Yoda', level: 10 },
+];
+----
+
+How to return the object whose name matches?
+
+Vanilla JavaScript:
+
+[source,javascript]
+----
+function findByName(name, users) {
+  return users.find(user => user.name === name);
+}
+
+findByName('Aayla Secura')(users);
+//=> { name: 'Aayla Secura', level: 9 }
+----
+
+Ramda:
+
+[source,javascript]
+----
+const findByName = compose(find, propEq('name'));
+
+findByName('Aayla Secura')(users);
+//=> { name: 'Aayla Secura', level: 9 }
+----
+
+* link:https://github.com/ramda/ramda/issues/2937[Should 'pathEq/propEq' and 'pathSatisfies/propSatisfies' parameters' order be consistent (Ramda issue)^].

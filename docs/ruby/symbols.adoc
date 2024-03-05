@@ -1,0 +1,14 @@
+= Symbols :: Ruby
+:icons: font
+:toc: left
+
+== Intro
+
+Symbols make nice Hash keys.
+They are preferred over strings for hash keys whenever possible.
+
+One may think of a Symbol as a kind of name tag.
+It's a label, not about the content.
+A String is generally about the content.
+In other languages one might see Symbols referred to as Atoms, or interned strings.
+

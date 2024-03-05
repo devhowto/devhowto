@@ -1,0 +1,98 @@
+= MariaDB
+:toc: left
+:icons: font
+:source-highlighter: highlight.js
+
+== Install MariaDB on macOS
+
+[source,shell-session]
+----
+$ brew install mariadb
+
+$ mysql.server start
+----
+
+== General Initial Steps
+
+No mater the operating system, these are useful first steps for a local study or development system.
+
+Run `sudo mysql_secure_installation`.
+
+Select a password for root, and delete the anonymous user and the test database.
+
+Login as `root` and create a user for local development/studying purposes:
+
+----
+$ mysql --user root --password
+
+MariaDB [(none)]> CREATE USER 'deveng'@'localhost' IDENTIFIED BY '1234';
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON *.* TO 'deveng'@'localhost' WITH GRANT OPTION;
+
+MariaDB [(none)]> SELECT user, host FROM mysql.user;
+
+MariaDB [(none)]> SHOW GRANTS FOR 'deveng'@'localhost';
+----
+
+Then create a database and switch context to that database:
+
+----
+MariaDB [(none)]> CREATE DATABASE blog CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+MariaDB [(none)]> USE blog;
+----
+
+“ci” means _case insensitive_.
+
+The prompt should now show `MariaDB [blog]>` instead of `MariaDB [(none)]>`.
+
+Create a `posts` table:
+
+[source,sql]
+----
+CREATE TABLE posts (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  title VARCHAR(96) NOT NULL,
+  intro VARCHAR(256),
+  body TEXT
+) ENGINE=InnoDB CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+----
+
+Insert some data into the `posts` table:
+
+[source,sql]
+----
+INSERT INTO posts (
+  id,
+  title,
+) VALUES (
+  1,
+  'First post'
+);
+
+INSERT INTO posts (
+  title,
+  intro
+) VALUES
+(
+  '2nd Post',
+  'Intro to second post'
+),
+(
+  'Learning the ways of the force',
+  'Intro to the ways of the force'
+);
+----
+
+== Dump and Restore
+
+[source,shell-session]
+----
+$ mysqldump \
+    -u devel \
+    -p1234 \
+    mydb \
+    | sed 's/utf8\( \+\|_\)/utf8mb4\1/g' \
+    | mysql \
+        -u devel \
+        -p1234 \
+        newdb
+----

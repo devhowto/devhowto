@@ -1,0 +1,234 @@
+= Prime Factors of a Number
+:page-subtitle: Algorithms and Data Structures
+:toc: left
+:icons: font
+:sectlinks:
+:stem: latexmath
+
+== Intro
+
+For an introduction on prime factorization, peruse link:https://www.mathsisfun.com/prime-factorization.html[Prime Factorization article on Math Is Fun^].
+
+If we divide a number as many times as possible by 2, it means the resulting quotient won't be divisible by multiples of 2 (4, 8, 12, etc.).
+
+.ghci session
+[source,text]
+----
+λ> 24 / 2
+12.0
+
+λ> 12 / 2
+6.0
+
+λ> 6 / 2
+3.0
+----
+
+The quotient 3 cannot be divided by 2, but neither by 4, or 8, or 12, etc.
+
+As another example, if a number is divided by 3 as many times as possible, the resulting quotient can't be divided by multiples of 3 (6, 9, 12, etc.).
+
+.ghci session
+[source,text]
+----
+λ> 18 / 2
+9.0
+
+λ> 9 / 3
+3.0
+
+λ> 3 / 3
+1.0
+----
+
+Divide 18 by the smallest prime: 2.
+The quotient is 9, which we divide by the next smallest prime: 3.
+The quotient is 3, which can still be divided by 3.
+The quotient is now 1.
+It cannot be divided by multiples of three, that is, 6, or 9, or 12, etc.
+
+The above ideas about division helps to understand some of the possible implementations of algorithms to find the prime factors of a number.
+
+== C solution with loops
+
+.factors() solution with loops
+[source,c]
+----
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_LEN 8
+
+int factors(int n, int *ps) {
+  int len = 0,
+      d;
+
+  for (d = 2; n > 1; ++d)
+    while (n % d == 0) {
+      *(ps + len++) = d;
+      n = n / d;
+    }
+
+  return len;
+}
+----
+
+Keep dividing `n` by `d`, so, at some point `d` will be 1 or less than 1, which is why we check stem:[n \gt 1].
+
+[NOTE]
+====
+The condition stem:[n \gt 1] can be replaced with the condition stem:[i \le n] and the resulting primes found should be the same.
+====
+
+Test the function with a few inputs:
+
+.Driver code to test factors() with loops
+[source,c]
+----
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+  int *ps = malloc(sizeof(int) * MAX_LEN);
+  int len;
+
+  len = factors(24, ps);
+  printf("\nFound %d prime factors for 24:\n", len);
+  for (int i = 0; i < len; ++i)
+    printf("• %d\n", *(ps + i));
+
+  len = factors(101, ps);
+  printf("\nFound %d prime factors for 101:\n", len);
+  for (int i = 0; i < len; ++i)
+    printf("• %d\n", *(ps + i));
+
+  len = factors(315, ps);
+  printf("\nFound %d prime factors for 315:\n", len);
+  for (int i = 0; i < len; ++i)
+    printf("• %d\n", *(ps + i));
+
+
+  free(ps);
+
+  return 0;
+}
+
+----
+
+== sqrt
+
+People implement solutions with loop testing divisibility only up to the square root of the target number.
+
+.Python solution excerpt
+[source,python]
+----
+while i <= int(sqrt(n))
+----
+
+.C solution excerpt
+[source,c]
+----
+while (i <= (int)sqrt((double)n)))
+----
+
+We can avoid having to deal with doubles vs ints and the use of `sqrt()` by using stem:[i * i \le n] instead of stem:[i \le sqrt(n)].
+
+More info on this link:https://stackoverflow.com/a/5811176/2855955[Stack Overflow Answer^].
+
+== Recursive Solution in C
+
+Here's one solution from the book Mastering Algorithms with C, with my own modifications to return a pointer to an array of prime factors instead of printing them.
+
+[source,c]
+----
+#include <stdio.h>
+#include <stdlib.h>
+
+int factor(int x, int n, int j, int *ps, int idx) {
+  int i;
+
+  if (n == 1) {
+    printf("1 is a unit.\n");
+    return ++idx;
+  }
+
+  i = j;
+
+  while (i * i <= n) {
+    if (n % i == 0) {
+      *(ps + idx) = i;
+      factor(x, (int)(n / i), i, ps, ++idx);
+      return ++idx;
+    } else {
+      ++i;
+    }
+  }
+
+  if (n == x)
+    printf("%d is prime.\n", x);
+  else
+    *(ps + idx) = n;
+
+  return ++idx;
+}
+
+int main(void) {
+  int *ps = malloc(sizeof(int) * 4);
+  int i, len;
+
+  len = factor(18, 18, 2, ps, 0);
+
+  for (i = 0; i <= len; ++i)
+    printf("%d\n", *(ps + i));
+
+  free(ps);
+}
+
+----
+
+## Recursive solution in Python
+
+[source,python]
+----
+def factors(x, n, j, ps = []):
+  if n == 1:
+    return 1
+
+  i = j
+  while i * i <= n:
+    if n % i == 0:
+      ps.append(i)
+      factors(x, int(n / i), i, ps)
+      return ps
+    else:
+      i = i + 1
+
+  if x == n:
+    return "%d is prime" % x
+  else:
+    ps.append(n)
+    return ps
+
+print(factors(18, 18, 2, []))
+#=> [2, 3, 3]
+----
+
+.Result
+[source,text]
+----
+Found 4 prime factors for 24:
+• 2
+• 2
+• 2
+• 3
+
+Found 1 prime factors for 101:
+• 101
+
+Found 4 prime factors for 315:
+• 3
+• 3
+• 5
+• 7
+----
+

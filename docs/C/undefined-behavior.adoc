@@ -1,0 +1,78 @@
+= Undefined Behavior
+:page-subtitle: C
+:toc: left
+:sectlinks:
+:icons: font
+:imagesdir: __assets
+
+== Werror sequence-point
+
+Consider this code:
+
+[source,c]
+----
+char *reverse(const char *s) {
+  size_t len = 0;
+  size_t j = 0;
+  char *dst;
+
+  while (*(s + len) != '\0')
+    ++len;
+
+  dst = malloc(len + 1);
+
+  while (*(s + j) != '\0')
+    *(dst + j) = *(s + len - 1 - j++);
+
+  *(dst + len) = '\0';
+
+  return dst;
+}
+----
+
+`gcc` gets angry: “error: operation on ‘j’ may be undefined”.
+
+[source,shell-session]
+----
+gcc \
+  -std=c99 \
+  -g \
+  -Wall \
+  -Wextra \
+  -pedantic \
+  -Werror \
+  -Wmissing-declarations \
+  -fsanitize=address,undefined \
+  -fno-common -fno-omit-frame-pointer \
+  -DUNITY_SUPPORT_64 \
+  -DUNITY_OUTPUT_COLOR \
+  test-framework/unity.c \
+  ./test_reverse_string.c \
+  ./reverse_string_v3.c \
+  -o memcheck.out
+./reverse_string_v3.c: In function ‘reverse’:
+./reverse_string_v3.c:22:35: error: operation on ‘j’ may be undefined [-Werror=sequence-point]
+   22 |     *(dst + j) = *(s + len - 1 - j++);
+      |                                  ~^~
+cc1: all warnings being treated as errors
+----
+
+It so happens that we are using `j` in between the so called _sequence points_, and the compiler cannot properly decide if `j` on the left hand side of the assignment operator has to be evaluated before or after the `j++` on the right hand side of the expression.
+
+That use of `j++` is simply not allowed in that situation and the fix is to increment `j` on an expression of its own:
+
+[source,diff]
+----
+- while (*(s + j) != '\0')
+-   *(dst + j) = *(s + len - 1 - j++);
++ while (*(s + j) != '\0') {
++   *(dst + j) = *(s + len - 1 - j);
++   ++j;
++ }
+----
+
+Learn more about this by perusing these resources:
+
+ * link:https://c-faq.com/expr/seqpoints.html[C-FAQ on Sequence Points^].
+ * link:https://stackoverflow.com/questions/949433/why-are-these-constructs-using-pre-and-post-increment-undefined-behavior[Why are these constructs using pre and post-increment undefined behavior? (Stack Overflow)^].
+ * link:https://stackoverflow.com/questions/26961858/operation-on-i-may-be-undefined[operation on 'i' may be undefined (Stack Overflow)^].

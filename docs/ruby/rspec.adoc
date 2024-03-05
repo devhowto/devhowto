@@ -1,0 +1,167 @@
+= RSpec
+:page-subtitle: Ruby
+:toc: left
+:sectlinks:
+:sectlevels: 6
+:imagesdir: __assets
+
+== Getting Started
+
+=== Simplest Approach
+
+Install `rspec`:
+
+[source,shell-session]
+----
+$ rvm install rspec
+----
+
+Then, if you have ruby specs like this one:
+
+.job.spec.rb
+[source,rb]
+----
+require_relative 'job'
+
+describe Job do
+  it 'should work' do
+    expect(Job.new.run).to eq('Run!')
+  end
+end
+----
+
+[NOTE]
+====
+Observe we *do not* need to `require 'rspec'`.
+====
+
+Simply run:
+
+[source,shell-session]
+----
+$ rspec --format=documentation ./job.spec.rb
+----
+
+image::rspec-example-1-fail.png[rspec example fail]
+
+Update the implementation of `Job#run` to satisfy the test and run it again.
+
+image::rspec-example-1-pass.png[rspec example pass]
+
+[TIP]
+====
+We can replace `--format=documentation` with `-f d`.
+`rspec --help` says:
+
+.excerpt from rspec --help
+[source,text]
+----
+-f, --format FORMATTER Choose a formatter.
+
+  • [p]rogress (default - dots)
+  • [d]ocumentation (group and example names)
+  • [h]tml
+  • [j]son
+  • [f]ailures ("file:line:reason", suitable for
+     editors integration)
+----
+====
+
+=== Autorun
+
+Sometimes when studying algorithms or doing some code algorithm and data structure challenges, it may be useful to simply have the tests on the same file as the implementation code itself.
+
+[NOTE]
+====
+First saw this approach used in the (free online) book link:https://htdp.org/[How to Design Programs^] and the (free) courses link:https://www.edx.org/learn/coding/university-of-british-columbia-how-to-code-simple-data[UBCx: How to Code: Simple Data^] and link:https://www.edx.org/learn/coding/university-of-british-columbia-how-to-code-complex-data[UBCx: How to Code: Complex Data^] by Gregor Kiczales which are based on that awesome book.
+====
+
+With ruby and rspec, we can do it with this approach:
+
+.add.rb
+[source,ruby]
+----
+require 'rspec/autorun'
+
+class Calc
+  class << self
+    def add(x, y)
+      x + y
+    end
+  end
+end
+
+describe 'Calc.add' do
+  it 'should add two numbers' do
+    expect(Calc.add(-1, 1)).to eq(0)
+  end
+end
+----
+
+Then run with `ruby` (not with `rspec`):
+
+[source,shell-session]
+----
+$ ruby ./add.rb
+----
+
+image::rspec-autorun-format-progress-dots.png[rspec autorun progress dots]
+
+Note by default rspec uses the `progress` (dots) output.
+Because we are using rspec's autorun feature and we run the tests by using the `ruby add.rb` (instead of `rspec add.rb`), there is no way to pass rspec options on the command line like `rspec --format documentation add.rb`.
+Fortunatelly, rspec can read options from the `.rspec` config file:
+
+.path/to/project/.rspec
+[source,text]
+----
+--color
+--format documentation
+----
+
+Then it will show the test descriptions instead of simply the dots.
+
+image::rspec-autorun-format-documentation.png[rspec autorun documentation]
+
+== Assert STDOUT output
+
+We want to assert output to STDOUT:
+
+[source,rb]
+----
+it 'should work' do
+  expect { puts 'Aayla Secura' }.to output(/secura/i).to_stdout
+end
+----
+
+With some class method that outputs to STDOUT:
+
+[source,rb]
+----
+describe PlainTextFormatter do
+  it 'should output report title' do
+    report = Report.new(PlainTextFormatter.new)
+
+    expect do
+      report.output
+    end.to output(/===== Nostromo Report =====/).to_stdout
+  end
+
+  it 'should should output report body content' do
+    report = Report.new(PlainTextFormatter.new)
+
+    lines_to_match = [
+      'This is Ripley, last survivor of the Nostromo.',
+      'Signing off.'
+    ].join("\n")
+
+    expect { report.output }.to output(/#{lines_to_match}/).to_stdout
+  end
+end
+----
+
+=== References
+
+* https://relishapp.com/rspec/rspec-expectations/v/3-11/docs/built-in-matchers/output-matcher[RSpec
+output matcher docson Relish].
+* https://stackoverflow.com/questions/16507067/testing-stdout-output-in-rspec[Testing
+STDOUT output in RSpec (StackOverflow)].

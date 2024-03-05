@@ -1,0 +1,44 @@
+= psql cli
+:page-subtitle: PostgreSQL
+:page-tags: psql postgres postgresql command-line cli
+
+`psql` is the primary tool to work with and manage a PostgreSQL database server.
+
+== Setting the prompt
+
+The default `psql` prompt shows the database name, in this fashion:
+
+.psql default prompt
+[source,text]
+----
+name_of_the_current_database=#
+----
+
+Sometimes we just prefer a simpler, _and shorter_ prompt.
+
+It is possible to set the prompt from the shell command line:
+
+[source,text]
+----
+$ psql -h 172.19.0.2 -U devel --set='PROMPT1=SQL> '
+Password for user devel:
+psql (15.4, server 14.8 (Debian 14.8-1.pgdg120+1))
+Type "help" for help.
+
+SQL> \c mycms_devel
+psql (15.4, server 14.8 (Debian 14.8-1.pgdg120+1))
+You are now connected to database "mycms_devel" as user "devel".
+SQL>
+----
+
+If you are already inside a `psql` session, use `\set`:
+
+[source,text]
+----
+mycms_devel=# \set PROMPT1 'SQL> '
+SQL>
+----
+
+In both cases, not how the name of the current database is not shown any longer, and we see the simpler and shorter ‘``SQL> ``’ prompt.
+
+Other ideas is to use simply ‘`> `’ or ‘`» `’

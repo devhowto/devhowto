@@ -1,0 +1,150 @@
+= Ruby
+:page-tags: ruby docs tutorial syntax concept feature
+:icons: font
+:toc: left
+
+Ruby is a delightful programming language designed for programmer happiness 💖.
+
+Yukihiro Matsumoto once presented link:./Yukihiro-Matsumoto-How-Emacs-Changed-My-Life.pdf[How Emacs Changed My Life (PDF)] which goes into how https://www.gnu.org/software/emacs/[Emacs] and https://www.gnu.org/software/emacs/manual/html_node/eintr/[emacs-lisp] influenced Matz and the design of the Ruby programming language.
+Unfortunately, it seems there is no video recording of it.
+https://www.slideshare.net/yukihiro_matz/how-emacs-changed-my-life[Here’s the Slideshare link] for the presentation.
+
+* https://i-love-ruby.gitlab.io/book.html[I Love Ruby] free, online book (rendered in Asciidoctor) by Karthikeyan A K.
+* https://ruby-doc.org/[Official Ruby Docs].
+
+Nice tools:
+
+* https://rubystyle.guide/[Ruby Style Guide].
+* https://docs.rubocop.org/rubocop/[Rubocop Docs].
+* https://github.com/awesome-print/awesome_print[Awesome Print].
+* https://github.com/pry/pry[pry (irb alternative with powerful
+introspection capabilities)].
+* https://solargraph.org/guides[Solargraph Ruby Language Server].
+
+== Ruby Concepts and Ideas
+
+* The name of the language is spelled _Ruby_ (not RUBY or ruby) because it is a proper noun (therefore, the first letter is capitalized). `ruby` is the name of the program we use to run Ruby programs, like `ruby -w fib.rb`.
+* A _mix-in_ (also spelled _mix in_) is the including of a module inside a class. We say things like “The Enumerable mix-in module provides…”.
+See https://ruby-doc.com/core/doc/syntax/modules_and_classes_rdoc.html[Ruby doc on modules].
+
+== Bits and Bytes of Syntax Sugar
+
+=== Hash Values
+
+We can get all the values of a hash by doing this:
+
+----
+>> { one: 1, two: 2 }.map(&:last)
+=> [1, 2]
+----
+
+Which is similar to doing `hash.values`.
+
+=== Map and Hash to Proc to Get Values
+
+----
+>> h = { one: 1, two: 2 }
+
+>> [:one, :two].map(&h)
+=> [1, 2]
+----
+
+With an array of keys, we map over those keys, and _turn the hash into a proc_ 😲!
+That proc will map the values based on the keys and return an array of the hash values.
+
+Saw this first in a solution for https://exercism.org/tracks/ruby/exercises/resistor-color-duo[resistor color duo exercism challenge].
+
+If we define `to_proc` we can use this _trick_ for any object.
+
+=== Hash Transform Values and &:next to_proc
+
+----
+>> {one: 1, two: 2}.transform_values(&:next)
+=> {:one=>2, :two=>3}
+----
+
+## Note on Style
+
+- link:https://discord.com/channels/518658712081268738/650031651845308419/1080189900311236719[My question on unnecessary readers on Discord].
+
+No need to write readers for every instance variable if they don't need to be exposed publicly.
+Just use the instance variables themselves.
+
+## Methods
+
+`1 + 1` is just syntax sugar for `1.+(1)`, that is, a normal method call.
+
+Ruby doesn't have the post and pre increment operators `x--` or `++x`, although it has `#succ` and `#pred` which perform post increment and decrement for numbers and strings, but not something for pre increment and decrement.
+
+If `1 + 1` is actually `1.+(1)`, one could ask what `n += 1` is syntax sugar for.
+We know from other languages that `n += 1` is the same as `n = n + 1` (which works in Ruby too).
+
+`+=` is not sugar, but just language syntax, not a method.
+According to link:https://en.wikibooks.org/wiki/Ruby_Programming/Syntax/Operators#Assignment[Ruby Operators :: Wikibooks^], these are called *self assignment*:
+
+[source,text]
+----
+x = 1        #=> 1 (this is the only non-self assignment in this list)
+x += x       #=> 2
+x -= x       #=> 0
+x += 4       #=> x was 0 so x= + 4 x is positive 4
+x *= x       #=> 16
+x **= x      #=> 18446744073709551616. Raise to the power
+x /= x       #=> 1
+----
+
+== gets
+
+.irb session
+[source,text]
+----
+>> s1 = gets
+hey
+=> "hey\n"
+>> s2 = gets.chomp
+hey
+=> "hey"
+>> s3 = gets(chomp: true)
+hey
+=> "hey"
+>> [s1, s2, s3]
+=> ["hey\n", "hey", "hey"]
+----
+
+We can use keyword arg `gets(chomp: true)`, which is a smidge better then `gets.chomp`, maybe...
+
+== Why long name initialize
+
+link:https://discord.com/channels/518658712081268738/788748516352458752/1198265233161080932[My original question^]:
+
+[quote, Fernando Basso, Ruby Discord Server]
+____
+Also, Ruby has a lot of nice shortened names like to_i and to_s.
+Why then would they name initialize this long instead of simply ini or init?
+I feel languages in general have some inconsistencies in the decisions taken (as a user of those languages).
+I imagine whoever was designing and implementing those things had reasons for doing things the way they did.
+Else, they slipped up here and there, similar to PHP hell of parameter order.
+____
+
+[quote, yes, Ruby Discord]
+____
+I think it's fairly consistent. The X in to_x is a letter representing a data type.
+Does ruby shorten things when it's not data-type dependent?
+Nothing I can remember of the top of my head, but I have terrible memory.
+____
+
+== collect vs map name
+
+* https://en.wikipedia.org/wiki/Map_(higher-order_function)
+
+* link:https://discord.com/channels/518658712081268738/788748516352458752/1198260956749377587[Discord conversation on map vs collect^].
+
+
+== Object hierarchy
+
+[source,irb]
+----
+$ irb --simple-prompt
+>> Enumerator.produce(Class, &:superclass).take_while(&:itself)
+=> [Class, Module, Object, BasicObject]
+----

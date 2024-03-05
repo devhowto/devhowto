@@ -1,0 +1,823 @@
+= Simply SQL Book Questions
+:page-subtitle: Databases and SQL
+:page-tags: database sql exercise book
+:toc: left
+:sectlinks:
+:toclevels: 6
+:icons: font
+:source-highlighter: highlight.js
+
+== Intro
+
+Some practice questions based on the book Simply SQL.
+
+== The WHERE Clause (chapter 4)
+
+=== Q1 By ID Equal To
+
+Application: Teams and Games.
+
+[role="qanda"]
+====
+Select the the fields `id` and `name` of the team with id equal to 9.
+
+.show answer
+[%collapsible]
+=====
+
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  teams
+WHERE
+  id = 9;
+----
+
+.Result
+[source,text]
+----
+ id |   name
+----+-----------
+  9 | Riff Raff
+(1 row)
+----
+=====
+====
+
+=== Q2 By ID Not Equal To
+
+Application: Teams and Games.
+
+[role="qanda"]
+====
+
+Select the `id` and `name` fields of the team with IDs not equal to 9.
+
+.show answer
+[%collapsible]
+=====
+
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  teams
+WHERE
+  id <> 9;
+----
+
+.Result
+[source,text]
+----
+ id |  name
+----+---------
+ 37 | Havoc
+ 63 | Brewers
+(2 rows)
+----
+=====
+====
+
+=== Q3 By Price Not Equal To
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Select items with price not equal to 9.37.
+
+.show answer
+[%collapsible]
+=====
+Equal to 9.37:
+
+[source,sql]
+----
+SELECT
+  id
+, name
+, type
+, price
+FROM
+  items
+WHERE
+  price <> 9.37;
+----
+
+.Result
+[source,text]
+----
+  id  |      name       |  type   | price
+------+-----------------+---------+-------
+ 5022 | gadget          | doodads | 19.37
+ 5023 | dingus          | gizmos  | 29.37
+ 5041 | gewgaw          | widgets |  5.00
+ 5042 | knickknack      | doodads | 10.00
+ 5043 | whatnot         | gizmos  | 15.00
+ 5061 | bric-a-brac     | widgets |  2.00
+ 5062 | folderol        | doodads |  4.00
+ 5063 | jigger          | gizmos  |  6.00
+ 5901 | doohickey       | widgets | 12.00
+ 5931 | contraption     | widgets | 49.95
+ 5932 | whatchamacallit | doodads | 59.95
+ 5911 | thingamajig     | widgets | 22.22
+ 5912 | thingamabob     | doodads | 22.22
+ 5913 | thingum         | gizmos  | 22.22
+ 5937 | whatsis         | gizmos  | 93.70
+(15 rows)
+----
+=====
+====
+
+=== Q4 String Field LIKE Pattern
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Select the fields `name` and `type` for items whose name include the string “thing”.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  name
+, type
+FROM
+  items
+WHERE
+  name LIKE 'thing%';
+----
+
+.Result
+[source,text]
+----
+    name     |  type
+-------------+---------
+ thingie     | widgets
+ thingamajig | widgets
+ thingamabob | doodads
+ thingum     | gizmos
+(4 rows)
+----
+=====
+====
+
+=== Q5 String Field NOT LIKE Pattern
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Select the fields `name` and `type` for items whose name does not include the string “thing”.
+
+[source,sql]
+----
+SELECT
+  name
+, type
+FROM
+  items
+WHERE
+  name NOT LIKE 'thing%';
+----
+
+.show answer
+[%collapsible]
+=====
+
+.Result
+[source,text]
+----
+      name       |  type
+-----------------+---------
+ gadget          | doodads
+ dingus          | gizmos
+ gewgaw          | widgets
+ knickknack      | doodads
+ whatnot         | gizmos
+ bric-a-brac     | widgets
+ folderol        | doodads
+ jigger          | gizmos
+ doohickey       | widgets
+ gimmick         | doodads
+ dingbat         | gizmos
+ contraption     | widgets
+ whatchamacallit | doodads
+ whatsis         | gizmos
+(14 rows)
+----
+=====
+====
+
+=== Q6 Price Between Range
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Select the fields `name` and `price` for items with price ranging from 5.00 to 10.00, inclusive.
+Do it using the `BETWEEN` operator and then using comparison operators.
+
+.show answer
+[%collapsible]
+=====
+Using between:
+
+[source,sql]
+----
+SELECT
+  name
+, price
+FROM
+  items
+WHERE
+  price BETWEEN 4.00 AND 10.00;
+----
+
+.Result
+[source,text]
+----
+    name    | price
+------------+-------
+ folderol   |  4.00
+ gewgaw     |  5.00
+ jigger     |  6.00
+ thingie    |  9.37
+ gimmick    |  9.37
+ dingbat    |  9.37
+ knickknack | 10.00
+ (7 rows)
+----
+Using comparison operators:
+
+[source,sql]
+----
+SELECT
+  name
+, price
+FROM
+  items
+WHERE
+  4.00 <= price AND price <= 10.00
+ORDER BY price ASC;
+----
+
+.Result
+[source,text]
+----
+    name    | price
+------------+-------
+    name    | price
+------------+-------
+ folderol   |  4.00
+ gewgaw     |  5.00
+ jigger     |  6.00
+ thingie    |  9.37
+ gimmick    |  9.37
+ dingbat    |  9.37
+ knickknack | 10.00
+(7 rows)
+----
+
+[NOTE]
+======
+The comparison could be like this too:
+
+[source]
+----
+price >= 4.00 AND price <= 10.00
+----
+======
+=====
+====
+
+=== Q7 AND and OR
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Select the fields `id`, `name` and `billaddr` for customers whose name is either “A. Jones” or “B. Smith”.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  id
+, name
+, billaddr
+FROM
+  customers
+WHERE
+     name = 'A. Jones'
+  OR name = 'B. Smith';
+----
+
+.Result
+[source,text]
+----
+ id  |   name   |          billaddr
+-----+----------+----------------------------
+ 710 | A. Jones | 123 Sesame St., Eureka, KS
+ 730 | B. Smith | 456 Sesame St., Eureka, KS
+----
+=====
+====
+
+=== Q8 AND and OR and Precedence
+
+Application: Shopping Cart.
+
+==== Q8a
+
+[role="qanda"]
+====
+Select the user name, cart id, and items id on that cart where the user is either “A. Smith” or “B. Jones” and the name of the items they bought is “thingum”.
+
+You'll need to join four tables for this.
+Careful with the precedence of `AND` over `OR`.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  customers.name AS customer
+, carts.id       AS cart
+, items.name     AS item
+FROM
+  customers
+INNER JOIN carts
+  ON carts.customer_id = customers.id
+INNER JOIN cartitems
+  ON cartitems.cart_id = carts.id
+INNER JOIN items
+  ON items.id = cartitems.item_id
+WHERE
+  (
+       customers.name = 'A. Jones'
+    OR customers.name = 'B. Smith'
+  )
+    AND items.name = 'thingum';
+----
+
+.Result
+[source,text]
+----
+ customer | cart |  item
+----------+------+---------
+ A. Jones | 2131 | thingum
+(1 row)
+----
+
+[NOTE]
+======
+Observe the use of parenthesis around the `OR` condition to give it precedence over `AND`.
+======
+=====
+====
+
+==== Q8b
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Repeat the same query as the previous question but now using `IN` the place of the `OR` condition.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  customers.name  AS customer
+, carts.id        AS cart
+, items.name      AS item
+FROM
+  customers
+INNER JOIN carts
+  ON carts.customer_id = carts.id
+INNER JOIN cartitems
+  ON cartitems.cart_id = carts.id
+INNER JOIN items
+  ON items.id = cartitems.item_id
+WHERE
+  customers.name IN ('A. Jones', 'B. Smith')
+    AND items.name = 'thingum';
+----
+
+.Result
+[source,text]
+----
+ customer | cart |  item
+----------+------+---------
+ A. Jones | 2131 | thingum
+(1 row)
+----
+=====
+====
+
+=== Q9 Items Purchased By Customer
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Using a subquery to provide values to the `IN` condition, select all items ever purchased by the customer with id 750.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  id
+, name
+FROM
+  items
+WHERE
+  id IN (
+    SELECT
+      cartitems.item_id
+    FROM
+      cartitems
+    INNER JOIN carts
+      ON carts.id = cartitems.cart_id
+    WHERE
+      carts.customer_id = 750
+  )
+ORDER BY name ASC;
+----
+
+.Result
+[source,text]
+----
+  id  |    name
+------+-------------
+ 5912 | thingamabob
+ 5913 | thingum
+ 5937 | whatsis
+(3 rows)
+----
+
+The idea is to find the IDs of items purchased by the customer with ID 750.
+That is done in the subquery.
+The list of IDs is simply provided by the `IN` condition in the main query.
+
+First, find carts whose `customer_id` is 750.
+Then, get the item IDs on those carts.
+Those IDs are fed to the `IN` condition in the main query.
+=====
+====
+
+=== Q10 Recent Entries by Category
+
+Application: Content Management System.
+
+==== Q10a
+
+[role="qanda"]
+====
+Using a correlated subquery, select the latest (most recent) entry from each category based on the `created` field.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  title
+, category
+, created
+FROM
+  entries AS t
+WHERE
+  created = (
+    SELECT
+      MAX(created) AS created
+    FROM
+      entries
+    WHERE
+      category = t.category
+  );
+----
+
+.Result
+[source,text]
+----
+            title            | category |       created
+-----------------------------+----------+---------------------
+ What If I Get Sick and Die? | angst    | 2008-12-30 00:00:00
+ Be Nice to Everybody        | advice   | 2009-03-02 00:00:00
+ Hello Statue                | humor    | 2009-03-17 00:00:00
+ The Size of Our Galaxy      | science  | 2009-04-03 00:00:00
+(4 rows)
+----
+
+The (correlated) subquery finds the max created date for each category based on `t.category`.
+The main query provides categories for the subquery to match on.
+=====
+====
+
+==== Q10b
+
+Application: Content Management System.
+
+[role="qanda"]
+====
+Redo the previous exercise using a join and a subquery as a derived table.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  t.title
+, t.category
+, t.created
+FROM
+  entries AS t
+INNER JOIN (
+  SELECT
+    category
+  , MAX(created) AS maxdate
+  FROM
+    entries
+  GROUP BY
+    category
+) AS m
+  ON
+    m.category = t.category
+      AND m.maxdate = t.created;
+----
+
+.Result
+[source,text]
+----
+            title            | category |       created
+-----------------------------+----------+---------------------
+ What If I Get Sick and Die? | angst    | 2008-12-30 00:00:00
+ Be Nice to Everybody        | advice   | 2009-03-02 00:00:00
+ Hello Statue                | humor    | 2009-03-17 00:00:00
+ The Size of Our Galaxy      | science  | 2009-04-03 00:00:00
+(4 rows)
+----
+
+Note how the join is followed by the `ON` and then two equality comparisons with `t` and `m`.
+The subquery is treated (and works) as a table in this case.
+=====
+====
+
+=== Q11 Customers With or Without Carts
+
+Application: Shopping Cart.
+
+==== Q11a
+
+[role="qanda"]
+====
+Using an `EXISTS` condition, return the names of users that:
+
+* Have carts.
+* Do not have carts.
+
+.show answer
+[%collapsible]
+=====
+
+Customers with carts:
+
+[source,sql]
+----
+SELECT
+  name
+FROM
+  customers
+WHERE
+  EXISTS (
+    SELECT
+      1
+    FROM
+      carts
+    WHERE
+      customers.id = carts.customer_id
+  );
+----
+
+.Result
+[source,text]
+----
+   name
+----------
+ D. White
+ G. Scott
+ A. Jones
+ E. Baker
+ H. Clark
+ B. Smith
+ C. Brown
+(7 rows)
+----
+
+Customers without carts:
+
+[source,sql]
+----
+SELECT
+  name
+FROM
+  customers
+WHERE
+  NOT EXISTS (
+    SELECT
+      1
+    FROM
+      carts
+    WHERE
+      customers.id = carts.customer_id
+  );
+----
+
+.Result
+[source,text]
+----
+   name
+----------
+ F. Black
+(1 row)
+----
+=====
+====
+
+In both cases, the subquery is a correlated subquery, as it needs `customers`
+
+==== Q11b
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Similar to the previous question, select customer names who do not have a cart, but this time using a `NOT IN` condition instead of `EXISTS` in an _uncorrelated_ subquery.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  name
+FROM
+  customers
+WHERE
+  id NOT IN (
+    SELECT
+      customer_id
+    FROM
+      carts
+  );
+----
+
+.Result
+[source,text]
+----
+   name
+----------
+ F. Black
+(1 row)
+----
+
+The subquery is _uncorrelated_ because it does not use anything from the `customers` table in the main query.
+=====
+====
+
+==== Q11c
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Similar to the previous question, select customer names who do not have a cart, again using a `NOT IN` condition but using a _correlated_ subquery this time.
+
+.show answer
+[%collapsible]
+=====
+[source,sql]
+----
+SELECT
+  name
+FROM
+  customers
+WHERE
+  id NOT IN (
+    SELECT
+      customer_id
+    FROM
+      carts
+    WHERE
+      customers.id = carts.customer_id
+  );
+----
+
+.Result
+[source,text]
+----
+   name
+----------
+ F. Black
+(1 row)
+----
+
+The subquery is _correlated_ because it uses `customers` from the main query.
+=====
+====
+
+==== Q11d
+
+Application: Shopping Cart.
+
+[role="qanda"]
+====
+Again similar to the previous question, select customer names who do not have a cart, but this time using a `LEFT OUTER JOIN` with an `IS NULL` test.
+
+.show answer
+[%collapsible]
+=====
+First, let's make it clear when values are `NULL` (I'm using PostgreSQL/psql CLI for these examples):
+
+[source,text]
+----
+SQL> \pset null '∅'
+Null display is "∅".
+----
+
+Then let's do the `LEFT OUTER JOIN` _without_ the `IS NULL` test to see the results:
+
+[source,sql]
+----
+SELECT
+  customers.name AS customer_name
+, carts.customer_id AS carts_customer_id
+FROM
+  customers
+LEFT OUTER JOIN carts
+  ON customers.id = carts.customer_id;
+----
+
+.Result
+[source,text]
+----
+ customer_name | carts_customer_id
+---------------+-------------------
+ A. Jones      |               710
+ E. Baker      |               820
+ B. Smith      |               730
+ C. Brown      |               750
+ C. Brown      |               750
+ B. Smith      |               730
+ H. Clark      |               880
+ D. White      |               770
+ G. Scott      |               860
+ C. Brown      |               750
+ F. Black      |                 ∅
+(11 rows)
+----
+
+See? F. Black's ID is not present in the `carts` table.
+
+Finally, let's add the `IS NULL` check to find users whose IDs are not present in the `carts` table:
+
+[source,sql]
+----
+SELECT
+  customers.name AS customers_without_carts
+FROM
+  customers
+LEFT OUTER JOIN carts
+  ON customers.id = carts.customer_id
+WHERE
+  carts.customer_id IS NULL;
+----
+
+.Result
+[source,text]
+----
+ customers_without_carts
+-------------------------
+ F. Black
+(1 row)
+----
+=====
+====

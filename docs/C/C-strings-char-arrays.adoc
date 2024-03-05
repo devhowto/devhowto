@@ -1,0 +1,150 @@
+= C Strings and Char Arrays
+:toc: left
+:icons: font
+:sectlinks:
+:stem: latexmath
+
+== Char Arrays
+
+* Signed char (negative and positive).
+  1 byte.
+  stem:[\frac{2^8}{2} = \frac{256}{2}], from -128 to 127.
+* Unsigned char (only positive).
+  1 byte.
+  stem:[2^8 = 256], from 0 to 255.
+
+[TIP]
+====
+Why unsigned chars range from -128 to 127 (and not to 128)?
+
+Because 0 is part of the positives in this context.
+stem:[0 + 127] totals 128 individual integers.
+
+Same with stem:[2^8 = 256] but then the range goes from 0 to 255 (not 0 to 256).
+Again that is because stem:[0 + 255] totals 256 individual integers.
+====
+
+'''
+Question: Why the type `char` limits representation in integers?
+
+Answer: Because charsets like ASCII assigned a constant integer value to represent symbols, letters, punctuation, etc.
+All charsets use integers to represent these symbols.
+
+.tip
+[source,shell-session]
+----
+$ man ascii
+----
+
+Question: How can a symbol be stored in a 1-byte memory?
+
+Because 8 bits is one byte. 2 (bits 0 and 1) to the 8th power (number of bits in a byte) is 256 (0 to 255).
+At the time this was enough to represent american English letters, symbols and punctuation.
+
+
+== Strings
+
+This is a char 'z' and the NUL terminator `\0`:
+
+[source,c]
+----
+char s[] = "z"
+----
+
+And this:
+
+[source,c]
+----
+char a[] = "z";
+printf("%ld\n", sizeof(a));
+
+char b[1] = "z";
+printf("%ld\n", sizeof(b));
+----
+
+`a` has the size 2: `'z'` and `'\0'`.
+The preprocessor counts the chars plus the space for the NUL terminator and allocates the necessary space.
+
+`b`, on the other hand, has the size 1: the storage for the array was explicitly said to be 1.
+So `b` is allocated memory for one byte, the char 'z' is stored and the NUL byte has nowhere to go, and is not part of `b`.
+
+== Strings as function parameters
+
+[source,c]
+----
+#include <stdio.h>
+
+void fn(char s[]) {
+  printf("%ld\n", sizeof s);
+}
+
+int main() {
+  char str[4] = { 'T', 'u', 'x', '\0' };
+
+  printf("%ld\n", sizeof str);
+
+  fn(str);
+
+  return 0;
+}
+----
+
+In `main()`, `sizeof str` produces 4 because the char array / string contains 4 characters.
+
+In `fn()`, `sizeof s` produces 8 because a pointer to char takes 8 bytes on the machine where this code was run.
+
+Arrays decay to pointers when passed to functions.
+
+Also, declaring a function parameter with the `arg[]` syntax is misleading because it looks like an array, but for that function, it `arg` is a pointer.
+
+[source,c]
+----
+void fn(char s[]) {
+  printf("%ld\n", sizeof s);
+}
+----
+
+The above even produces warnings with `-Wall`:
+
+[source,shell-session]
+----
+$ gcc -std=c99 -Wall ex01.c -o outdir/ex01
+ex01.c: In function ‘fn’:
+ex01.c:4:26: warning: ‘sizeof’ on array function parameter ‘s’ will return size of ‘char *’ [-Wsizeof-array-argument]
+    4 |   printf("%ld\n", sizeof s);
+      |                          ^
+ex01.c:3:14: note: declared here
+    3 | void fn(char s[]) {
+      |         ~~~~~^~~
+----
+
+Delcare it like this instead:
+
+[source,c]
+----
+void fn(char *s) {
+  printf("%ld\n", sizeof s);
+}
+----
+
+== Arrays are CONSTANT pointers
+
+People say “an array name is a pointer to its first element”.
+This is only partially true:
+
+[source,c]
+----
+int main() {
+  char str[4] = { 'T', 'u', 'x', '\0' };
+  char *p = str;
+
+  printf("%c\n", *(str + 1));
+  printf("%c\n", *(++p));
+  printf("%c\n", *(++str)); // <1>
+}
+----
+
+1. error: lvalue required as increment operand
+
+An array name is a *constant* pointer.
+We can do `*(arr + 1)`, but not `*arr++` or `*(++arr)`.

@@ -1,0 +1,62 @@
+= Structs
+:page-subtitle: C
+:toc: left
+:icons: font
+:toclevel: 6
+:sectlinks:
+:stem: latextmath
+
+== Initializing Structs
+
+=== Struct with flexible array members (FAM)
+
+Here's a struct which represents a “list”.
+
+[source,c]
+----
+typedef struct List_ {
+   size_t len;
+   short elmts[];
+} List;
+----
+
+Note that `elmts` is an array.
+How many elements does it take?
+Until it is not initialized to set aside memory so it can hold stem:[n] elements, that question cannot be answered.
+
+How does one initialize it (allocate memory) so that it can take stem:[n] elements?
+Use `malloc` (`stdlib.h`) and compute the size of `List` _plus_ the size of the type of `elmts` _times_ how many elements we want `elmts` to be able to store.
+
+Let's exemplify with a function that creates and initializes a new list and then returns it:
+
+[source,c]
+----
+List *list_new(size_t len, short elmts[]) {
+  /* Allocate memory for the list, accounting for the space
+   * necessary for the `len` array elements of type `short`. */
+  List *list = malloc(sizeof(List) + sizeof(short) * len);
+
+  /* Set the length. */
+  list->length = len;
+
+  /* Copy the elements one by one. */
+  for (size_t i = 0; i < len; ++i)
+    list->elmts[i] = elmts[i];
+
+  return list;
+}
+----
+
+Then we can use it like this:
+
+[source,c]
+----
+List *list = list_new(3, (short []){10, 20, 30})
+
+for (size_t i = 0; i < 3, ++i)
+  printf("%d\n", list->elmts[i]);
+
+free(list);
+----
+
+As always, when using dynamic memory allocation, one must remember to `free()` the memory when it is no longer needed.

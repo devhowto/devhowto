@@ -1,0 +1,100 @@
+= Hashes :: Ruby
+:toc: left
+:icons: font
+
+== Intro
+
+Before ruby 1.9, only the “hash rocket” syntax was available:
+
+.hash rocket syntax
+[source,ruby]
+----
+ahsoka = { :id => 1, :name => 'Ahsoka Tano' }
+----
+
+Ruby 1.9 introduced a syntax which is similar to EcmaScript  literal objects.
+In this case, the keys are always symbols, even if it looks like we are using strings:
+
+.hash JSON-style syntax
+[source,ruby]
+----
+aayla = { id: 2, name: 'Aayla Secura' }
+luke = { 'id': => 4, 'name': 'Luke Skywalker' }
+----
+
+Both `aayla` and `luke` keys are all symbols, even though we used 'single quoted strings' to create the `luke` hash keys.
+
+[NOTE]
+====
+link:https://ruby-doc.org/3.1.3/Hash.html[Ruby docs^] calls this JSON-style syntax, but let's remember that ECMAScript uses this syntax before JSON came to be, and was in fact inspired by EcmaScript literal object syntax anyway (words of Douglas Crockford, JSON creator).
+JSON even stands for JavaScript Object Notation.
+====
+
+We can use string keys too, but only with rocket syntax:
+
+.string keys with rocket syntax
+[source,ruby]
+----
+yoda = { 'id' => 3, 'name' => 'Yoda' }
+----
+
+This is IMPORTANT because we can't _mix and match_ symbol and string keys:
+
+.hash symbol vs string keys
+[source,ruby]
+----
+>> yoda
+=> {"id"=>3, "name"=>"Yoda"}
+>> luke
+=> {:id=>4, :name=>"Luke Skywalker"}
+
+>> yoda['name']
+=> "Yoda"
+>> yoda[:name]
+=> nil
+
+>> luke['name']
+=> nil
+>> luke[:name]
+=> "Luke Skywalker"
+----
+
+== Dot notation (no such thing)
+
+Also, dot notation is not allowed for accessing hash properties, as it is interpreted as method invocation (sending a message):
+
+.no dot notation for accessing keys
+----
+>> ahsoka.name
+(irb):29:in `<main>': undefined method `name' for
+{:id=>1, :name=>"Ahsoka Tano"}:Hash (NoMethodError)
+----
+
+== Look ma, no curly braces!
+
+We can omit the curly braces in certain context where a hash is expected:
+
+.hash-like syntax without curly braces
+[source,ruby]
+----
+def printName(jedi)
+  p jedi[:name]
+end
+
+ahsoka = { id: 1, name: 'Ahsoka Tano' }
+
+printName(ahsoka)
+printName(id: 2, name: 'Aayla Secura')
+printName :id => 3, :name => 'Yoda'
+printName id: 4, name: 'Luke Skywalker'
+----
+
+.running the example above
+[source,shell-session]
+----
+$ ruby -w ./hash_1.rb
+"Ahsoka Tano"
+"Aayla Secura"
+"Yoda"
+"Luke Skywalker"
+----

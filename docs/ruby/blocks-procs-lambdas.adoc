@@ -1,0 +1,75 @@
+= Blocks, Procs and Lambdas
+:toc: left
+:icons: font
+
+
+== to_proc
+
+The ampersand converts a block into a proc.
+
+Resistor Color Duo on Exercism:
+
+[source,text]
+----
+>> h = { one: 1, two: 2 }
+
+>> [:one, :two].map(&h)
+=> [1, 2]
+
+>> h.fetch_values(:one, :two)
+=> [1, 2]
+----
+
+The `&` operator calls `#to_proc` on the object.
+
+[source,ruby]
+----
+class TwoTimer
+  def to_proc = proc { |x| x * 2 }
+end
+
+p [1, 2, 3].map(&TwoTimer.new)
+#=> [2, 4, 6]
+----
+
+[source,ruby]
+----
+class Hash
+  def to_proc = proc { |k| p 'called'; self[k] }
+end
+
+h = {a: 1, b: 2, c: 3, d: 4}
+
+p [:a, :c].map(&h)
+#=> "called"
+#=> "called"
+#=> [1, 3]
+----
+
+We can think of it not in terms of behavior, but as it being transformed into something else.
+
+Procs are closures so they capture state.
+In the above, that is the `self` which happens to be a hash object.
+
+[source,ruby]
+----
+##
+# Monkey-patch `Hash` with our own `#to_proc` implementation.
+#
+# NOTE: With `ruby -w` a warning is reported about overriding
+# original `#to_proc`.
+#
+class Hash
+  ##
+  # Causes each element to be incremented by one.
+  #
+  def to_proc = proc do |key|
+    self[key] + 1
+  end
+end
+
+h = { one: 1, two: 2 }
+
+p [:one, :two].map(&h)
+#=> [2, 3]
+----

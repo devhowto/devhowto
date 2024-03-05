@@ -1,0 +1,16 @@
+= Performance and Optimization
+:page-subtitle: Databases and SQL
+:page-tags: database sql performance optimization
+:toc: left
+:icons: font
+:sectlinks:
+:toclevels: 6
+:source-highlighter: highlight.js
+
+== Indexes
+
+_Indexing_ is the first thing that comes to mind when trying to improve performance of queries.
+
+A *table scan* is the process of reading through all tables (and should be avoided if possible).
+
+An *indexed retrieval* is much more performant, as the RDBMS (Relation Database Management System) does not need to read though all rows, but goes directly to the desired rows.

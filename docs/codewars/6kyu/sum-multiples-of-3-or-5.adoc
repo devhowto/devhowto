@@ -1,0 +1,169 @@
+= Multiples of 3 or 5
+:page-subtitle: 6kyu Codewars Challenge » Algorithms and Data Structures
+:page-tags: codewars 6kyu math multiple algorithm
+:favicon: https://fernandobasso.dev/cmdline.png
+:icons: font
+:sectlinks:
+:sectnums!:
+:toclevels: 6
+:toc: left
+:source-highlighter: highlight.js
+
+
+* link:https://www.codewars.com/kata/514b92a657cdc65150000006[Multiples of 3 or 5 6kyu Codewars challenge^]
+
+== JavaScript
+
+=== Solution 1
+
+[source,javascript]
+----
+/**
+ * Checks whether `y` is a multiple of `x`.
+ *
+ * @param {number} x
+ * @param {number} y
+ * @returns {boolean}
+ */
+function isMultOf(x, y) {
+  return y % x === 0;
+}
+
+function mult3or5(n) {
+  if (n < 0) return 0;
+
+  let total = 0;
+
+  for (let i = 1; i < n; ++i) {
+    if (isMultOf(3, i) && isMultOf(5, i))
+      total += i;
+    else if (isMultOf(3, i))
+      total += i;
+    else if (isMultOf(5, i))
+      total += i;
+  }
+
+  return total;
+}
+----
+
+=== Solution 2
+
+When they say “If the number is a multiple of *both* 3 and 5, only count it _once_”, it means we can really simplify the conditions to this:
+
+[source,text]
+----
+if (isMultOf(3, i) || isMultOf(5, i))
+  total += i;
+----
+
+Therefore, here's the improved version:
+
+[source,javascript]
+----
+
+----
+
+== C
+
+=== Solution 1
+
+Same as JS solution 2.
+
+[source,c]
+----
+#include <stdio.h>
+
+/**
+ * Checks whether `y` is a multiple of `x`.
+ */
+int is_mult_of(int x, int y) {
+  return y % x == 0;
+}
+
+int sum_mults_3_or_5(int n) {
+  int total = 0;
+
+  for (int i = 1; i < n; ++i)
+    if (is_mult_of(5, i) || is_mult_of(3, i))
+      total += i;
+
+  return total;
+}
+
+int main(void) {
+
+  printf("%d\n", sum_mults_3_or_5(10));
+
+  return 0;
+}
+----
+
+== Haskell
+
+=== Solution 1
+
+Main idea is is to use filter and list comprehension.
+
+[source,haskell]
+----
+multsOf3or5 :: [Int] -> [Int]
+multsOf3or5 = filter (\x -> rem x 3 == 0 || rem x 5 == 0)
+
+mults :: Int -> Int
+mults n = sum . multsOf3or5 $ [1 .. n - 1]
+
+
+main :: IO ()
+main = do
+  print $ show $ mults 10
+----
+
+== Python
+
+=== Solution 1
+
+Using `range()` and an `is_mult_of()` tiny helper function.
+
+[source,python]
+----
+def is_mult_of(x, y):
+    """Checks if `x` is a multiple of `y`.
+
+    ASSUME: `y` is not 0 (zero).
+
+    Parameters
+    ----------
+    x : int
+    y : int
+
+    Returns
+    -------
+    int
+    """
+
+    return x % y == 0
+
+def sum_mults(num):
+    """Sum all ints below `num` which are multiples of 3 or 5.
+
+    Parameters
+    ----------
+    num : int
+
+    Returns
+    -------
+    int
+    """
+
+    if num < 0:
+        return 0
+
+    total = 0;
+
+    for n in range(1, num):
+        if is_mult_of(n, 3) or is_mult_of(n, 5):
+            total = total + n;
+
+    return total
+----

@@ -1,0 +1,122 @@
+= Dev Notes
+:icons: font
+:toc: left
+:stem: latexmath
+
+My dev studies and research notes.
+
+[NOTE]
+====
+The official repository is the link:https://gitlab.com/devhowto/devhowto[devhowto repository on Gitlab].
+The link:https://github.com/devhowto/devhowto[Github one] is just a mirror.
+====
+
+[NOTE]
+====
+Gitlab has much superior support for Asciidoc (through the Asciidoctor implementation), including Science, Technology, Engineering and Mathematical (STEM) notation (see link:https://docs.gitlab.com/ee/user/asciidoc.html#equations-and-formulas-stem[Gitlab Docs on Asciidoc STEM]).
+
+It also supports PlantUML, which is a truly amazing _Diagrams as Code_ tool).
+====
+
+[stem]
+++++
+x = a_0 + \frac{1}{\displaystyle a_1
+        + \frac{1}{\displaystyle a_2
+        + \frac{1}{\displaystyle a_3 + a_4}}}
+++++
+
+latexmath:[C = \alpha + \beta Y^{\gamma} + \epsilon]
+
+A matrix can be written as stem:[[[a,b\],[c,d\]\]((n),(k))].
+
+[stem]
+++++
+\begin{bmatrix}
+        1 & x & 0 \\
+        0 & 1 & -1
+\end{bmatrix}\begin{bmatrix}
+        1  \\
+        y  \\
+        1
+\end{bmatrix}
+=\begin{bmatrix}
+        1+xy  \\
+        y-1
+\end{bmatrix}.
+++++
+
+== Document titles and subtitles
+
+We use the notion of title and subtitle as two separate pieces of information mostly because the title is used on the sidebar and top of the page, while the combination of both are used to compose the full document title in rendered HTML.
+
+The document titles should include the main title plus some extra information that further categorizes the content of that page.
+And then immediately after the title, create a `page-subtitle` custom attribute to set further title information which will be used by our tooling to compose the full title.
+
+[source,text]
+----
+= Title
+:page-subtitle: My Subtitle
+----
+
+The rendered HTML would contain something like this:
+
+[source,html]
+----
+<title>Title » My Subtitle</title>
+----
+
+Guidelines:
+
+* If writing about function composition in Haskell, make “Function Composition” the main title, and then “Haskell” as the subtitle.
+* Create some snippets on your editor to help you maintain some consistency.
+* Think and compare with existing titles and subtitles.
+Don't just do whatever comes to mind.
+
+Let us see some examples.
+
+JavaScript functions:
+
+[source,text]
+----
+= Functions
+:page-subtitle: JavaScript
+----
+
+Codewars Filter Odds 8kyu challenge solution in C:
+
+[source,text]
+----
+= Filter Odds
+:page-subtitle: 8kyu Codewars Challenge » Algorithms and Data Structures
+----
+
+Codewars All Balanced Parentheses 4kyu Challenge solution in Ruby:
+
+[source,text]
+----
+= All Balanced Parentheses
+:page-subtitle: 4kyu Codewars Challenge » Algorithms and Data Structures
+----
+
+[source,text]
+----
+= ch09 Lists
+:page-subtitle: Haskell Programming From First Principles (book)
+----
+
+[TIP]
+====
+Think about how the final title will look like to help you come up with good titles and subtitles.
+====
+
+=== Use Case Examples
+
+==== Codewars Challenges
+
+[source,text]
+----
+= <Challenge Title>
+:page-subtitle: <N>kyu Codewars Challenge » Algorithms and Data Structures
+
+* link:<link here>[<Challenge Title> » <N>kyu Codewars challenge^]
+----

@@ -1,0 +1,127 @@
+Command Line:
+  - cmdline/curl.adoc
+  - cmdline/bash-brace-expansion.adoc
+  - cmdline/du.adoc
+  - cmdline/bash-conditionals.adoc
+  - cmdline/performance-benchmark.adoc
+  - cmdline/gnu-utils-macos.adoc
+  - cmdline/grep.adoc
+  - cmdline/command-line-intro.adoc
+  - cmdline/cp.adoc
+  - cmdline/help-info-man.adoc
+  - cmdline/echo-printf.adoc
+  - cmdline/built-in.adoc
+  - cmdline/find.adoc
+  - cmdline/pandoc.adoc
+  - cmdline/bash-parameter-expansion.adoc
+  - cmdline/tar.adoc
+  - cmdline/filter-lines.adoc
+  - cmdline/mkdir.adoc
+  - cmdline/argument-syntax.adoc
+  - cmdline/bash-aliases.adoc
+  - cmdline/sed.adoc
+  - cmdline/null-command.adoc
+  - cmdline/bash-arrays.adoc
+  - cmdline/encoding.adoc
+  - cmdline/bash-subshell-child-process.adoc
+  - cmdline/bash-history.adoc
+  - cmdline/od.adoc
+  - cmdline/bash-scripts.adoc
+  - cmdline/hackerrank-shell.adoc
+  - SED:
+    - cmdline/sed/sed-tasks-1.adoc
+    - cmdline/sed/sed-insert.adoc
+  - Terminal:
+    - cmdline/terminal/index.adoc
+    - cmdline/terminal/kitty.adoc
+
+Databases:
+  - dbsql/databases-intro.adoc
+  - dbsql/basic-sql-1.adoc
+  - dbsql/hackerrank-sql-1-easy.adoc
+  - dbsql/postgresql-roles.adoc
+  - dbsql/useful-postgresql-commands.adoc
+  - dbsql/postgresql-docker.adoc
+
+Editors:
+  Vim:
+    - editors/vim/vim-coc.adoc
+    - editors/vim/git-related-tips.adoc
+  Nvim:
+    - editors/nvim/lua-intro.adoc
+  Emacs:
+    - editors/emacs/emacs.adoc
+
+Miscellaneous:
+  - misc/archlinux.adoc
+  - misc/asciidoc.adoc
+  - misc/debian-virtualbox.adoc
+  - misc/filename-path.adoc
+  - misc/gnupg.adoc
+  - misc/macos.adoc
+  - misc/NetBSD.adoc
+  - misc/random.adoc
+  - misc/ssh-secure-shell.adoc
+  - misc/unicode-utf8.adoc
+  - misc/virtualbox.adoc
+  - misc/weechat.adoc
+
+C:
+ - C/clangd.adoc
+ - C/undefined-behavior.adoc
+ - C/structs.adoc
+
+Scheme:
+ - scheme/chicken.adoc
+ - scheme/debugging.adoc
+ - scheme/functions.adoc
+
+Ruby:
+ - ruby/rspec.adoc
+
+JavaScript:
+  - javascript/index.adoc
+  - javascript/arrays.adoc
+  - Do It With Ramda:
+    - javascript/async-examples-with-ramda.adoc
+    - javascript/do-it-with-ramda-part-1.adoc
+
+Algorithms:
+  - algds/other/prime-factors.adoc
+  - algds/other/count-vowels.adoc
+
+Codewars Challenges:
+  6kyu:
+    - codewars/6kyu/sum-multiples-of-3-or-5.adoc
+
+Exercism Challenges:
+  - exercism/README.adoc
+  - C:
+      Easy:
+        - exercism/C/easy/armstrong-number.adoc
+        - exercism/C/easy/isogram.adoc
+        - exercism/C/easy/hamming.adoc
+        - exercism/C/easy/grains.adoc
+        - exercism/C/easy/difference-of-squares.adoc
+        - exercism/C/easy/grade-school.adoc
+        - exercism/C/easy/reverse-string.adoc
+        - exercism/C/easy/list-operations.adoc
+  - Ruby:
+      - exercism/ruby/lasagna.adoc
+      - exercism/ruby/acronym.adoc
+      - exercism/ruby/microwave.adoc
+      - exercism/ruby/resistor-color-duo.adoc
+      - exercism/ruby/amusement-park.adoc
+      - exercism/ruby/amusement-park-improvements.adoc
+      - exercism/ruby/log-line-parser.adoc
+      - exercism/ruby/assembly-line.adoc
+      - exercism/ruby/savings-account.adoc
+      - exercism/ruby/meetup.adoc
+      - exercism/ruby/port-palermo.adoc
+      - exercism/ruby/chess-game.adoc
+      - exercism/ruby/simple-calculator.adoc
+      - exercism/ruby/blackjack.adoc
+      - exercism/ruby/bird-count.adoc
+      - exercism/ruby/boutique-inventory.adoc
+      - exercism/ruby/boutique-inventory-improvements.adoc
+      - exercism/ruby/locomotive-engineer.adoc

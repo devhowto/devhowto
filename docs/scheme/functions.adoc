@@ -1,0 +1,41 @@
+= Functions :: Scheme
+:icons: font
+:toc: left
+
+== Variadic Functions
+
+Variadic means that the function has no definite arity and the function can take a different number of arguments each time it is called.
+
+.variadic sum function example
+[source,scheme]
+----
+;;;;
+;; sum :: Num... -> Num
+;;
+;; Takes zero or more numeric arguments and returns their sum.
+;;
+;; As 0 (zero) is the identity of addition, this function returns 0 if
+;; no arguments are provided.
+;;
+(define (sum . args)
+  (let go ((lst args) (acc 0))
+    (cond
+     ((null? lst) acc)
+     (else (go (cdr lst) (+ (car lst) acc))))))
+----
+
+
+.usage
+----
+(sum)
+;=> 0
+
+(sum 7)
+;=> 7
+
+(sum 1 2)
+;=> 3
+
+(sum 1 2 3 4 5)
+;=> 15
+----

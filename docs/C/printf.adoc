@@ -1,0 +1,11 @@
+= C printf
+:page-tags: C printf gcc clang
+:toc: right
+:stem: latexmath
+:icons: font
+:source-highlighter: highlight.js
+
+== References
+
+* link:https://man.archlinux.org/man/printf.3[printf :: Arch Linux Man Pages]
+* link:https://www.ibm.com/docs/en/i/7.2?topic=functions-printf-print-formatted-characters[printf :: IMB docs]

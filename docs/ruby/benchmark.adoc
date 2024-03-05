@@ -1,0 +1,10 @@
+= Benchmarking
+:page-subtitle: Ruby
+:page-tags: ruby performance benchmark
+
+
+== benchmark-ips gem
+
+* link:https://github.com/evanphx/benchmark-ips[benchmark-ips repo^].
+* link:https://discord.com/channels/518658712081268738/650031651845308419/1180045340095823882[Discord thread on benchmarking #each_with_object^].
+

@@ -1,0 +1,121 @@
+= RVM :: Ruby
+
+== `rvm list known’ not showing latest rubies
+
+[source,shell-session]
+----
+$ rvm --version
+rvm 1.29.12 (latest) by Michal Papis, Piotr Kuczynski, Wayne E. Seguin [https://rvm.io]
+
+$ rvm list known
+# MRI Rubies
+(some output redacted)
+[ruby-]1.9.3[-p551]
+[ruby-]2.7[.2]
+[ruby-]3[.0.0]
+ruby-head
+----
+
+For some reason, `rvm list known` did not show ruby
+3.1.2`. Still, running`rvm install
+ruby-3.1.2`worked.`rvm`itself had just been upgraded to the latest version with`nvm
+get stable`.
+
+* https://stackoverflow.com/questions/70672711/whats-the-right-string-to-use-when-installing-ruby-3-1-through-rvm-on-mac-os-bi#comment129235266_70673017[My
+comment on StackOverflow (question about Ruby 3.1 on macOS)].
+
+=== Default Ruby on New Shells
+
+Make ruby-3.1.2 the default for new shell sessions:
+
+[source,shell-session]
+----
+$ rvm --default use ruby-3.1.2
+----
+
+* https://rvm.io/rubies/default[Default Ruby on RVM docs].
+
+== OpenSSL Problems with rvm install
+
+[,shell-session]
+----
+$ tail -n 12 /Users/fernando/.rvm/log/1693503034_ruby-3.1.2/make.log
+make[2]: Leaving directory '/Users/fernando/.rvm/src/ruby-3.1.2/ext/socket'
+1 warning generated.
+7 warnings generated.
+make[2]: Leaving directory '/Users/fernando/.rvm/src/ruby-3.1.2/ext/openssl'
+make[1]: *** [exts.mk:256: ext/openssl/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+1 warning generated.
+linking shared-object ripper.bundle
+make[2]: Leaving directory '/Users/fernando/.rvm/src/ruby-3.1.2/ext/ripper'
+make[1]: Leaving directory '/Users/fernando/.rvm/src/ruby-3.1.2'
+make: *** [uncommon.mk:305: build-ext] Error 2
+++ return 2
+----
+
+This has worked:
+
+[,shell-session]
+----
+$ rvm pkg install openssl
+
+Beware, 'rvm pkg ...' is deprecated, read about the new autolibs feature: 'rvm help autolibs'.
+
+Checking requirements for osx.
+Certificates bundle '/usr/local/etc/openssl@1.1/cert.pem' is already up to date.
+Requirements installation successful.
+Fetching openssl-1.0.1i.tar.gz to /Users/fernando/.rvm/archives
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100 4318k  100 4318k    0     0  4172k      0  0:00:01  0:00:01 --:--:-- 4188k
+Extracting openssl to /Users/fernando/.rvm/src/openssl-1.0.1i
+Configuring openssl in /Users/fernando/.rvm/src/openssl-1.0.1i
+Compiling openssl in /Users/fernando/.rvm/src/openssl-1.0.1i
+Installing openssl to /Users/fernando/.rvm/usr
+
+Please note that it's required to reinstall all rubies:
+
+    rvm reinstall all --force
+
+Updating openssl certificates....
+----
+
+Followed by:
+
+[,shell-session]
+----
+$ rvm install 3.1.2 --with-openssl-dir=$HOME/.rvm/usr
+ruby-3.1.2 - #removing src/ruby-3.1.2..
+Checking requirements for osx.
+Certificates bundle '/usr/local/etc/openssl@1.1/cert.pem' is already up to date.
+Requirements installation successful.
+Installing Ruby from source to: /Users/fernando/.rvm/rubies/ruby-3.1.2, this may take a while depending on your cpu(s)...
+ruby-3.1.2 - #downloading ruby-3.1.2, this may take a while depending on your connection...
+ruby-3.1.2 - #extracting ruby-3.1.2 to /Users/fernando/.rvm/src/ruby-3.1.2.....
+ruby-3.1.2 - #configuring............................................................................
+ruby-3.1.2 - #post-configuration.
+ruby-3.1.2 - #compiling....................................................................................................
+ruby-3.1.2 - #installing.....................
+ruby-3.1.2 - #making binaries executable...
+Installed rubygems 3.3.7 is newer than 3.0.9 provided with installed ruby, skipping installation, use --force to force installation.
+ruby-3.1.2 - #gemset created /Users/fernando/.rvm/gems/ruby-3.1.2@global
+ruby-3.1.2 - #importing gemset /Users/fernando/.rvm/gemsets/global.gems..............................there was an error installing gem rubygems-bundler
+.............................
+ruby-3.1.2 - #generating global wrappers........
+ruby-3.1.2 - #gemset created /Users/fernando/.rvm/gems/ruby-3.1.2
+ruby-3.1.2 - #importing gemsetfile /Users/fernando/.rvm/gemsets/default.gems evaluated to empty gem list
+ruby-3.1.2 - #generating default wrappers........
+ruby-3.1.2 - #adjusting #shebangs for (gem irb erb ri rdoc testrb rake).
+Install of ruby-3.1.2 - #complete
+Ruby was built without documentation, to build it run: rvm docs generate-ri
+----
+
+Got into other problems later with messages like "Cannot load SSL" and similar.
+
+Another possible solution (https://github.com/rvm/rvm/issues/5380):
+
+[,shell-session]
+----
+$ rvm install 3.2.2 --with-openssl-dir=`brew --prefix openssl@3`
+----

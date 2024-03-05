@@ -1,0 +1,22 @@
+= C Topics
+:toc: left
+:icons: font
+:sectlinks:
+
+This is a random list of C topics.
+
+* Pass by value vs pass by reference or call by value vs pass by reference.
+* Pointer.
+* Pointer to a pointer.
+* Pointer as parameter.
+* Pointer to a pointer as parameter.
+* Return pointer.
+* Pointer arithmetic.
+* Array as constant pointer.
+* Generic pointer.
+* Void pointer.
+* Pointer to a void pointer.
+* Type cast.
+* Multi-dimensional array.
+* Row-major order for arrays.
+* Function pointer.

@@ -1,0 +1,182 @@
+= The C Programming Language
+:page-tags: c gcc clang tools gnu shell
+:toc: right
+:icons: fonts
+:stem: latexmath
+
+== Warnings, Pedantic
+
+Unless otherwise noted, assume the the compiler flags include:
+
+* `-std=c99`
+* `-Og`
+* `-g3`
+* `-Wall`
+* `-Wextra`
+* `-Wpedantic`
+* `-fsanitize=address,undefined`
+
+== Return status vs exit status
+
+The ANSI C standard has no value for true and false.
+C programs treat the value 0 as false, and any other value as true.
+The C99 standard does allow you to use the words true and false in your programs—but the compiler treats them as the values 1 and 0 anyway.
+
+If your function returns 0, it means success.
+Any other values signals some sort of failure or malfunction.
+
+0 is success for a return value (or exit status on shell scripts for example), even though it also means “false”.
+1 is some kind of error (again, even on shell script exit status), even though it also means “true”.
+
+== Tooling
+
+=== bear
+
+Bear is able to generate an LLVM/Clangd compilation database from intercepted commands, such as `make <target>`.
+
+See link:https://github.com/rizsotto/Bear[rizsotto/Bear^] repo.
+
+On Arch Linux:
+
+[source,shell-session]
+----
+$ pacman --sync --refresh --needed bear
+----
+
+Create a `compile_commands.json` from a `Makefile`:
+
+[source,shell-session]
+----
+$ bear -- make foo
+----
+
+The result will be a `compile_commands.json` in the current directory which contains the build info for the `foo` `make` target.
+
+Sometimes it generates an empty `compile_commands.json`.
+One time when it happened, no `main()` function was present, and just momentarily adding a minimal main function solved the problem.
+
+== Criterion
+
+link:https://github.com/Snaipe/Criterion/releases[Download Criterion^] (if not installing from AUR or the package manager of
+your distro), and extract it to `$HOME/local/clibs`:
+
+[source,shell-session]
+----
+$ mkdir -pv ~/local/clibs
+mkdir: created directory '/home/devel/local/clibs'
+
+$ cd $?
+
+$ \curl -LO https://github.com/Snaipe/Criterion/releases/download/v2.4.2/criterion-2.4.2-linux-x86_64.tar.xz
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+100  852k  100  852k    0     0   180k      0  0:00:04  0:00:04 --:--:--  172k
+
+$ tree -C ./
+./
+└── criterion-2.4.2-linux-x86_64.tar.xz
+
+1 directory, 1 file
+
+$ tar -vxf ./criterion-2.4.2-linux-x86_64.tar.xz
+criterion-2.4.2/
+criterion-2.4.2/lib/
+criterion-2.4.2/lib/libcriterion.so.3.2.0
+criterion-2.4.2/lib/pkgconfig/
+...
+
+$ rm -v ./criterion-2.4.2-linux-x86_64.tar.xz
+removed './criterion-2.4.2-linux-x86_64.tar.xz'
+----
+
+And maybe rename `criterion-<version>` to simply `criterion` to make
+later commands easier:
+
+[source,shell-session]
+----
+$ mv -v ./criterion{-2.4.2,}
+renamed './criterion-2.4.2' -> './criterion'
+----
+
+Then, C files including Criterion tests must compiled with correct flags
+to include Criterion header files and proper linking:
+
+[source,shell-session]
+----
+$ make -f ./Makefile_dev \
+  ./out/spin_words_v1 && LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$HOME/local/clibs/criterion/lib"
+
+$ gcc \
+  -std=c99 \
+  -Og \
+  -g3 \
+  -Wall \
+  -Wextra \
+  -Wpedantic \
+  -fsanitize=address,undefined \
+  -I ~/local/clibs/criterion/include \
+  -L ~/local/clibs/criterion/lib \
+  -lcriterion \
+  ./myapp.c \
+  -o ./myapp
+----
+
+And when running the compiled code, specify Creterion's library path:
+
+[source,shell-session]
+----
+$ LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:$HOME/local/clibs/criterion/lib" \
+  ./myapp
+----
+
+Of course, those can be set in the shell rc files and used in
+combination with tools like `make`:
+
+In `~/.bashrc`:
+
+[source,shell-session]
+----
+export CLIBS="$HOME/devel/clibs"
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$CLIBS/criterion/lib"
+----
+
+And an example `Makefile`:
+
+[source,shell-session]
+----
+CLIBS=$(HOME)/local/clibs
+CC=gcc
+CFLAGS=-std=c99 \
+	-Og \
+	-g3 \
+	-Wall \
+	-Wextra \
+	-Wpedantic \
+	-fsanitize=address,undefined \
+	-I $(CLIBS)/criterion/include \
+	-L $(CLIBS)/criterion/lib \
+	-l criterion
+
+./out:
+	mkdir -pv ./out
+
+./out/%: %.c
+	$(CC) $(CFLAGS) $< -o $@
+
+clean:
+	rm -rfv ./out/*
+----
+
+Then we can simply do:
+
+[source,shell-session]
+----
+$ make ./out
+$ make ./out/myapp
+$ ./out/myapp
+----
+
+== Resources
+
+* link:https://stevens.netmeister.org/631/[Advanced Programming in the UNIX Environment CS631 - APUE by Jan Schaumann^]

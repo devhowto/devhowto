@@ -1,0 +1,120 @@
+= Scheme Debugging
+:icons: font
+:toc: left
+
+== Call of non-procedure #f
+
+.broken code
+[source,scheme]
+----
+;;;;
+;; insertR* :: Atom [a] -> [a]
+;;
+;; Returns `lst` with `new` inserted to the right of all occurrences
+;; of `old`.
+;;
+(define insertR*
+  (lambda (new old lst)
+    ((null? lst) '())
+    ((atom? (car lst))
+     (cond
+      ((eq? (car lst) old)
+       (cons old
+             (cons new
+                   (insertR* new old (cdr lst)))))
+      (else
+       (cons (car lst)
+             (insertR* new old (cdr lst))))))
+    (else
+     (cons (insertR* new old (car lst))
+           (insertR* new old (cdr lst))))))
+----
+
+Running the code above with Chicken Scheme produces an error something like this:
+
+.chicken scheme error in REPL
+----
+#;1> (insertR* 'NEW 'qux '(foo (bar qux)))
+
+Error: call of non-procedure: #f
+
+	Call history:
+
+	<syntax>	  (insertR* (quote NEW) (quote qux) (quote (foo (bar qux))))
+	<syntax>	  (quote NEW)
+	<syntax>	  (##core#quote NEW)
+	<syntax>	  (quote qux)
+	<syntax>	  (##core#quote qux)
+	<syntax>	  (quote (foo (bar qux)))
+	<syntax>	  (##core#quote (foo (bar qux)))
+	<eval>	  (insertR* (quote NEW) (quote qux) (quote (foo (bar qux))))
+	<eval>	  [insertR*] ((null? lst) (quote ()))
+	<eval>	  [insertR*] (null? lst)	<--
+----
+
+The problem is in this line:
+
+[source,scheme]
+----
+((null? lst) '())
+----
+
+Why‽
+Look:
+
+[source,]
+----
+#;3> (define lst '())
+#;3> ((null? lst) '())
+
+Error: call of non-procedure: #t
+
+	Call history:
+
+	<syntax>	  ((null? lst) (quote ()))
+	<syntax>	  (null? lst)
+	<syntax>	  (quote ())
+	<syntax>	  (##core#quote ())
+	<eval>	  ((null? lst) (quote ()))
+	<eval>	  (null? lst)	<--
+----
+
+`(null? lst)` returns `#f`.
+Our expression then evaluates to `(#f '())`, and `#f` is not a _procedure_ (function).
+We cannot apply `#f` to `'()` `#f` is not a procedure.
+
+.simple referential transparency check
+----
+((null? lst) '())
+(#f '())
+...error...
+----
+
+But that same line works as expected inside `cond`.
+Here's the working code with the cond in the correct place:
+
+[source,scheme,highlight-lines=9]
+----
+;;;;
+;; insertR* :: Atom [a] -> [a]
+;;
+;; Returns `lst` with `new` inserted to the right of all occurrences
+;; of `old`.
+;;
+(define insertR*
+  (lambda (new old lst)
+    (cond
+     ((null? lst) '())
+     ((atom? (car lst))
+      (cond
+       ((eq? (car lst) old)
+        (cons old
+              (cons new
+                    (insertR* new old (cdr lst)))))
+       (else
+        (cons (car lst)
+              (insertR* new old (cdr lst))))))
+     (else
+      (cons (insertR* new old (car lst))
+            (insertR* new old (cdr lst)))))))
+----
