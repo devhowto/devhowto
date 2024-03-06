@@ -8,7 +8,7 @@
 
 == Introduction
 
-TypeScript uses a structural type system.
+TypeScript implements a _structural_ type system.
 It means the names of types don’t mater.
 Only their shapes do.
 
@@ -35,9 +35,9 @@ printJedi({ id: 2, name: "Aayla Secura" });
 
 ----
 
-<1> Type-checks because ahsoka is of type `Jedi`.
+<1> Type-checks because `ahsoka` is of type `Jedi`.
 
-<2> Type-checks because even though we didn't explicitly create the object for Aayla by annotating it with the type `Jedi`, the type checks analyses the structure of the passed object.
+<2> Type-checks because even though we didn't explicitly create the object for Aayla by annotating it with the type `Jedi`, the type checker is satisfied with the the structure of the passed object.
 Because it contains `id` of type `number`, and `name` of type `string`, the type checker is happy with it.
 
 But as soon as the shape doesn't match, the type checker catches it:
