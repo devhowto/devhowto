@@ -42,4 +42,4 @@ Because it contains `id` of type `number`, and `name` of type `string`, the type
 
 But as soon as the shape doesn't match, the type checker catches it:
 
-image:2024-03-06T10-32-22-828Z.png[Structural type wrong ID type] 
+image:structural-typing-jedi-wrong-id-type.png[Structural type wrong ID type] 
