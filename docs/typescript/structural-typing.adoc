@@ -1,0 +1,45 @@
+= Structural Typing
+:page-subtitle: TypeScript
+:page-tags: tsconfig typescript config
+:toc: left
+:icons: font
+:source-highlighter: highlight.js
+:imagesdir: __assets
+
+== Introduction
+
+TypeScript uses a structural type system.
+It means the names of types don’t mater.
+Only their shapes do.
+
+For example, here's a type and a function that takes that type as parameter:
+
+[source,typescript]
+----
+type Jedi = {
+  id: number;
+  name: string;
+};
+
+function printJedi(jedi: Jedi): void {
+  log(jedi.id, jedi.name);
+}
+
+const ahsoka: Jedi = { id: 1, name: "Ahsoka Tano" };
+
+// <1>
+printJedi(ahsoka);
+
+// <2>
+printJedi({ id: 2, name: "Aayla Secura" });
+
+----
+
+<1> Type-checks because ahsoka is of type `Jedi`.
+
+<2> Type-checks because even though we didn't explicitly create the object for Aayla by annotating it with the type `Jedi`, the type checks analyses the structure of the passed object.
+Because it contains `id` of type `number`, and `name` of type `string`, the type checker is happy with it.
+
+But as soon as the shape doesn't match, the type checker catches it:
+
+image:2024-03-06T10-32-22-828Z.png[Structural type wrong ID type] 

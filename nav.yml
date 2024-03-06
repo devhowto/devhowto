@@ -1,5 +1,6 @@
 TypeScript:
   - typescript/tsconfig-examples.adoc
+  - typescript/structural-typing.adoc
 
 Command Line:
   - cmdline/curl.adoc
