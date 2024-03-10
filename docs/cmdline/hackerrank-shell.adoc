@@ -1,6 +1,10 @@
-== HackerRank Shell
+= HackerRank Shell
+:toc: right
+:sectlevels: 6
+:sectlinks:
+:icons: font
 
-=== Intro
+== Intro
 
 Unless otherwise noted, assume all scripts contain the following
 shebang:
@@ -9,11 +13,11 @@ shebang:
 #!/usr/bin/env bash
 ....
 
-=== Easy Challenges
+== Easy Challenges
 
 https://www.hackerrank.com/domains/shell
 
-==== Let’s Echo
+=== Let’s Echo
 
 Tags: #cmdline #shell #bash #echo #printf Links:
 https://www.hackerrank.com/challenges/bash-tutorials-lets-echo[challenge]
@@ -25,7 +29,7 @@ $ echo HELLO
 $ printf '%s\n' HELLO
 ----
 
-==== Looping With Numbers
+=== Looping With Numbers
 
 * Tags: #cmdline #shell #bash #numbers #looping #for
 * Links:
@@ -46,7 +50,7 @@ Or using ranges:
 $ printf '%d\n' {1..50}
 ----
 
-==== Looping And Skipping
+=== Looping And Skipping
 
 * Tags: #cmdline, #numbers #looping #for
 * Links:
@@ -90,7 +94,7 @@ Or using `seq`:
 $ seq -s ' ' 1 2 9
 ----
 
-==== A Personalized Echo
+=== A Personalized Echo
 
 * Tags: #cmdline #read #echo
 * Links:
@@ -102,7 +106,7 @@ $ read -r name
 $ printf 'Welcome %s\n' "$name"
 ----
 
-==== The World of Numbers
+=== The World of Numbers
 
 * Tags: #cmdline #shell #bash #numbers #math #bc #ranges
 * Links:
@@ -217,7 +221,7 @@ lol
 What the poop‽ 💩
 ----
 
-==== Getting started with conditionals
+=== Getting started with conditionals
 
 * Tags: #cmdline #shell #bash #conditionals
 * Links:
@@ -259,7 +263,7 @@ lol
 What the poop‽ 💩
 ----
 
-==== More on Conditionals
+=== More on Conditionals
 
 * Tags: #cmdline #shell #bash #conditionals #math
 * Links:
@@ -282,7 +286,7 @@ read -r z
 echo ISOSCELES && exit 0
 ----
 
-==== Arithmetic Operations
+=== Arithmetic Operations
 
 * Tags: #cmdline #shell #bash #math #bc
 * Links:
@@ -319,7 +323,7 @@ truncates (does not round) to three decimal places and `printf` has no
 way to round up, making the solution to the exercise incorrect.
 Therefore, we use `bc -l` without scale, or use `scale=4` at least.
 
-==== Compute the Average
+=== Compute the Average
 
 * Tags: #cmdline #shell #bash #math
 * Links:
@@ -348,7 +352,7 @@ printf '%.3f\n' "$(echo "scale=4; $sum / $n" | bc -l)"
 We used `scale=4` by the same reasons described earlier about truncating
 and rounding.
 
-==== cut Challenges
+=== cut Challenges
 
 * Tags: #cmdline #shell #bash #cut
 
@@ -373,7 +377,7 @@ $ cut -d ' ' -f 1,2,3 -
 $ cut -d $'\t' -f 2- -
 ----
 
-==== Head of Text File Challenges
+=== Head of Text File Challenges
 
 [source,shell-session]
 ----
@@ -382,7 +386,7 @@ $ head -n 20
 $ head -c 20
 ----
 
-==== Middle of a Text File
+=== Middle of a Text File
 
 * Tags: #cmdline #shell #bash #sed
 * Links:
@@ -393,7 +397,7 @@ link:++https://www.hackerrank.com/challenges/text-processing-in-linux---the-midd
 $ sed -n '12,22 p'
 ----
 
-==== Tail of a Text File 1 and 2
+=== Tail of a Text File 1 and 2
 
 * Tags: #cmdline #shell #bash #tail
 * Links:
@@ -406,7 +410,7 @@ $ tail -n 20 -
 $ tail -c 20 -
 ----
 
-==== tr Command 1
+=== tr Command 1
 
 * Tags: #cmdline #shell #bash #tr #here-document #assignment
 * Links:
@@ -434,7 +438,7 @@ int res = [23 + i] * 2;
 A https://www.gnu.org/software/bash/manual/bash.html#Here-Documents[Here
 Document] is used to assign lines of text to the variable `input`.
 
-==== tr Command 2
+=== tr Command 2
 
 * Tags: #cmdline #shell #bash #tr
 * Links:
@@ -445,7 +449,7 @@ https://www.hackerrank.com/challenges/text-processing-tr-2[challenge]
 $ tr -d 'a-z'
 ----
 
-==== tr Command 3
+=== tr Command 3
 
 * Tags: #cmdline #shell #bash #tr
 * Links:
@@ -456,7 +460,7 @@ https://www.hackerrank.com/challenges/text-processing-tr-3[challenge]
 $ tr -s ' '
 ----
 
-==== sort Lines Challenges
+=== sort Lines Challenges
 
 * Tags: #cmdline #shell #bash #sort
 * Links:
@@ -502,7 +506,7 @@ $ sort -t $'\t' -n -k 2 -
 $ sort -t '|' -nr -k 2 -
 ----
 
-==== uniq Challenges
+=== uniq Challenges
 
 * Tags: #cmdline #shell #bash #uniq
 * Links:
@@ -577,7 +581,7 @@ $ echo "$lines" | uniq -u -
 TUX
 ----
 
-==== Read In An Array
+=== Read In An Array
 
 * Tags: #cmdline #shell #bash #arrays
 * Links:
@@ -590,7 +594,7 @@ $ while read -r line ; do arr+=("$line") ; done < /dev/stdin
 $ echo "${#arr[*]}"
 ----
 
-==== Display an Element of an Array
+=== Display an Element of an Array
 
 * Tags: #cmdline #shell #bash #arrays
 * Links:
@@ -605,7 +609,7 @@ echo "${countries[3]}"
 `-t` in `mapfile` removes the trailing delimiter so the array elements
 are “clean”.
 
-==== Count Elements in an Array
+=== Count Elements in an Array
 
 * Tags: #cmdline #shell #bash #arrays
 * Links:
@@ -617,7 +621,7 @@ mapfile -t countries
 echo "${#countries[@]}"
 ----
 
-==== Slice An Array
+=== Slice An Array
 
 * Tags: #cmdline #shell #bash #arrays
 * Links:
@@ -661,7 +665,7 @@ and:
 head -8 | tail -5 | paste -s -d ' ' -
 ----
 
-==== Concatenate Array With Itself
+=== Concatenate Array With Itself
 
 * Tags: #cmdline #shell #bash #arrays
 * Links:
@@ -676,7 +680,7 @@ countries+=("${countries[@]}" "${countries[@]}")
 echo "${countries[*]}"
 ----
 
-==== grep A
+=== grep A
 
 * Tags: #cmdline #shell #sed
 * Links:
@@ -687,7 +691,7 @@ https://www.hackerrank.com/challenges/text-processing-in-linux-the-grep-command-
 $ grep -iw 'th\(e\|at\|en\|ose\)'
 ----
 
-==== grep B
+=== grep B
 
 * Tags: #cmdline #shell #grep
 * Links:
@@ -707,7 +711,7 @@ This works locally and on HackerRank:
 $ grep '\(.\) \?\1'
 ----
 
-==== sed 3
+=== sed 3
 
 * Tags: #cmdline #shell #sed
 * Links:
@@ -718,7 +722,7 @@ https://www.hackerrank.com/challenges/text-processing-in-linux-the-sed-command-3
 $ sed 's/[Tt][Hh][Yy]/{&}/g'
 ----
 
-==== sed 4
+=== sed 4
 
 * Tags: #cmdline #shell #sed
 * Links: https://www.hackerrank.com/challenges/sed-command-4[challenge]
@@ -735,9 +739,9 @@ Or
 $ sed 's/[0-9]\+ /**** /g'
 ----
 
-=== Medium Challenges
+== Medium Challenges
 
-==== Paste 1
+=== Paste 1
 
 * Tags: #cmdline #shell #paste
 * Links: https://www.hackerrank.com/challenges/paste-1[challenge]
@@ -747,7 +751,7 @@ $ sed 's/[0-9]\+ /**** /g'
 $ paste -s -d ';' -
 ----
 
-==== paste 2
+=== paste 2
 
 * Tags: #cmdline #shell #paste
 * https://www.hackerrank.com/challenges/paste-2[challenge]
@@ -757,7 +761,7 @@ $ paste -s -d ';' -
 paste -d ';' - - -
 ----
 
-==== paste 3
+=== paste 3
 
 * Tags: #cmdline #shell #paste
 * Links: https://www.hackerrank.com/challenges/paste-3[challenge]
@@ -767,7 +771,7 @@ paste -d ';' - - -
 $ paste -s -
 ----
 
-==== paste 4
+=== paste 4
 
 * Tags: #cmdline #shell #paste
 * Links: https://www.hackerrank.com/challenges/paste-4[challenge]
@@ -776,7 +780,7 @@ $ paste -s -
 $ paste - - -
 ....
 
-==== sed 1
+=== sed 1
 
 * Tags: #cmdline #shell #sed
 * Links:
@@ -787,13 +791,13 @@ https://www.hackerrank.com/challenges/text-processing-in-linux-the-sed-command-1
 $ sed 's/\<the\>/this/'
 ----
 
-==== sed 2
+=== sed 2
 
 * Tags: #cmdline #shell #sed
 * Links:
 https://www.hackerrank.com/challenges/text-processing-in-linux-the-sed-command-2[challenge]
 
-==== grep challenges
+=== grep challenges
 
 * Tags: #cmdline #shell #grep
 * Links:
@@ -810,7 +814,7 @@ $ grep -i '\<the\>'
 $ grep -iv '\<that\>'
 ----
 
-==== awk challenges
+=== awk challenges
 
 * Tags: #cmdline #shell #awk
 * Links: https://www.hackerrank.com/challenges/awk-1[challenge 1],
@@ -858,7 +862,7 @@ Challenge 4:
 awk 'ORS=NR % 2 ? ";" : "\n"'
 ----
 
-==== Filter an Array With Patterns
+=== Filter an Array With Patterns
 
 * Tags: #cmdline #shell #bash #arrays #pattern-matching
 * Links:
@@ -874,7 +878,7 @@ while read -r line ; do
 done
 ----
 
-==== Remove First Capital Letter From Each Array Element
+=== Remove First Capital Letter From Each Array Element
 
 * Tags: #cmdline #shell #bash #arrays #pattern-matching
 * Links:
@@ -891,9 +895,9 @@ done
 echo "${arr[*]}"
 ----
 
-=== Hard Challenges
+== Hard Challenges
 
-==== sed 5
+=== sed 5
 
 * Tags: #cmdline #shell #sed
 * Links: https://www.hackerrank.com/challenges/sed-command-5[challenge]
@@ -910,7 +914,7 @@ the search must also match an “x”. That is why we can’t do
 `s/\([0-9]\+\) \1 \1 \1`, because it would only match if all four fields
 of the number were the same thing, like “1234 1234 1234 1234”.
 
-==== Lonely Integer
+=== Lonely Integer
 
 * Tags: #cmdline #shell #bash #numbers
 * Links:
@@ -962,7 +966,7 @@ do
 done
 ----
 
-==== Fractal Tree
+=== Fractal Tree
 
 * Tags: #cmdline #shell #bash
 * Links:
@@ -1054,4 +1058,4 @@ else
 fi
 ----
 
-=== The End
+== The End

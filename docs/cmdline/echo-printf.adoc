@@ -2,6 +2,7 @@
 :page-tags: bash cmdline
 :toc: left
 :icons: font
+:experimental:
 
 == Intro
 
@@ -31,13 +32,13 @@ Why does `echo -n` still produce a newline and the next prompt is on a
 line of its own?
 
 It is not `echo` that is producing a newline. Because we first add a
-newline by hitting `Enter` (a.k.a `Return`) in order to execute the
+newline by hitting kbd:[Enter] (a.k.a kbd:[Return]) in order to execute the
 command, then bash prints nothing (we provided nothing for `echo` to
-print), the output is a newline from our `Enter` and nothing else. The
+print), the output is a newline from our kbd:[Enter] and nothing else. The
 `$` prompt is positioned on a line of its own simply because `echo` had
 nothing to print.
 
-When we do `echo -n foo` and hit `Enter`, we first produce a newline,
+When we do `echo -n foo` and hit kbd:[Enter], we first produce a newline,
 then bash prints 'foo'.
 
 [source,shell-session]
@@ -63,13 +64,10 @@ $ echo -- -n
 -- -n.
 ----
 
-Not what we want…​ We learned in `cmdline End of Options` that a anything
-following `__` should be treated as a normal string operand, and not as
-an option to the program. Why then `--` is not working here and
-preventing `-n` from beting treaded an option‽ Because bash’s `echo`
-honors
-https://pubs.opengroup.org/onlinepubs/9699919799/utilities/echo.html[the
-specs]:
+Not what we want...
+We learned in link:/cmdline/argument-syntax.html#_end_of_options[End of Options^] that a anything following `--` should be treated as a normal string operand, and not as an option to the program.
+Why then is `--` not working here and preventing `-n` from beting treaded an option‽
+Because bash’s `echo` honors https://pubs.opengroup.org/onlinepubs/9699919799/utilities/echo.html[the specs]:
 
 ____
 The echo utility shall not recognize the “--” argument in the manner
