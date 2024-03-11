@@ -1,15 +1,19 @@
 image: ruby:3.2
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH
+
+cache:
+  paths:
+    - vendor/
+
 stages:
 - test
 sast:
   stage: test
 include:
 - template: Security/SAST.gitlab-ci.yml
-
-cache:
-  paths:
-    - vendor/
 
 before_script:
   - gem install bundler
