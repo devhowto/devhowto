@@ -1,4 +1,5 @@
 = Man, Info and Help
+:page-subtitle: Command Line
 
 It is a good habit read man pages, help pages, and info pages instead of
 immediatelly jumping to a web search.
@@ -17,7 +18,7 @@ skills and expertise. Just keep trying.
 [TIP]
 .Tip
 ====
-Read the document about _built-ins_. `built-ins-page`.
+Read the document about link:/cmdline/built-in.html[shell _built-in_ commands].
 ====
 
 Shells have built-in commands. Some of Bash's built-ins include commands
