@@ -5,6 +5,8 @@
 
 My dev studies and research notes.
 
+http://localhost:3001/cmdline/command-line-intro.html
+
 [NOTE]
 ====
 The official repository is the link:https://gitlab.com/devhowto/devhowto[devhowto repository on Gitlab].
