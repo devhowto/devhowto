@@ -20,7 +20,7 @@ before_script:
   - bundle install --path vendor
 
 pages:
-  state: deploy
+  stage: deploy
   script:
     - git --version
     - ruby --version
