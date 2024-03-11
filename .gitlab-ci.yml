@@ -7,14 +7,21 @@ sast:
 include:
 - template: Security/SAST.gitlab-ci.yml
 
+cache:
+  paths:
+    - vendor/
+
+before_script:
+  - gem install bundler
+  - bundle install --path vendor
+
 pages:
+  state: deploy
   script:
-    - gem install bundler
-    - bundle install
     - git --version
     - ruby --version
     - asciidoctor --version
-    - git clone https://gitlab.com/fernandobasso/adocwiki.git ./adocwiki
+    - git clone --depth 1 https://gitlab.com/fernandobasso/adocwiki.git ./adocwiki
     - echo $PWD
     - ls -l $PWD/adocwiki
     - ruby $PWD/adocwiki/src/main.rb $PWD
@@ -22,3 +29,6 @@ pages:
   artifacts:
     paths:
       - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
+  environment: production
