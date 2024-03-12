@@ -105,7 +105,7 @@ Then run with `ruby` (not with `rspec`):
 $ ruby ./add.rb
 ----
 
-image::rspec-autorun-format-progress-dots.png[rspec autorun progress dots]
+image::rspec-autorun-format-progress-dots-1.png[rspec autorun progress dots]
 
 Note by default rspec uses the `progress` (dots) output.
 Because we are using rspec's autorun feature and we run the tests by using the `ruby add.rb` (instead of `rspec add.rb`), there is no way to pass rspec options on the command line like `rspec --format documentation add.rb`.
@@ -120,7 +120,7 @@ Fortunatelly, rspec can read options from the `.rspec` config file:
 
 Then it will show the test descriptions instead of simply the dots.
 
-image::rspec-autorun-format-documentation.png[rspec autorun documentation]
+image::rspec-autorun-format-documentation-1.png[rspec autorun documentation]
 
 == Assert STDOUT output
 
