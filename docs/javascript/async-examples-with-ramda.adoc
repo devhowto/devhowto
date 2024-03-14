@@ -72,7 +72,7 @@ fetchJediById(3).then(log);
 //=> { name: 'Aayla Secura', skill: 'Mind trick' }
 ----
 
-Of we can replace the `fetchJediById(id).then(log)` with yet another `pipe` + `andThen`:
+Or we can replace the `fetchJediById(id).then(log)` with yet another `pipe` + `andThen`:
 
 [source,javascript]
 ----
