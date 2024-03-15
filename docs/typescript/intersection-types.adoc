@@ -1,0 +1,47 @@
+= Intersection Types
+:page-subtitle: TypeScript
+:page-tags: typescript intersection
+:toc: left
+:icons: font
+:source-highlighter: highlight.js
+:imagesdir: __assets
+
+== Introduction to Intersection Types
+
+Intersection types are created with the `&` operator.
+Intersections behaves different if used with literal types vs object types.
+The `&` operator behaves like and _and_ operation for literal types, but as an _union_ for object types.
+
+[source,typescript]
+----
+type T = string & number;
+// type T = never
+----
+
+The resulting type is `never`, because `T` cannot possibly be both `string` *and* `number`.
+In this case, the name “intersection” makes sense.
+There is no intersection between `string` and `number`.
+
+However, this creates an _union_ of the type constituents:
+
+[source,typescript]
+----
+type U = BaseConfig & { headers: Record<string, string> };
+// type U = BaseConfig & {
+//     headers: Record<string, string>;
+// }
+----
+
+
+image:intersection-type-config-intellisense.png[Intersection type for config object with intellisense]
+
+It is as if we had done this:
+
+[source,typescript]
+----
+type U = {
+  url: string;
+  version: number;
+  headers: Record<string, string>;
+}
+----
