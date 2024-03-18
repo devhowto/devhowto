@@ -568,8 +568,7 @@ bare POSIX shell as much as possible.
 In `sed`, we can read its info page with `info sed`. In the section “Sed
 Scripts > The "s" Command”, we can read this:
 
-*Excerpt from GNU Sed Info Page*
-
+.Excerpt from GNU Sed Info Page
 [source,text]
 ----
 Finally, as a GNU 'sed' extension, you can include a special sequence
@@ -607,8 +606,7 @@ discuss one such example.
 
 If you read the help for the builtin `printf` command, it says:
 
-*Excerpt of bash’s `help printf'*
-
+.Excerpt of bash’s `help printf'
 [source,text]
 ----
 In addition to the standard format specifications described in printf(1),
@@ -617,8 +615,7 @@ printf interprets:
 
 And then you do `man 1 printf`, and see:
 
-*Excerpt of `man 1 printf':*
-
+.Excerpt of `man 1 printf'
 [source,text]
 ----
 NOTE:  your shell may have its own version of printf, which usually su‐
@@ -684,8 +681,7 @@ Guideline 10 on
 https://pubs.opengroup.org/onlinepubs/9699919799/basedefs/V1_chap12.html[XBD
 Utility Syntax Guidelines 10] says:
 
-*Excerpt of XBD Utility Syntax Guidelines*
-
+.Excerpt of XBD Utility Syntax Guidelines
 [source,text]
 ----
 The first `--` argument that is not an option-argument should be accepted as a
@@ -724,8 +720,7 @@ about `--`. Then we read
 https://pubs.opengroup.org/onlinepubs/9699919799/utilities/echo.html[XCU
 echo spec page], and come accross this:
 
-*Excerpt of XCU echo spec page*
-
+.Excerpt of XCU echo spec page
 [source,text]
 ----
 The echo utility shall not recognize the "--" argument in the manner
