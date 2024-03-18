@@ -1,3 +1,5 @@
+Home:
+  - index.adoc
 TypeScript:
   - typescript/tsconfig-examples.adoc
   - typescript/structural-typing.adoc
