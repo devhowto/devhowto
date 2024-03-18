@@ -6,6 +6,8 @@ TypeScript:
   - typescript/intersection-types.adoc
 
 Command Line:
+  - cmdline/command-line-intro.adoc
+  - cmdline/help-info-man.adoc
   - cmdline/curl.adoc
   - cmdline/bash-brace-expansion.adoc
   - cmdline/du.adoc
@@ -13,9 +15,7 @@ Command Line:
   - cmdline/performance-benchmark.adoc
   - cmdline/gnu-utils-macos.adoc
   - cmdline/grep.adoc
-  - cmdline/command-line-intro.adoc
   - cmdline/cp.adoc
-  - cmdline/help-info-man.adoc
   - cmdline/echo-printf.adoc
   - cmdline/built-in.adoc
   - cmdline/find.adoc

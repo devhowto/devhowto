@@ -1,12 +1,10 @@
-= Command Line
-
-help-info-man built-in argument-syntax echo-printf bash-brace-expansion
-bash-parameter-expansion bash-aliases bash-arrays terminal/index tar.md
-find.md hackerrank-shell
+= Introduction to Unix Command Line
+:page-subtitle: Command Line
+:imagesdir: __assets
 
 == Intro
 
-image:command-line-intro.assets/bash-help-1.png[Bash Help Command Line]
+image::bash-help-1.png[Bash Help Command Line]
 
 Command line tools have NOT faded out into the past. They have kept
 consistently evolving and being improved. They still do! A lot of GUI
