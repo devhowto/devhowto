@@ -1,16 +1,15 @@
 = Man, Info and Help
 :page-subtitle: Command Line
 
-It is a good habit read man pages, help pages, and info pages instead of
-immediatelly jumping to a web search.
+== Introduction
+It is a good habit read man pages, help pages, and info pages instead of immediately jumping to a web search.
 
 [TIP]
 .Tip
 ====
-If you are new to *nix, don’t expect to understand very much of the
-manuals when reading and trying stuff in the very first few attempts. It
-will really depend a lot on your background and previous experience,
-skills and expertise. Just keep trying.
+If you are new to *nix, don’t expect to understand very much of the manuals when reading and trying stuff in the very first few attempts.
+It will really depend a lot on your background and previous experience, skills.
+Just keep on keeping on and hang tough!
 ====
 
 == help
@@ -21,8 +20,8 @@ skills and expertise. Just keep trying.
 Read the document about link:/cmdline/built-in.html[shell _built-in_ commands].
 ====
 
-Shells have built-in commands. Some of Bash's built-ins include commands
-like `help`, `pwd`, `type`, and `cd`.
+Shells have built-in commands.
+Some of Bash's built-ins include commands like `help`, `pwd`, `type`, and `cd`.
 
 [source,shell-session]
 ----
@@ -30,19 +29,16 @@ $ type cd
 cd is a shell builtin
 ----
 
-`help` is a builtin command that provides usage information on other
-builtin commands.
+`help` is a builtin command that provides usage information on other builtin commands.
 
 [TIP]
 .Tip
 ====
-To see the list of Bash’s builtin commands, simply type `help` without
-any arguments.
+To see the list of Bash’s builtin commands, simply type `help` without any arguments.
 ====
 
-To display the help for a builtin, you can either do `man bash` and
-search for that command or, more simple, quick and practical, use the
-`help` builtin. Start with this:
+To display the help for a builtin, you can either do `man bash` and search for that command or simply use `help` builtin.
+Start with this:
 
 [source,shell-session]
 ----
@@ -50,8 +46,7 @@ $ help help
 $ help
 ----
 
-Yes, run `help` without arguments once to see a list of Bash's builtin
-commands.
+Yes, run `help` without arguments once to see a list of Bash's builtin commands.
 
 Then try some others:
 
@@ -85,12 +80,11 @@ $ info --help
 [NOTE]
 .Note
 ====
-Of course, on Arch Linux, we are fine, but on Ubuntu, we need to
-`apt install texinfo-doc-nonfree`.
+Of course, on Arch Linux, we are fine, but on Ubuntu, we need to `apt install texinfo-doc-nonfree` to have the `info` stuff available.
 ====
 
-Generally, info pages are more user-friendly and tutorial-like than man
-pages. To read info pages, do
+Generally, info pages are more user-friendly and tutorial-like than man pages.
+To read info pages, do
 
 [source,shell-session]
 ----
@@ -103,13 +97,11 @@ $ info bash
 [NOTE]
 .Note
 ====
-Not all programs and commands have info pages, and when an info page
-does not exist for a given command, `info` shows the man page instead.
+Not all programs and commands have info pages, and when an info page does not exist for a given command, `info` shows the man page instead.
 `vi`, `vim` and `rsync` are some such programs.
 ====
 
-You can also open info directly into a section of an info document (if
-you know the name of the section), something like:
+You can also open info directly into a section of an info document (if you know the name of the section), something like:
 
 [source,shell-session]
 ----
@@ -142,9 +134,9 @@ C-h i m <command>
 C-h i m sed
 ----
 
-Info has a lot of nomenclature, concepts and commands. `info info`
-explains about commands to find stuff inside info, navigate documents,
-etc. It is a somewhat complex system. Yet, a powerful one.
+Info has a lot of nomenclature, concepts and commands.
+`info info` explains about commands to find stuff inside info, navigate documents, etc.
+It is a somewhat complex system. Yet, a powerful one.
 
 === info summary
 
