@@ -5,6 +5,12 @@
 :source-highlighter: highlight.js
 :imagesdir: __assets
 
+== Introduction
+
 This project is a compilation of my own work mixed with ideas and notes I learn from others. You’ll find pages with tutorial-like explanations on things that interest me and code solutions for book exercises, coding challenges, algorithms and data structures, functional programming stuff, etc.
 
 If you find any problems, or have suggestions, you are welcome to create an issue or a pull request in the link:https://gitlab.com/devhowto/devhowto.gitlab.io[Dev How To Gitlab repository^].
+
+== Technical Notes
+
+This website is being built with the link:https://gitlab.com/fernandobasso/adocwiki[AdocWiki^] tool I'm (slowly) developing.
