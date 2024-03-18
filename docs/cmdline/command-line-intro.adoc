@@ -13,17 +13,13 @@ interfaces use command line tools behind the scenes.
 There exists a specification to standardize how command line utilities
 should behave so that they work in a cross-platform, interoperable way.
 
-GNU and BSD command line utilities generally try to follow the specs but
-add the so called _extensions_ which add further capabilities to the
-tools, making writing scripts and programs easier and sometimes less
-verbose, but also reduce the portability. Some tools can be run in a
-more restrict way that disallow extensions. The docs for each tool
-should specify those things. Information about these things is also
-scattered across this website's notes and examples when they are deemed
-important and/or worthwhile.
+GNU and BSD command line utilities generally try to follow the specs, but add the so called _extensions_ which endow the tools with further and/or improved capabilities, making writing scripts and programs easier and sometimes less verbose, albeit reducing their portability.
 
-Besides reading the specs, also take a look at the sidebar about reading
-and understanding man pages, info pages and help pages.
+Some tools can be run in a more restrict way that disallow extensions.
+The docs for each tool should specify those things.
+Information about these things is also scattered across this website's notes and examples when they are deemed important and/or worthwhile.
+
+Besides reading the specs, also take a look at the link:/cmdline/help-info-man.html[Man, Info and Help] page.
 
 [NOTE]
 .Note
