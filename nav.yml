@@ -1,10 +1,15 @@
 Home:
   - index.adoc
 TypeScript:
+  - typescript/index.adoc
   - typescript/tsconfig-examples.adoc
   - typescript/structural-typing.adoc
+  - typescript/union-types.adoc
   - typescript/intersection-types.adoc
   - typescript/any-unknown-top-types.adoc
+  - typescript/keyof.adoc
+  - typescript/functions.adoc
+  - typescript/infer.adoc
 
 Command Line:
   - cmdline/command-line-intro.adoc
