@@ -1,0 +1,89 @@
+= Any and Unknown Top Types
+:page-subtitle: TypeScript
+:page-tags: typescript any
+:toc: left
+:icons: font
+:source-highlighter: highlight.js
+:imagesdir: __assets
+
+== Introduction
+
+TypeScript has two so-called _top types_: `any` and `unknown`.
+`any` essentially disables the type system, while `unknown` allows one to be _cautious_.
+
+A _top type_ is a type compatible with any value of (almost) any type.
+That is, any values whatsoever can be assigned to `any` and `unknown`:
+
+[source,typescript]
+----
+const w: any = 1;
+const x: any = { two: 2 };
+const y: unknown = "three";
+const z: unknown = ["four", 5, { six: 6 }];
+----
+
+Even `null` and `undefined` can be assigned to `any` and `unknown`:
+
+[source,typescript]
+----
+const h: any = null;
+const i: any = undefined;
+const j: unknown = null;
+const l: unknown = undefined;
+----
+
+== any
+
+For these examples, use `strict` mode or at least set `noImplicitAny` in `tsconfig.json`:
+
+[source,json]
+----
+{
+  "compilerOptions": {
+    "strict": true
+  }
+}
+----
+
+Or at least:
+
+[source,json]
+----
+{
+  "compilerOptions": {
+    "noImplicitAny": true
+  }
+}
+----
+
+Every value is compatible with `any`.
+
+Every sub-type except `never` is compatible with `any`.
+`never` *can* be assigned to `any`, but `any` *cannot* be assigned to `never` (because `never` is a type without any inhabitants).
+
+Any value can be assigned to `any`:
+
+[source,typescript]
+----
+const x: any = 1;
+const y: any = { what: "ever" };
+----
+
+But no value can be assigned to `never`:
+
+[source,typescript]
+----
+const x: never = 1;
+// ~ Type 'number' is not assignable to type 'never'.
+----
+
+Not even `any` can be assigned to `never`:
+
+[source,typescript]
+----
+const x: any = 1;
+const y: never = x;
+// ~ Type 'any' is not assignable to type 'never'
+----
+
+* link:https://www.typescriptlang.org/play?ssl=31&ssc=50&pln=31&pc=1#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAErxCEFAEtaEYXl4Y8Z1KgDWAW2Lo7RwgHNxWgBS99qo0UIbwBKCABvUAgIaWdDI0QAG2sAXggAclIATwhMbAAVLI48AGU5dCMORHSoiAo5eAc8JXFEBOSINLakvABuUABfUJD+0AVCWkQIRNR3bABhRQZkgG0AIhn3NYBdTohx5bxxTfFhNzJvA9Rkkc0QDUh50ggxI3cDbJjiRPhrREoAAbZAFeDQHKYAD2wnzSAEZRvd1MwAHKUWI-ayoXgvQg5RBFaxyZ7mF70N6EPBkQyAinSAggrTgiBZbC0gh7eHaAB+EEKxQyhEa5nQ6QgJgghFQU1e72Iwg6-0MBIFMgI6S8TAezABEIBYtMQNxAIANBAAO7IIxyZD7UiSqYkmUUqmKgFs9B6vAJZAEUFgJksiWq9B7CH9SA8vnWTK40Xi+2k2jkuUKyj4-npd3qoA[TS Playground on any^].

@@ -4,6 +4,7 @@ TypeScript:
   - typescript/tsconfig-examples.adoc
   - typescript/structural-typing.adoc
   - typescript/intersection-types.adoc
+  - typescript/any-unknown-top-types.adoc
 
 Command Line:
   - cmdline/command-line-intro.adoc
