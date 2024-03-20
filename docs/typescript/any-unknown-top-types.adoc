@@ -86,4 +86,46 @@ const y: never = x;
 // ~ Type 'any' is not assignable to type 'never'
 ----
 
-* link:https://www.typescriptlang.org/play?ssl=31&ssc=50&pln=31&pc=1#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAErxCEFAEtaEYXl4Y8Z1KgDWAW2Lo7RwgHNxWgBS99qo0UIbwBKCABvUAgIaWdDI0QAG2sAXggAclIATwhMbAAVLI48AGU5dCMORHSoiAo5eAc8JXFEBOSINLakvABuUABfUJD+0AVCWkQIRNR3bABhRQZkgG0AIhn3NYBdTohx5bxxTfFhNzJvA9Rkkc0QDUh50ggxI3cDbJjiRPhrREoAAbZAFeDQHKYAD2wnzSAEZRvd1MwAHKUWI-ayoXgvQg5RBFaxyZ7mF70N6EPBkQyAinSAggrTgiBZbC0gh7eHaAB+EEKxQyhEa5nQ6QgJgghFQU1e72Iwg6-0MBIFMgI6S8TAezABEIBYtMQNxAIANBAAO7IIxyZD7UiSqYkmUUqmKgFs9B6vAJZAEUFgJksiWq9B7CH9SA8vnWTK40Xi+2k2jkuUKyj4-npd3qoA[TS Playground on any^].
+* link:https://www.typescriptlang.org/play?ssl=31&ssc=50&pln=31&pc=1#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAErxCEFAEtaEYXl4Y8Z1KgDWAW2Lo7RwgHNxWgBS99qo0UIbwBKCABvUAgIaWdDI0QAG2sAXggAclIATwhMbAAVLI48AGU5dCMORHSoiAo5eAc8JXFEBOSINLakvABuUABfUJD+0AVCWkQIRNR3bABhRQZkgG0AIhn3NYBdTohx5bxxTfFhNzJvA9Rkkc0QDUh50ggxI3cDbJjiRPhrREoAAbZAFeDQHKYAD2wnzSAEZRvd1MwAHKUWI-ayoXgvQg5RBFaxyZ7mF70N6EPBkQyAinSAggrTgiBZbC0gh7eHaAB+EEKxQyhEa5nQ6QgJgghFQU1e72Iwg6-0MBIFMgI6S8TAezABEIBYtMQNxAIANBAAO7IIxyZD7UiSqYkmUUqmKgFs9B6vAJZAEUFgJksiWq9B7CH9SA8vnWTK40Xi+2k2jkuUKyj4-npd3qoA[TypeScript Playground: any,window=_blank].
+
+== Operations on any and unknown
+
+A value of type `any` allows any operation on that value, while a value of type `unknown` allows no operations unless runtime checks are performed first to serve as guards.
+
+=== Operations on any
+
+Suppose we start with this:
+
+[source,typescript]
+----
+let yoda: any;
+----
+
+Because we explicitly annotated `yoda` with `any`, we disabled type-checking for it.
+Not even the default type inference will come into play.
+Therefore, we can read or write to `yoda` or assume it is an array, or object, or whatever, and the type-checker will remain silent about everything.
+
+[source,typescript]
+----
+log(yoda.name);            // <1>
+yoda.name = "Master Yoda"; // <2>
+----
+
+<1> We don't know if `yoda` is an object and has a `name` property.
+<2> Same as above.
+Therefore, we don't know if we can assign a value to the property.
+
+[source,typescript]
+----
+yoda = null;                // <1>
+yoda.power.toString();      // <2>
+log(yoda.power.toFixed(2)); // <3>
+----
+
+<1> Assign `null` to `yoda`.
+<2> Then of course it shouldn't allow reading any properties and invoking methods on them.
+<3> Same as point 2.
+
+Almost everything we did to the value `yoda` above would cause runtime errors, but we disabled any type-checking by explicitly annotating `yoda` to be of type `any`.
+
+* link:https://www.typescriptlang.org/play?#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAErxCEFAEtaEYXl4Y8Z1KgDWAW2Lo7RwgHNxWgBS99qo0UIbwBKCABvUAgIaWdDI0QAG2sAXggAIgB5DgJiREDCUyDSAE8ITGwAFRKcgGU5dCMORHSAbiiICjl4BzwlcXyk1Pih9oBfUJD20AVCxAhE1HdsAGFFBmSAbXTF93SAXQg02Y28cV3xYTcybxPUZKnNEA1IAAMS1DJiV4gTCFReIYatZXqVXuIIABJeYKeCJMhmaxiIzuQh4BGkf7CABWeFUABptMQILREI0PPj-ugIKV-igCECcv9AbFEvA8JSMBBCKhjB4afNiIlEl4NMl5h8vthStNnupmLBCGUOOhUDl0IgynJMeYIOg8MQEVyAO6Ndh9QyoUVgXbeSXEcQkXqPe2O4i9I4ZACydEQDIAmp9iG0ns9tDoDUbqaaEtZEJR6TEheyqTSlRAVWqCJrmf94OhtHI0KhaG53L9TELFsb0dbQPbPYQ4Yl2q6OKga+gBqhamSy6F2ra2x2CN2cEYAB7o7wAJhCjxezAA6tYKIQAOTzOw842-QGvdudn5-Ymk8nuTnU4lNhzmdCcwFGXjaGQWvATkyIUxuCDvIPgpgwC0SBYESBwS3mV90BKPlyxrTojAReNDGQaxWRTP8vh+YhhFQaRrGNVA4TIQtiHgWhrHQfR8g9AhVXQWhKWEJAIHgsgTBw5IMXTTUcgAWiLPFXA8bRhDKd8OESIw5ASRIylIHllHyflMO+S1EVzXiQTBOsgA[TypeScript Playground: Operations on any,window=_blank].
