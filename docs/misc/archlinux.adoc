@@ -50,3 +50,21 @@ Also see:
 
 * link:https://wiki.archlinux.org/title/OpenNTPD[OpenNTPD (Arch Linux Wiki)^]
 * link:https://wiki.archlinux.org/title/System_time[System Time (Arch Linux Wiki)^].
+
+== Pacman Mirrors
+
+=== Reflector
+
+[source,shell-session]
+----
+$ sudo pacman --sync --refresh reflector
+
+$ sudo reflector \
+    --latest 3 \
+    --sort rate \
+    --country Brazil,United\ States \
+    --save /etc/pacman.d/mirrorlist
+----
+
+* https://wiki.archlinux.org/title/Mirrors
+* https://wiki.archlinux.org/title/Reflector
