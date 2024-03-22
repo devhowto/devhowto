@@ -14,9 +14,6 @@ TypeScript has two so-called _top types_: `any` and `unknown`.
 A _top type_ is a type compatible with any value of (almost) any type.
 That is, any values whatsoever can be assigned to `any` and `unknown`:
 
-While `any` allows one to do everything with a value, `unknown` allows nothing.
-Read on.
-
 [source,typescript]
 ----
 const w: any = 1;
@@ -34,6 +31,9 @@ const i: any = undefined;
 const j: unknown = null;
 const l: unknown = undefined;
 ----
+
+While `any` allows one to do everything with a value, `unknown` allows nothing.
+Read on.
 
 == any
 
@@ -93,7 +93,7 @@ const y: never = x;
 
 == Operations on any
 
-A value of type `any` allows any operation on that value, while a value of type `unknown` allows no operations unless runtime checks are performed first to serve as guards.
+A value of type `any` allows any operations whatsoever on that value, while a value of type `unknown` allows no operations unless runtime checks are performed first to serve as guards.
 
 Suppose we start with this:
 
@@ -114,7 +114,7 @@ yoda.name = "Master Yoda"; // <2>
 
 <1> We don't know if `yoda` is an object and has a `name` property.
 <2> Same as above.
-Therefore, we don't know if we can assign a value to the property.
+Therefore, we don't know if we can assign a value to it.
 
 [source,typescript]
 ----
@@ -127,13 +127,13 @@ log(yoda.power.toFixed(2)); // <3>
 <2> Then of course it shouldn't allow reading any properties and invoking methods on them.
 <3> Same as point 2.
 
-Almost everything we did to the value `yoda` above would cause runtime errors, but we disabled all type-checking by explicitly annotating `yoda` to be of type `any`. And the type checker gives us free rein.
-Except we'll get runtime errors, rollbacks, and some will be held accountable, and will suffer the consequences of their ill type deeds and undoings.
+Almost everything we did to the value `yoda` above would cause runtime errors, but we disabled all type-checking by explicitly annotating `yoda` to be of type `any`.
+And the type checker rests its case and leaves us on our own.
+And we we'll get runtime errors, rollbacks, and someone will be held accountable, and will suffer the consequences of their ill type deeds and undoings.
 
 * link:https://www.typescriptlang.org/play?#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAErxCEFAEtaEYXl4Y8Z1KgDWAW2Lo7RwgHNxWgBS99qo0UIbwBKCABvUAgIaWdDI0QAG2sAXggAIgB5DgJiREDCUyDSAE8ITGwAFRKcgGU5dCMORHSAbiiICjl4BzwlcXyk1Pih9oBfUJD20AVCxAhE1HdsAGFFBmSAbXTF93SAXQg02Y28cV3xYTcybxPUZKnNEA1IAAMS1DJiV4gTCFReIYatZXqVXuIIABJeYKeCJMhmaxiIzuQh4BGkf7CABWeFUABptMQILREI0PPj-ugIKV-igCECcv9AbFEvA8JSMBBCKhjB4afNiIlEl4NMl5h8vthStNnupmLBCGUOOhUDl0IgynJMeYIOg8MQEVyAO6Ndh9QyoUVgXbeSXEcQkXqPe2O4i9I4ZACydEQDIAmp9iG0ns9tDoDUbqaaEtZEJR6TEheyqTSlRAVWqCJrmf94OhtHI0KhaG53L9TELFsb0dbQPbPYQ4Yl2q6OKga+gBqhamSy6F2ra2x2CN2cEYAB7o7wAJhCjxezAA6tYKIQAOTzOw842-QGvdudn5-Ymk8nuTnU4lNhzmdCcwFGXjaGQWvATkyIUxuCDvIPgpgwC0SBYESBwS3mV90BKPlyxrTojAReNDGQaxWRTP8vh+YhhFQaRrGNVA4TIQtiHgWhrHQfR8g9AhVXQWhKWEJAIHgsgTBw5IMXTTUcgAWiLPFXA8bRhDKd8OESIw5ASRIylIHllHyflMO+S1EVzXiQTBOsgA[TypeScript Playground: Operations on any,window=_blank]
 
 == Operations on unknown
-
 
 [source,typescript]
 ----
@@ -145,17 +145,17 @@ log(yoda.name.toUpperCase());
 // ~ 'yoda' is of type 'unknown'.
 ----
 
-<1> Unlike to `any`, `unknown` will not blindly reading and writing, or performing operations.
+<1> Unlike the case with `any`, `unknown` will not allow reading and writing, or performing operations.
 
 image::yoda-name-unknown.png[Yoda object with name property on unknown type]
 
-But it is possible to do some type-guards (runtime checks) and then the type-checker can be appeased.
+But it is possible to apply some type-guards (runtime checks) and thus assure safety.
+Therefore, `unknown` is way safer than `any` as it will only allow operations after proper checks.
 
 [source,typescript]
 ----
 /**
- * Checks if `obj` is an object and contains the
- * `name` property.
+ * Checks if `obj` is an object and contains the `name` property.
  */
 function hasName(obj: unknown): obj is { name: unknown } {
   if (!obj || typeof obj !== "object")
@@ -174,4 +174,18 @@ if (hasName(yoda)) // <1>
 <1> Apply a type-guard.
 <2> Inside the condition block, the type-checker knows `yoda` is an object which contains the `name` property.
 
-link:https://www.typescriptlang.org/play?removeComments=true&jsx=0&pretty=true&preserveWatchOutput=false&inlineSourceMap=false#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAKJkAloggo8xwwBtTpMhHTxCERXNOJKtPEZMQOxAOYuLPG1hPF4MU2FUVABrAFtidGj9Ql9xLQAKXntVfUUIdIBKCABvUAgIaQSzREsIAF4IACIAVUJowlQAdwcRACs8VWMATw48AFpfeASbTGwAFRG8AGU5dH0OREaAbjKICjl4WLwlcURA+urLHYBfQoKd0AVCWiNzVF9sAGFFBksAbUab18jQAuhcnr88OIgeJhMkyOkIahLPdNCANJAdNJjsY0PBfMgIKRHMJ+oNOoZCV4AAb6MjUonkCDUkhHBkcdCoUboM54WjaTp0In0fS+Qh4GyuZlDVBkYjUgA0uJciwg+lozPs7S6hGp2g64pMlnoaQ0liMMrl2C1HW6F2KarI2AAjErWXhsI0AJqy4iNCDXB7o9TMb5KdAJIbGSjU0hDRWatq23UQCnmcwQDpGYTmeHmKPoPDEAwpRlkAVrM4pJUYbwEMLoWLJXyObnEM4-U1gIHpS3EcTu1E9vsD4hHU6oZocbmfOh4O47SAAPwgAHI+6u1RrULxhqM1zadau0uAAFSnsqniCfZADaIa-S76l9BnqxkkslGawQJ7KZIakxL2Zd12U5blECGNIIFPMAskIHI8mQOgADkx3nPprSTHUCmwPotxKTM0Mw7U7WuEpdkffIAEI8IAH1ovc8B3D8ICouoGkaPoBk2ApdnKQtEHgIgIF4YhzHcB5yko9IaNJcQkNoAB5boAAUwIICD0kad1GgKXjyn4jwhIcUTxLwSTbCM4TEDsczQGuNF0W0ABJXdKM6UwKAgBgjlsewzl8uRbzke8lRMBxDCJdMug1eAAMYSBC2LZVvHUnlIK0aSFNQo5e19PTdmHX1RyOVEgA[TypeScript Playground: Unknown object with name property type-guard,window=_blank]
+Yet, the `name` property itself is of the type `unknown`, so we are not allowed to assume we can call methods on it.
+
+image::yoda-name-unknown-type.png[Yoda name of type unknown]
+
+Again we would need type checks.
+
+[source,typescript]
+----
+if (hasName(yoda) && typeof yoda.name === "string")
+  log(yoda.name.toUpperCase());
+----
+
+Now, because we first make sure `yoda.name` is a string before attempting to invoke a string method on it, the type-checker is satisfied with it.
+
+* link:https://www.typescriptlang.org/play?removeComments=true&jsx=0&pretty=true&preserveWatchOutput=false&inlineSourceMap=false#code/PTBQIAkIgIIQQVwC4AsD2AnAXBAYgU3QDsBDQgE1QgCFiBnW1cYaCZRRAB1sxADMCS5VACM6DAHRk8AN2ABjVIUTE5iMCFBMmEAKJkAloggo8xwwBtTpMhHTxCERXNOJKtPEZMQOxAOYuLPG1hPF4MU2FUVABrAFtidGj9Ql9xLQAKXntVfUUIdIBKCABvUAgIaQSzREsIAF4IACIAVUJowlQAdwcRACs8VWMATw48AFpfeASbTGwAFRG8AGU5dH0OREaAbjKICjl4WLwlcURA+urLHYBfQoKd0AVCWiNzVF9sAGFFBksAbUab18jQAuhcnr88OIgeJhMkyOkIahLPdNCANJAdNJjsY0PBfMgIKRHMJ+oNOoZCV4AAb6MjUonkCDUkhHBkcdCoUboM54WjaTp0In0fS+Qh4GyuZlDVBkYjUgA0uJciwg+lozPs7S6hGp2g64pMlnoaQ0liMMrl2C1HW6F2KarI2AAjErWXhsI0AJqy4iNCDXB7o9TMb5KdAJIbGSjU0hDRWatq23UQCnmcwQDpGYTmeHmKPoPDEAwpRlkAVrM4pJUYbwEMLoWLJXyObnEM4-U1gIHpS3EcTu1E9vsD4hHU6oZocbmfOh4O47SAAPwgAHI+6u1RrULxhqM1zadau0uAAFSnsqniCfZADaIa-S76l9BnqxkkslGawQJ7KZIakxL2Zd12U5blECGNIIFPMAskIHI8mQOgADkx3nPprSTHUCmwPotxKTM0Mw7U7WuEpdkffIAEI8IAH1ovc8B3D8ICouoGkaPoBk2ApdnKQtEHgIgIF4YhzHcB5yko9IaNJcQkNoAB5boAAUwIICD0kad1GgKXjyn4jwhIcUTxLwSTbCM4TEDsczQGuNF0W0ABJXdKM6UwKAgBgjlsewzl8uRbzke8lRMBxDCJdMug1eAAMYSBC2LZVvHUnlIK0aSFNQo5e19PTdmHX1RyOVFQCylC0LyuUCvKIq5RKqFXCnGc5wXXZlzXEd3U3N9mIg-dV0Pbpj0cjFmCoJBcTfNMM1odt1V4KMvAG0wgrvAhhVTKxC0zLoIHiJIUm0WghNMalurQ18H3IPAJSJbybObCAQgbKx2DwWINme1xtDkMS5qe0sjhQWVtwixAu3K3d0myqq+yKAAyRHGOYy7fPYjiXjWFJdMK95qv7d0JxaghZ3cBcgA[TypeScript Playground: Unknown object with name property type-guard,window=_blank]
