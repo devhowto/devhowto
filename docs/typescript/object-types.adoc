@@ -1,0 +1,48 @@
+= Object Types
+:page-subtitle: TypeScript
+:description: A detailed discussion, concepts and examples on object types in TypeScript
+:page-tags: typescript object
+:toc: left
+:icons: font
+:source-highlighter: highlight.js
+:imagesdir: __assets
+
+== Introduction
+
+TypeScript offers three object types:
+
+* `{}`, which can be called the _anything that is non-null and non-undefined type_.
+TODO: Find the official docs on that type.
+* `object`
+* `Object`
+
+== Non-null and non-undefined type {}
+
+The _non-null and non-undefined type `{}` allows any value of any type (literal or compound) as long the values are not `null` or `undefined`.
+
+These are all valid:
+
+[source,typescript]
+----
+var x: {} = 1;
+var y: {} = "TS";
+var f: {} = function fn() { return 1; };
+var v: {} = {};
+var w: {} = { lang: "TypeScript" };
+var a: {} = [];
+var b: {} = [1, "two", { three: 0b0011 }];
+// etc.
+----
+
+But this is illegal:
+
+[source,typescript]
+----
+var n: {} = null;
+// ~ Type 'null' is not assignable to type '{}'.
+
+var u: {} = undefined;
+// ~ Type 'undefined' is not assignable to type '{}'.
+----
+
+The type `{}` accepts the set of all values of all types (not only compound types, but also literal types) except `null` and `undefined`.
