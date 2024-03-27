@@ -8,6 +8,7 @@ TypeScript:
   - typescript/union-types.adoc
   - typescript/intersection-types.adoc
   - typescript/object-types.adoc
+  - typescript/tuples.adoc
   - typescript/any-unknown-top-types.adoc
   - typescript/keyof.adoc
   - typescript/infer.adoc
