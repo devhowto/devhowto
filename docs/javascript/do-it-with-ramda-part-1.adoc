@@ -31,7 +31,7 @@ function findByName(name, users) {
   return users.find(user => user.name === name);
 }
 
-findByName('Aayla Secura')(users);
+findByName('Aayla Secura', users);
 //=> { name: 'Aayla Secura', level: 9 }
 ----
 
