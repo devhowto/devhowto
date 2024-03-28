@@ -17,6 +17,7 @@ done
 # Copy google verification to build directory.
 #
 cp -v ./google4e1c1c5cc9907ad4.html ./build
+cp -v ./robots.txt ./build
 
 ##
 # Generate simple sitemap.txt file on build directory.
