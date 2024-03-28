@@ -14,16 +14,16 @@ Consider this array of jedi objects:
 [source,javascript]
 ----
 const users = [
-  { name: 'Ahsoka Tano', level: 9 },
-  { name: 'Darth Vader', level: 8 },
-  { name: 'Aayla Secura', level: 9 },
-  { name: 'Yoda', level: 10 },
+  { name: "Ahsoka Tano", level: 9 },
+  { name: "Darth Vader", level: 8 },
+  { name: "Aayla Secura", level: 9 },
+  { name: "Yoda", level: 10 },
 ];
 ----
 
 How to return the object whose name matches?
 
-Vanilla JavaScript:
+=== Vanilla JavaScript
 
 [source,javascript]
 ----
@@ -31,18 +31,54 @@ function findByName(name, users) {
   return users.find(user => user.name === name);
 }
 
-findByName('Aayla Secura', users);
-//=> { name: 'Aayla Secura', level: 9 }
+findByName("Aayla Secura", users);
+//=> { name: "Aayla Secura", level: 9 }
 ----
 
-Ramda:
+=== Ramda
+
+Let"s build this step by step.
+
+Using `propEq()`, check that the given object (last parameter) contains "Yoda" as the value for the property `name` in that object.
 
 [source,javascript]
 ----
-const findByName = compose(find, propEq('name'));
-
-findByName('Aayla Secura')(users);
-//=> { name: 'Aayla Secura', level: 9 }
+propEq("Yoda", "name", { name: "Yoda", level: 10 });
+//=> true
 ----
 
-* link:https://github.com/ramda/ramda/issues/2937[Should 'pathEq/propEq' and 'pathSatisfies/propSatisfies' parameters' order be consistent (Ramda issue)^].
+Note we are hard-coding the name "Yoda".
+To make the name dynamic, create a function that takes the name (a string) and uses it as the first parameter of `propEq()`.
+
+[source,javascript]
+----
+/**
+ * @sig String -> Object -> Boolean
+ */
+const hasName = name => propEq(name, "name");
+
+hasName("Yoda")({ name: "Yoda", level: 10 });
+//=> true
+----
+
+`hasName()` takes the name as a string, returns a function that takes an object, which un turns returns a boolean indicating whether the name matches or not.
+
+Finally, if we have a collection of jedi, we can use `hasName()` as ``find()``'s callback finding function:
+
+[source,javascript]
+----
+/**
+ * @sig String -> [Object] -> Object | undefined
+ */
+const findByName = name => find(hasName(name, "name"));
+
+findByName("Yoda")(users);
+//=> { name: "Yoda", level: 10 }
+
+findByName("Aayla Secura")(users);
+//=> { name: "Aayla Secura", level: 9 }
+----
+
+`findByName()` takes a string, then it returns a function that takes an array of objects, which in turn returns either the found object (if the name matches) or `undefined` otherwise.
+
+* link:https://github.com/ramda/ramda/issues/2937[Should "pathEq/propEq" and "pathSatisfies/propSatisfies" parameters" order be consistent (Ramda issue)^].
