@@ -127,12 +127,21 @@ type Padawan = [name: string, age: number, level: number];
 
 == Tuples in function arguments
 
-Function arguments can be described as tuples!
+Function arguments can be described with tuples.
 
 [source,typescript]
 ----
-declare function f(id: number, name: string): void;
-declare function g(...args: [number, string]): void;
+type Jedi = [name: string, level: number];
+
+const yoda: Jedi = ["Yoda", 100];
+
+function print(...args: Jedi): void {
+  log(args[0], args[1]);
+}
 ----
 
+== Variadic Tuples
+
 A variadic tuple has length and type of elements, like "`normal tuples`", except that _the exact shape is yet to be defined_.
+
+* link:https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-0.html#variadic-tuple-types[Variadic Tuples documentation,window=_blank].
