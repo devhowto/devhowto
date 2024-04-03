@@ -1,0 +1,17 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    asciidoctor (2.0.20)
+    awesome_print (1.9.2)
+    pygments.rb (2.4.1)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  asciidoctor
+  awesome_print
+  pygments.rb
+
+BUNDLED WITH
+   2.4.21
