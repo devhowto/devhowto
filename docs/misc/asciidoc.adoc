@@ -18,6 +18,8 @@ $ for file in ./*.md ; do
       --output="${file%.md}.adoc" \
       --wrap=ventilate "$file"
   done
+
+$ rm -vi ./*.md
 ----
 
 == Source Highlighter

@@ -4,6 +4,7 @@ TypeScript:
   - typescript/index.adoc
   - typescript/tsconfig-examples.adoc
   - typescript/structural-typing.adoc
+  - typescript/type-aliases-and-interfaces.adoc
   - typescript/functions.adoc
   - typescript/union-types.adoc
   - typescript/intersection-types.adoc

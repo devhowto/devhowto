@@ -67,4 +67,5 @@ https://devhowto.gitlab.io/typescript/object-types.html
 https://devhowto.gitlab.io/typescript/structural-typing.html
 https://devhowto.gitlab.io/typescript/tsconfig-examples.html
 https://devhowto.gitlab.io/typescript/tuples.html
+https://devhowto.gitlab.io/typescript/type-aliases-and-interfaces.html
 https://devhowto.gitlab.io/typescript/union-types.html
