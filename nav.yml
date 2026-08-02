@@ -70,7 +70,7 @@ Editors:
 
 Miscellaneous:
   - misc/archlinux.adoc
-  - misc/asciidoc.adoc
+  - misc/asciidoc-and-asciidoctor.adoc
   - misc/debian-virtualbox.adoc
   - misc/filename-path.adoc
   - misc/gnupg.adoc
