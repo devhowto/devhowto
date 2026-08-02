@@ -4,8 +4,9 @@
 :stem: latexmath
 
 My dev studies and research notes.
+Hosted on Gitlab pages:
 
-http://localhost:3001/cmdline/command-line-intro.html
+* https://devhowto.gitlab.io/
 
 [NOTE]
 ====
