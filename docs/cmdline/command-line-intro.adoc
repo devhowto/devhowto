@@ -84,3 +84,7 @@ Coreutils] project by http://www.maizure.org/projects/faq.html[MaiZure].
 
 * https://github.com/landley/toybox[ToyBox^]
 * http://joeyh.name/code/moreutils[MoreUtils^]
+
+== More resources
+
+* https://clig.dev/
