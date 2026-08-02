@@ -25,8 +25,8 @@ SSH into it to see it is really running:
 
 [source,shell-session]
 ----
-$ ssh deveng@127.0.0.1 -p 2222
-(deveng@127.0.0.1) Password for deveng@nbsdc:
+$ ssh devy@127.0.0.1 -p 2222
+(devy@127.0.0.1) Password for devy@nbsdc:
 Last login: Sat Sep 30 10:34:05 2023 from 10.0.2.2
 NetBSD 9.3 (GENERIC) #0: Thu Aug  4 15:30:37 UTC 2022
 
@@ -35,5 +35,5 @@ Welcome to NetBSD!
 
 [NOTE]
 ====
-`-p 2222` because port 2222 on the host i being forwarded to 22 in the VM.
+`-p 2222` because port 2222 on the host is being forwarded to 22 in the VM.
 ====
