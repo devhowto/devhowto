@@ -20,8 +20,8 @@ endif::[]
 
 == Ctrl+key
 
-It is common to have keymaps like kbd:[Ctrl+s] or kbd:[Ctrl+q].
-However, keymaps like kbd:[Ctrl+;] or kbd:[Ctrl+.] mostly don't work in terminals, which meany they will not work inside tmux, vim, or emacs (in -nw) mode.
+It is common to have keymaps like kbd:[Ctrl+s] or kbd:[Ctrl+q] in applications of all sorts.
+However, keymaps like kbd:[Ctrl+;] or kbd:[Ctrl+.] mostly don't work in terminals, which means they will not work inside tmux, vim, or emacs (in -nw) mode.
 
 For example, in VTE-based terminals (like Terminator, or Xfce4-terminal), run `cat` then kbd:[Ctrl+;], and it simply echoes “;” back.
 Try with kbd:[Ctrl+/] and it prints something like `^_`, meaning it did capture the combined keypresses correctly.
@@ -31,3 +31,5 @@ Therefore, if we try o map kbd:[Ctrl+;] in vim, for example it will not work as 
 Now try `cat` and kbd:[Alt+;], and you'll see it echoes `^[;`, meaning it correctly captured the combined keypress.
 
 In short, `Ctrl` doesn't work with some special chars, while `Alt` does work mostly with any char available on the keyboard.
+
+In Kitty, `cat` then kbd:[Ctrl+;] just prints `;` (like in VTE-based terminals mentioned above), but for some reason, bkd:[Ctrl+;] still work inside vim, probably because its (advance and amazing) https://sw.kovidgoyal.net/kitty/keyboard-protocol/[keyboard protocol^].
