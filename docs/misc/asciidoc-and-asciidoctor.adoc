@@ -1,5 +1,4 @@
 = AsciiDoc & Asciidoctor
-:subtitle:
 :description: Notes, tips and examples on AsciiDoc and Asciidoctor
 :pp: {plus}{plus}
 :page-tags: ["asciidoc", "asciidoctor", "markup"]

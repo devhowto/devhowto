@@ -1,4 +1,5 @@
-= du :: Command Line
+= du
+:page-subject Command Line
 :page-tags: du shell cmdline
 :icons: font
 :toc: left

@@ -1,4 +1,5 @@
-= tar | Command Line
+= tar
+:page-subject: Command Line
 
 == Pack Excluding Directories
 

@@ -69,6 +69,7 @@ Editors:
     - editors/emacs/emacs.adoc
 
 Miscellaneous:
+  - misc/keyboard.adoc
   - misc/archlinux.adoc
   - misc/asciidoc-and-asciidoctor.adoc
   - misc/debian-virtualbox.adoc

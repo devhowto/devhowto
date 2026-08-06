@@ -1,5 +1,7 @@
 = Introduction to Unix Command Line
-:page-subtitle: Command Line
+:page-title: An Introduction to The Unix Command Line
+:page-subject: Command Line
+:short-title: Intro to CMDLINE
 :imagesdir: __assets
 
 == Intro

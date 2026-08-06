@@ -1,4 +1,4 @@
-= Sed — Stream Editor
+= Sed Stream Editor
 :page-tags: sed cmdline
 
 * https://catonmat.net/sed-one-liners-explained-part-one
@@ -33,3 +33,4 @@ sed: no input files
 
 Of course, the `-i` option takes a file, not STDIN.
 We got STDIN instead of the `Makefile` because we used redirection.
+
