@@ -20,6 +20,8 @@ endif::[]
 
 == Ctrl+key
 
+A keymap.
+
 It is common to have keymaps like kbd:[Ctrl+s] or kbd:[Ctrl+q] in applications of all sorts.
 However, keymaps like kbd:[Ctrl+;] or kbd:[Ctrl+.] mostly don't work in terminals, which means they will not work inside tmux, vim, or emacs (in -nw) mode.
 
@@ -32,4 +34,6 @@ Now try `cat` and kbd:[Alt+;], and you'll see it echoes `^[;`, meaning it correc
 
 In short, `Ctrl` doesn't work with some special chars, while `Alt` does work mostly with any char available on the keyboard.
 
-In Kitty, `cat` then kbd:[Ctrl+;] just prints `;` (like in VTE-based terminals mentioned above), but for some reason, bkd:[Ctrl+;] still work inside vim, probably because its (advance and amazing) https://sw.kovidgoyal.net/kitty/keyboard-protocol/[keyboard protocol^].
+In Kitty, `cat` then kbd:[Ctrl+;] just prints `;` (like in VTE-based terminals mentioned above), but for some reason, kbd:[Ctrl+;] still work inside vim, probably because its (advance and amazing) https://sw.kovidgoyal.net/kitty/keyboard-protocol/[keyboard protocol^].
+
+It also happens that in some applications inside a terminal, pressing kbd:[Ctrl+Enter] produces a new line without submitting the text to the application, while in some other cases, we need kbd:[Alt+Enter] to produce new lines without submitting the text o he application.
