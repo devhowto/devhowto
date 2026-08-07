@@ -27,7 +27,7 @@ In C, we can do things like this:
 
 [source,c]
 ----
-int main(int argc, char *argv[]) {
+int main() {
   fprintf(stdout, "%s\n", "make: humans");
 
   fprintf(stderr, "%s\n", "Something is wrong on this planet.");
@@ -70,7 +70,7 @@ So, it means:
 
 [source,shell-session]
 ----
-cat << EOF
+$ cat << EOF
 Hello!
 EOF
 ----
@@ -79,9 +79,19 @@ Is actually the same as:
 
 [source,shell-session]
 ----
-cat << EOF >&1
+$ cat << EOF >&1
 Hello!
 EOF
----
+----
 
 That is, `>&1` is the explicit way to say “send the output to STDOUT.”
+
+And by the way, the only position where the redirection operators cannot appear is between `<<` and `EOF`. The other (possible) positions are valid:
+
+[source,text]
+----
+>&1 cat << EOF (OK)
+cat >&1 << EOF (OK)
+cat << >&1 EOF (ERR)
+cat << EOF >&1 (OK)
+----

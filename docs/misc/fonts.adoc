@@ -1,0 +1,38 @@
+= Fonts
+:page-tags: ["font", "utf8", "unicode", "emoji"]
+:favicon: https://fernandobasso.dev/cmdline.png
+:icons: font
+:sectlinks:
+:sectnums!:
+:toclevels: 6
+:source-highlighter: highlight.js
+:experimental:
+:stem: latexmath
+:toc: left
+:imagesdir: __assets
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+== Ubuntu
+
+Ubuntu 2025.04 with most Unicode fonts already installed:
+
+[,bash]
+----
+$ fc-list : family | sort | wc -l
+288
+
+$ fc-list : family | grep Noto | wc -l
+210
+----
+
+A lot of Google's Unicode and Emoji Noto fonts are installed by default.
+
+== Myna
+
+https://github.com/sayyadirfanali/Myna

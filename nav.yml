@@ -70,9 +70,10 @@ Editors:
     - editors/emacs/emacs.adoc
 
 Miscellaneous:
-  - misc/keyboard.adoc
   - misc/archlinux.adoc
+  - misc/keyboard.adoc
   - misc/asciidoc-and-asciidoctor.adoc
+  - misc/fonts.adoc
   - misc/debian-virtualbox.adoc
   - misc/filename-path.adoc
   - misc/gnupg.adoc
