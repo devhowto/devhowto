@@ -23,15 +23,13 @@ endif::[]
 * `1` is the starndard output, or STDOUT;
 * `2` is the standard error, or STDERR;
 
-In C, we can do things like this:
+In C, it is simple to send output to both STDOUT and STDERR.
 
 [source,c]
 ----
-int main() {
-  fprintf(stdout, "%s\n", "make: humans");
-
-  fprintf(stderr, "%s\n", "Something is wrong on this planet.");
-
+int main(void) {
+  fprintf(stdout, "%s\n", "OK");
+  fprintf(stderr, "%s\n", "ERR");
   return 0;
 }
 ----
@@ -95,3 +93,4 @@ cat >&1 << EOF (OK)
 cat << >&1 EOF (ERR)
 cat << EOF >&1 (OK)
 ----
+
