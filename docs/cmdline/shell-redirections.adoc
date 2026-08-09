@@ -19,14 +19,26 @@ endif::[]
 
 == Intro
 
+[NOTE]
+====
+What is described on this page targets Bash, but most things also work the same way in other shells.
+====
+
+When bash starts, it normally opens three file descriptors.
+We associated them with the numbers 0, 1 and 2.
+
 * `0` is the standard input, or STDIN;
 * `1` is the starndard output, or STDOUT;
 * `2` is the standard error, or STDERR;
+
+The numbers are used a lot in command line and shell scripts, as we shall see with several examples along this page.
 
 In C, it is simple to send output to both STDOUT and STDERR.
 
 [source,c]
 ----
+#include <stdio.h>
+
 int main(void) {
   fprintf(stdout, "%s\n", "OK");
   fprintf(stderr, "%s\n", "ERR");
@@ -54,9 +66,9 @@ $ printf '%d\n' {1..3}
 Same goes for `cat`.
 By default, output goes to stdout:
 
-[source,shel-session]
+[source,shell-session]
 ----
-$ cat <<EOF
+$ cat << EOF
 > I'm $(whoami). My shell is $SHELL, version $BASH_VERSION.
 > My main editor is $EDITOR, but I love Emacs too!
 > EOF
