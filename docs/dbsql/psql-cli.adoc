@@ -42,3 +42,45 @@ SQL>
 In both cases, not how the name of the current database is not shown any longer, and we see the simpler and shorter ‘``SQL> ``’ prompt.
 
 Other ideas is to use simply ‘`> `’ or ‘`» `’
+
+== Query from a bash here document
+
+Suppose we need to run a query on psql with `--command`:
+
+[source,shell-session]
+----
+$ POSTGRES_PASSWORD=h4ck3r \
+    psql \
+    --host=127.0.0.1 \
+    --port=5432 \
+    --user=devy \
+    --command='SELECT 1 AS num';
+---- 
+
+But imagine the query would be long and take multiple lines.
+In that case, we could use `cat` with bash _Here Document_:
+
+[source,shell-session]
+----
+query=$(cat << EOF
+  SELECT
+      id
+    , first_name
+    , last_name
+    , email
+  FROM users
+  WHERE id = 1;
+EOF
+)
+
+$ POSTGRES_PASSWORD=h4ck3r \
+    psql \
+    --host=127.0.0.1 \
+    --port=5432 \
+    --user=devy \
+    --command="$query";
+
+ id | first_name | last_name |       email
+----+------------+-----------+-------------------
+  1 |   Master   |   Yoda    | yoda@theforce.org
+----
