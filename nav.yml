@@ -55,6 +55,7 @@ Command Line:
 Databases:
   - dbsql/databases-intro.adoc
   - dbsql/basic-sql-1.adoc
+  - dbsql/psql-cli.adoc
   - dbsql/hackerrank-sql-1-easy.adoc
   - dbsql/postgresql-roles.adoc
   - dbsql/useful-postgresql-commands.adoc

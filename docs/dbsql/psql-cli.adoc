@@ -58,9 +58,9 @@ $ POSTGRES_PASSWORD=h4ck3r \
 ---- 
 
 But imagine the query would be long and take multiple lines.
-In that case, we could use `cat` with bash _Here Document_:
+In that case, we could use `cat` with a Bash's _Here Document_:
 
-[source,shell-session]
+[source,shell]
 ----
 query=$(cat << EOF
   SELECT
@@ -73,14 +73,19 @@ query=$(cat << EOF
 EOF
 )
 
-$ POSTGRES_PASSWORD=h4ck3r \
-    psql \
-    --host=127.0.0.1 \
-    --port=5432 \
-    --user=devy \
-    --command="$query";
+POSTGRES_PASSWORD=h4ck3r \ 
+  psql \
+  --host=127.0.0.1 \
+  --port=5432 \
+  --user=devy \
+  --command="$query";
+----
 
+And the result would be something like this:
+
+[source,text]
+----
  id | first_name | last_name |       email
-----+------------+-----------+-------------------
-  1 |   Master   |   Yoda    | yoda@theforce.org
+----+------------+-----------+--------------------
+  1 |   Aayla    |  Secura   | aayla@theforce.org
 ----
