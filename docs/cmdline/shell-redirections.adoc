@@ -103,6 +103,94 @@ And by the way, the only position where the redirection operators cannot appear 
 >&1 cat << EOF (OK)
 cat >&1 << EOF (OK)
 cat << >&1 EOF (ERR)
-cat << EOF >&1 (OK)
+cat << EOF >&1 (O K)
 ----
 
+== stderr
+
+By default, errors on a shell session are redirected to stdout.
+Consider this shell session:
+
+[source,shell-session]
+----
+$ ls -1
+redir.c
+redir.sh*
+
+$ echo $?
+0
+
+$ rm ./main.c
+rm: cannot remove './main.c': No such file or directory
+
+$ echo $?
+1
+----
+
+Observe that the exit status of `ls` is 0 (zero), which means the command ran successfully.
+However, `rm` failed because `main.c` does exist in that directory, it the command exit status is 1 (one) which signifies some sort of failure.
+Regardless, both the output of `ls` and the error message from `rm` are displayed on the terminal.
+
+That said, we can redirect stdout and stderr to different destinations, including the blackwhole `/dev/null`, or, very commonly, to text files.
+
+We use `1>` to redirect output to stdout, and `2>` to rediret error output to stderr.
+Let's rerun the previous commands and redirect the output:
+
+[source,shell-session]
+----
+$ 1> ./out.txt ls -1
+
+$ 2> ./err.txt rm ./main.c
+
+$ cat ./out.txt
+out.txt
+redir.c
+redir.sh*
+
+$ cat ./err.txt
+rm: cannot remove './main.c': No such file or directory
+----
+
+Remember that `ls` runs successfully, so its output goes to stdoug, while `rm` fails with an exit status of 1 and its error message output goes to stderr.
+But we set up redirections to send the output to specific text files.
+
+Note that `out.txt` also includes `out.txt` itself as a result of `ls`.
+How come?
+That is because redirection is set up *before* the command actually runs.
+Bash first creates `out.txt` and connects stdout to that file, and _then_ runs the command itself.
+So, by the time `ls` is run, `out.txt` already exists (even though it is still empty at that point).
+
+Same for `err.txt`.
+Bash will first create the file, point stderr to it, and only then actually execute the `rm` command.
+
+Consider what happens in this case:
+
+[source,shell-session]
+----
+$ ls -1
+err.txt
+out.txt
+redir.c
+redir.sh*
+
+$ 2> ./guess.txt rm ./guess.txt
+
+$ echo $?
+0
+
+$ ls -1
+err.txt
+out.txt
+redir.c
+redir.sh*
+----
+
+First, we don't have a file called `guess.txt`.
+When then setup stderr to point to `guess.txt` to run `rm` to send error message output to that file.
+But, because redirections are setup first, before the command is actually run, `guess.txt` is created before `rm` runs.
+Then, when `rm` runs, it actually succeeds in removing that file, which is why the exit status of the command is 0 (and not 1 like in the previous examples).
+
+////
+Commands like `echo`, `printf` and `cat` send output to stdout by default.
+But let's explore some examples to send output to stderr instead.
+////

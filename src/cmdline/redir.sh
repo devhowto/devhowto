@@ -1,9 +1,8 @@
 #!/bin/bash
 
-usage () {
-  cat << EOF
-Hello!
-EOF
-} >&2
+error () {
+  printf "Oops!\n"
+  exit 1
+}
 
-usage
+>&2 error
