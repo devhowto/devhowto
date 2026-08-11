@@ -1,6 +1,39 @@
 = tar
 :page-subject: Command Line
 
+== Extract into a specific directory
+
+Use tar's `--directory=DIR` option to change to DIR before extracting the archive.
+
+.Excerpt from man tar
+[source,text]
+----
+-C, --directory=DIR
+    Change to DIR before performing any operations. This option is
+    order-sensitive, i.e. it affects all options that follow.
+----
+
+[source,shell-session]
+----
+$ mkdir -pv ~/Public/extracted
+$ tar -C ~/Public/extracted -xvf ~/Backups/to_extract.tar
+----
+
+`-C` does not create the target directory.
+It must already exist, otherwise it fails with an error, which is why the example above includes `mkdir -pv` to create the target directory first.
+
+[TIP]
+====
+Even though `-C/--directory` says “change to DIR before performing any operations”, the source archive to be extracted doesn't need to be given as an absolute path.
+If we are in the directory of the archive to be extracted, a relative path to refer to it will work as well.
+
+[source,shell-session]
+----
+$ cd ~/Backups
+$ tar -C ~/Public/extracted -xvf ./Backups/to_extract.tar
+----
+====
+
 == Pack Excluding Directories
 
 Useful command to create an archive of a React/Vue.js where we want
@@ -17,3 +50,4 @@ $ tar \
 $ du -h myapp-poc1.tar
 800K    myapp-poc1.tar
 ----
+
