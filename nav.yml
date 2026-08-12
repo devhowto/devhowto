@@ -93,6 +93,7 @@ C:
 
 Scheme:
  - scheme/chicken.adoc
+ - scheme/chicken-install.adoc
  - scheme/debugging.adoc
  - scheme/functions.adoc
 

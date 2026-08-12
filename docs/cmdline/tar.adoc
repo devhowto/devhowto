@@ -25,7 +25,7 @@ It must already exist, otherwise it fails with an error, which is why the exampl
 [TIP]
 ====
 Even though `-C/--directory` says “change to DIR before performing any operations”, the source archive to be extracted doesn't need to be given as an absolute path.
-If we are in the directory of the archive to be extracted, a relative path to refer to it will work as well.
+A relative path to refer to it will work as well.
 
 [source,shell-session]
 ----
