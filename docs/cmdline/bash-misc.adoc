@@ -1,0 +1,43 @@
+= Bash Miscellaneous Stuff
+:page-subtitle: Command Line
+:page-tags: bash command-line
+:favicon: https://fernandobasso.dev/cmdline.png
+:icons: font
+:sectlinks:
+:sectnums!:
+:toclevels: 6
+:toc: left
+:source-highlighter: highlight.js
+:stem: latexmath
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+== Stuck on “logout” on exit or Ctrl+d
+
+This is script is in `PATH`:
+
+.~/work/bin/scpw
+[source,bash]
+----
+#!/bin/bash
+
+0< <(printf 'h4ck3r') xclip -in -sel clip
+----
+
+On Kitty terminal, upon typing `scpw RET` followed by `exit` or kbd:[Ctrl+d], the prompt gets stuck showing “logout” and nothing else closes it.
+Not with kbd:[Ctrl+c] or kbd:[Ctrl+\].
+It doesn't happen in VTE-based terminals or xterm, for example.
+
+The problem seems to be that `xclip` keeps running in the background, and Kitty keeps the shell session open if there are child-processes in that session (see references below).
+Running `pkill xclip` closes the shell session, which indicates that `xclip` was indeed quietly still waiting in the background.
+
+=== References
+
+* https://superuser.com/questions/243460/what-to-do-when-ctrl-c-cant-kill-a-process
+* https://github.com/kovidgoyal/kitty/issues/378
+* https://github.com/kovidgoyal/kitty/issues/307
