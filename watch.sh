@@ -19,5 +19,7 @@ inotifywait -qmr -e modify --exclude '\.?#.*' docs/ \
   | while read event; do
       printf '%s: %s\n' "$(date +'%F %T')" "$event"
       ruby ../adocwiki/src/main.rb "$PWD"
+      mkdir -pv ./build/__assets
+      cp -v ./docs/__assets/* ./build/__assets/
     done
 
