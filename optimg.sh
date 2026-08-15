@@ -23,6 +23,6 @@ if (( "${#arr[@]}" > 0 ))
 then
   for f in "${arr[@]}"
   do
-    echo "→ $f"
+    optipng -o7 "$f"
   done
 fi
