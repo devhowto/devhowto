@@ -146,3 +146,6 @@ Exercism Challenges:
       - exercism/ruby/boutique-inventory.adoc
       - exercism/ruby/boutique-inventory-improvements.adoc
       - exercism/ruby/locomotive-engineer.adoc
+
+Security:
+  - security/jwt.adoc

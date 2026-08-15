@@ -1,0 +1,39 @@
+= JSON Web Token Security
+:page-subtitle: 
+:page-tags: 
+:favicon: https://fernandobasso.dev/cmdline.png
+:icons: font
+:sectlinks:
+:sectnums!:
+:toclevels: 6
+:toc: left
+:source-highlighter: highlight.js
+:stem: latexmath
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+:important-caption: :heavy_exclamation_mark:
+:caution-caption: :fire:
+:warning-caption: :warning:
+endif::[]
+
+
+== Malicious JWT to get all users
+
+The atacker creaters their own JWT and set the role to “admin”, and get access to all users in the database.
+What is wrong with the code below?
+
+[source,javascript]
+----
+app.get("/admin/users", async function getUsers(req, res) {
+  const { role } = jwt.decode(req.headers.authorization);
+
+  if (role === "admin")
+    return res.json(await db.Users());
+
+  return res.status(403).json({ error: "Forbidden" });
+})
+----
+
+The auth token is being decoded, but its signature is never verified.
+It only checks that the role is “admin”.
