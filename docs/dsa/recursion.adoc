@@ -1,0 +1,5 @@
+= Recursion
+
+== Introduction
+
+image::../__assets/c3po-machines-making-machines-how-recursive.png[C3POMachines Making Machines. How Recursive!]

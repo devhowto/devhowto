@@ -1,6 +1,7 @@
 = Emacs
 :icons: font
 :toc: left
+:experimental:
 
 == Read from STDIN
 
@@ -42,3 +43,10 @@ exec </dev/tty || true
 twb user says:
 
 > I was doing it once for the purposes of making alias ed="emacs -batch -f ed-mode"
+
+== Line wrapping
+
+In some modes, we don't want to hard-wrap lines at a certain length, but instead let the lines run as long the person writing the code wants them to be.
+One such case is for https://asciidoctor.org/docs/asciidoc-recommended-practices/#one-sentence-per-line[AsciiDoc “ventilated prose” or “one sentence per line”] style.
+
+For those cases, kbd:[M+x] kbd:[auto-fill-mode] kbd:[RET].

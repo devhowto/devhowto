@@ -107,6 +107,9 @@ JavaScript:
     - javascript/async-examples-with-ramda.adoc
     - javascript/do-it-with-ramda-part-1.adoc
 
+Data Structures & Algorithms:
+  - dsa/recursion.adoc
+
 Algorithms:
   - algds/other/prime-factors.adoc
   - algds/other/count-vowels.adoc
