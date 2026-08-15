@@ -9,15 +9,21 @@
 ##
 # Create an array with all __asset directories.
 #
-assets_dir=($(find ./docs -type d -name __assets -print))
+asset_dirs=($(find ./docs -type d -name __assets -print))
 
 ##
 # Copy assets to build directory for each category.
 #
-for asset_dir in "${assets_dir[@]}"
+for asset_dir in "${asset_dirs[@]}"
 do
   cp -rv "$asset_dir" "${asset_dir/docs/build}"
 done
+
+##
+# Copy the global assets.
+#
+mkdir -pv ./build/__assets
+cp -v ./docs/__assets/* ./build/__assets/
 
 ##
 # Generate simple sitemap.txt file on build directory.
