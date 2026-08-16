@@ -3,7 +3,6 @@
 :toc: left
 :sectlinks:
 :sectlevels: 6
-:imagesdir: __assets
 
 == Getting Started
 
@@ -13,7 +12,7 @@ Install `rspec`:
 
 [source,shell-session]
 ----
-$ rvm install rspec
+$ gem install rspec
 ----
 
 Then, if you have ruby specs like this one:
@@ -42,11 +41,11 @@ Simply run:
 $ rspec --format=documentation ./job.spec.rb
 ----
 
-image::rspec-example-1-fail.png[rspec example fail]
+image::../__assets/rspec-example-1-fail.png[rspec failure example]
 
 Update the implementation of `Job#run` to satisfy the test and run it again.
 
-image::rspec-example-1-pass.png[rspec example pass]
+image::../__assets/rspec-example-1-pass.png[rspec example pass]
 
 [TIP]
 ====
@@ -105,7 +104,7 @@ Then run with `ruby` (not with `rspec`):
 $ ruby ./add.rb
 ----
 
-image::rspec-autorun-format-progress-dots-1.png[rspec autorun progress dots]
+image::../__assets/rspec-autorun-format-progress-dots-1.png[rspec autorun progress dots]
 
 Note by default rspec uses the `progress` (dots) output.
 Because we are using rspec's autorun feature and we run the tests by using the `ruby add.rb` (instead of `rspec add.rb`), there is no way to pass rspec options on the command line like `rspec --format documentation add.rb`.
@@ -120,7 +119,7 @@ Fortunatelly, rspec can read options from the `.rspec` config file:
 
 Then it will show the test descriptions instead of simply the dots.
 
-image::rspec-autorun-format-documentation-1.png[rspec autorun documentation]
+image::../__assets/rspec-autorun-format-documentation-1.png[rspec autorun documentation]
 
 == Assert STDOUT output
 

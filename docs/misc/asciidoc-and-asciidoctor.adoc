@@ -139,7 +139,7 @@ done
 
 Add this attribute to the document:
 
-[,text]
+[source,text]
 ----
 = My Title
 :toc: left
@@ -153,7 +153,7 @@ image::asciidoctor-source-highlighter-pygments.rb-2023.png[Asciidoctor source hi
 
 but I got an error with this:
 
-[,text]
+[source,text]
 ----
 = My Title
 :toc: left
@@ -169,7 +169,7 @@ asciidoctor: WARNING: optional gem 'pygments.rb' is not available (reason: canno
 
 But if I changing to `pygments.rb` works:
 
-[,text]
+[source,text]
 ----
 = My Title
 :toc: left
@@ -199,7 +199,7 @@ Discussion on antora.zulipchat.com:
 
 For the whole document use:
 
-[,text]
+[source,text]
 ----
 = Doc Title
 :page-tags: tag1 tag2
@@ -208,7 +208,7 @@ For the whole document use:
 To add tags to a specific section, there is no mechanism to do that currently.
 However, you could use roles that either start with tag- or are understood to be tags:
 
-[,text]
+[source,text]
 ----
 [.tag-foo.tag-bar.tag-baz]
 == Intro
@@ -216,7 +216,7 @@ However, you could use roles that either start with tag- or are understood to be
 
 And something Dan Allen hopes to get into the language spec is `data-tags`:
 
-[,text]
+[source,text]
 ----
 [data-tags="foo bar baz"]
 == Intro
@@ -232,7 +232,7 @@ ____
 
 And we can have additional attributes on a block:
 
-[,text]
+[source,text]
 ----
 [tags="foo bar baz"]
 == Intro
@@ -241,6 +241,10 @@ And we can have additional attributes on a block:
 But for them to have any effect, we'd need to extend the HTML convert.
 
 == AsciiDoc on Emacs
+
+* https://irreal.org/blog/?p=13871
+
+=== adoc-mode
 
 Check https://github.com/bbatsov/adoc-mode[adoc-mode].
 
@@ -253,14 +257,14 @@ Removing some of those symbols caused the image preview to start working as expe
 
 I ended up turning this:
 
-[,text]
+[source,text]
 ----
 image:__assets/reserved-words.png[OpenGroup POSIX Spec&#44; on Reserved Words]
 ----
 
 To this:
 
-[,text]
+[source,text]
 ----
 image:__assets/reserved-words.png[OpenGroup POSIX Spec on Reserved Words].
 ----
@@ -323,7 +327,7 @@ ____
 
 Below are some selectors to disable italics for at least some source code highlighting tools, like Pygments and Highlight.js.
 
-[,text]
+[source,text]
 ----
 ++++
 <style type="text/css" rel="stylesheet">
@@ -380,7 +384,7 @@ Even though I use Arch Linux since 2009, I love Ubuntu fonts.
 Also, I cannot stand seeing italics in code; not for reserved words, comments, or anything else.
 No italic fonts for code!
 
-[,text]
+[source,text]
 ----
 ++++
 <style type="text/css" rel="stylesheet">

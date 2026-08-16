@@ -1,0 +1,7 @@
+= GNU Compiler Collection (GCC)
+
+== Install
+
+* https://gcc.gnu.org/install/
+* https://gcc.gnu.org/wiki/Installing
+* https://wiki.archlinux.org/title/GNU_Compiler_Collection

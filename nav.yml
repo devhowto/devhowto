@@ -87,9 +87,10 @@ Miscellaneous:
   - misc/weechat.adoc
 
 C:
- - C/clangd.adoc
- - C/undefined-behavior.adoc
  - C/structs.adoc
+ - C/undefined-behavior.adoc
+ - C/clangd.adoc
+ - C/gcc.adoc
 
 Scheme:
  - scheme/chicken.adoc
