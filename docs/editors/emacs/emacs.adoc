@@ -50,3 +50,10 @@ In some modes, we don't want to hard-wrap lines at a certain length, but instead
 One such case is for https://asciidoctor.org/docs/asciidoc-recommended-practices/#one-sentence-per-line[AsciiDoc “ventilated prose” or “one sentence per line”] style.
 
 For those cases, kbd:[M+x] kbd:[auto-fill-mode] kbd:[RET].
+
+Also try enabling and disabling `visual-line-mode`, which changes the way lines are displayed.
+When enabled, my experience has been that it makes lines with links/URLs format less pleasant and readable, so I mostly keep `visual-line-mode` disabled.
+
+Also see:
+
+* https://superuser.com/questions/592154/how-can-i-turn-off-emacss-auto-line-wrapping-for-the-current-session
