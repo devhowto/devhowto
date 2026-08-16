@@ -25,7 +25,7 @@ pages:
     - echo $PWD
     - ls -l $PWD/adocwiki
     - ruby $PWD/adocwiki/src/main.rb $PWD
-    - bash ./copy-assets.sh
+    - bash ./copy_assets.sh
     - mv -v ./build ./public
   artifacts:
     paths:
