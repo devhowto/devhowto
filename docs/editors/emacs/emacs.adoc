@@ -57,3 +57,8 @@ When enabled, my experience has been that it makes lines with links/URLs format 
 Also see:
 
 * https://superuser.com/questions/592154/how-can-i-turn-off-emacss-auto-line-wrapping-for-the-current-session
+
+== Canvas
+
+* https://mastodon.social/@divyaranjan@mathstodon.xyz/117104661248563465
+* https://cgit.git.savannah.gnu.org/cgit/emacs.git/commit/?id=d5f515e4a3350079330c2e80f3681d140d649c88
