@@ -1,0 +1,13 @@
+diff --git a/src/hello.c b/src/hello.c
+index 951ca50..4a74987 100644
+--- a/src/hello.c
++++ b/src/hello.c
+@@ -1,5 +1,8 @@
+ #include <stdio.h>
++#include <stdlib.h>
+ 
+ int main(void) {
+   fprintf(stdout, "Hello, World!\n");
++
++  return EXIT_SUCCESS;
+ }

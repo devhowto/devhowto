@@ -1,6 +1,6 @@
 = JSON Web Token Security
-:page-subtitle: 
-:page-tags: 
+:page-subtitle: Web Security
+:page-tags: json jwt security web
 :favicon: https://fernandobasso.dev/cmdline.png
 :icons: font
 :sectlinks:

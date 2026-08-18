@@ -12,6 +12,9 @@
 printf '%s: Converting the files once\n' "$(date +'%F %T')"
 ruby ../adocwiki/src/main.rb "$PWD"
 
+mkdir -pv ./build/__assets
+cp -v ./docs/__assets/* ./build/__assets/
+
 ##
 # The watch for .adoc file changes.
 #

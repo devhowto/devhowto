@@ -42,6 +42,7 @@ Command Line:
   - cmdline/encoding.adoc
   - cmdline/bash-subshell-child-process.adoc
   - cmdline/bash-history.adoc
+  - cmdline/patch.adoc
   - cmdline/od.adoc
   - cmdline/bash-scripts.adoc
   - cmdline/hackerrank-shell.adoc
