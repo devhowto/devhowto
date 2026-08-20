@@ -156,7 +156,7 @@ Add this attribute to the document:
 
 As of 2023, the docs currently say for pygments we simply write `pygments`.
 
-image::asciidoctor-source-highlighter-pygments.rb-2023.png[Asciidoctor source highlighter pygments 2023]
+image::../__assets/asciidoctor-source-highlighter-pygments-rb-2023-11-11T14-33-05-612Z.png[asciidoctor source highlighter pygments.rb 2023]
 
 but I got an error with this:
 
@@ -266,7 +266,7 @@ I ended up turning this:
 
 [source,text]
 ----
-image:__assets/reserved-words.png[OpenGroup POSIX Spec&#44; on Reserved Words]
+image:../__assets/reserved-words.png[OpenGroup POSIX Spec&#44; on Reserved Words]
 ----
 
 To this:
