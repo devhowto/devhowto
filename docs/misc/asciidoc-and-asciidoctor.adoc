@@ -24,6 +24,9 @@ endif::[]
 AsciiDoc is the best non-html-like markup language.
 It is as simple as Markdown for the simple things, while also offering way more useful, powerful and advanced features when needed.
 
+* https://docs.asciidoctor.org/asciidoctor/latest/install/[AsciiDoc (Ruby)]
+* https://github.com/nlopes/acdc[ACDC - AsciiDoc Parser & Converter (Rust)]
+
 == Preview current .adoc file in the browser
 
 Install the https://addons.mozilla.org/en-US/firefox/addon/asciidoctorjs-live-preview/[Asciidoctor.js Live Preview^] extension so that the browser can open any `.adoc` file and render its AsciiDoc automatically.
@@ -42,6 +45,10 @@ In VS Code, kbd:[Ctrl+Shift+P] and “File: Copy Path of Active File” to copy 
 Looks like (as of 2026), we cannot  make `include::foo.adoc[]` or `docinfo` files work with the extension.
 It seems to only handle single-file documents.
 ====
+
+Many other ways to preview, very well written and documented:
+
+* https://mrduguo.github.io/asciidoctor.org/docs/editing-asciidoc-with-live-preview/
 
 == Convert Markdown to AsciiDoc
 
