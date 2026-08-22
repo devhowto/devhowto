@@ -70,11 +70,13 @@ Editors:
     - editors/nvim/lua-intro.adoc
   Emacs:
     - editors/emacs/emacs.adoc
+    - editors/emacs/my-workflow.adoc
 
 Miscellaneous:
   - misc/archlinux.adoc
   - misc/keyboard.adoc
   - misc/asciidoc-and-asciidoctor.adoc
+  - misc/asciidoc-syntax.adoc
   - misc/fonts.adoc
   - misc/debian-virtualbox.adoc
   - misc/filename-path.adoc

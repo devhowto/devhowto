@@ -31,7 +31,7 @@ We associated them with the numbers 0, 1 and 2.
 * `1` is the starndard output, or STDOUT;
 * `2` is the standard error, or STDERR;
 
-The numbers are used a lot in command line and shell scripts, as we shall see with several examples along this page.
+The numbers are used a lot in the command line and in shell scripts, as we shall see with several examples along this page.
 
 In C, it is simple to send output to both STDOUT and STDERR.
 
@@ -50,7 +50,7 @@ In the shell, we use the `<`, `>` and `&` operators in combination with the numb
 
 == stdout
 
-When we print or echo something, it goes to stdout by default:
+When `print` or `echo` are used to output text, it goes to stdout by default:
 
 [source,shell-session]
 ----
@@ -96,14 +96,15 @@ EOF
 
 That is, `>&1` is the explicit way to say “send the output to STDOUT.”
 
-And by the way, the only position where the redirection operators cannot appear is between `<<` and `EOF`. The other (possible) positions are valid:
+And by the way, the only position where the redirection operators cannot appear is between `<<` and `EOF`.
+The other (possible) positions are valid:
 
 [source,text]
 ----
 >&1 cat << EOF (OK)
 cat >&1 << EOF (OK)
 cat << >&1 EOF (ERR)
-cat << EOF >&1 (O K)
+cat << EOF >&1 (OK)
 ----
 
 == stderr
@@ -128,7 +129,7 @@ $ echo $?
 ----
 
 Observe that the exit status of `ls` is 0 (zero), which means the command ran successfully.
-However, `rm` failed because `main.c` does exist in that directory, it the command exit status is 1 (one) which signifies some sort of failure.
+However, `rm` failed because `main.c` does exist in that directory, the command exit status is 1 (one), which signifies some sort of failure.
 Regardless, both the output of `ls` and the error message from `rm` are displayed on the terminal.
 
 That said, we can redirect stdout and stderr to different destinations, including the blackwhole `/dev/null`, or, very commonly, to text files.

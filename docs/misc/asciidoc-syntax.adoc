@@ -1,0 +1,15 @@
+= AsciiDoc Syntax
+:page-subject: AsciiDoc
+:experimental:
+
+== Keyboard Macro
+
+Here are the current (2026) docs for
+https://docs.asciidoctor.org/asciidoc/latest/macros/keyboard-macro/[AsciiDoc
+keyboard macro].
+As of 2026, it covers examples of application/GUI programs keyboard shortcuts, but nothing related to keybindings and keymaps for editors like Vim, Emacs or IDEs in general.
+
+The docs mention one `++kbd:[]++` macro per keys which are pressed together, like `++kbd:[Ctrl+Shift+N]++` (which renders as kbd:[Ctrl+Shift+N]) to open a new incognito application window (like in Firefox).
+Note the use of `N` in uppercase, and `Ctrl` and `Shift`.
+But editors and IDEs also have the concept of sequences of keys, like a combination of “chords” and _arpeggios_ mixed or followed with single keys, and their own documentation and communities have their own idioms for describing keyboard-related stuff.
+Let's cover some examples.

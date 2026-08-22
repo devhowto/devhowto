@@ -1,0 +1,19 @@
+= My Emacs Workflow
+:page-subject: emacs
+:experimental:
+
+== Intro
+
+These are notes (mostly for myself) on how I go about doing actual work in Emacs, like how I find stuff, modify, jump around, etc.
+
+[NOTE]
+====
+These notes relates to my Emacs config.
+====
+
+== Projectile
+
+=== Search for text
+
+Use kbd:[C-c p s] to get search-related which-key suggestions.
+

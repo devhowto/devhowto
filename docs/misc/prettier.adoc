@@ -1,0 +1,10 @@
+= Prettier Formatter
+
+== nvim
+
+From inside nvim, format the current line containing JSON:
+
+[source,text]
+----
+:!npx --yes prettier --format json
+----
