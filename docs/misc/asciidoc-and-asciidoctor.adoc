@@ -27,6 +27,10 @@ It is as simple as Markdown for the simple things, while also offering way more 
 * https://docs.asciidoctor.org/asciidoctor/latest/install/[AsciiDoc (Ruby)]
 * https://github.com/nlopes/acdc[ACDC - AsciiDoc Parser & Converter (Rust)]
 
+== Editors
+
+See link:../editors/emacs/emacs-loves-asciidoc.adoc[Emacs Loves AsciiDoc].
+
 == Preview current .adoc file in the browser
 
 Install the https://addons.mozilla.org/en-US/firefox/addon/asciidoctorjs-live-preview/[Asciidoctor.js Live Preview^] extension so that the browser can open any `.adoc` file and render its AsciiDoc automatically.
@@ -246,37 +250,6 @@ And we can have additional attributes on a block:
 ----
 
 But for them to have any effect, we'd need to extend the HTML convert.
-
-== AsciiDoc on Emacs
-
-* https://irreal.org/blog/?p=13871
-
-=== adoc-mode
-
-Check https://github.com/bbatsov/adoc-mode[adoc-mode].
-
-=== adoc-mode image preview not working
-
-I had a problem where the image preview was not working.
-
-The reason was the characters {pp}&#44;{pp} inside the alt description of the image that causing some parsing issue or something.
-Removing some of those symbols caused the image preview to start working as expected.
-
-I ended up turning this:
-
-[source,text]
-----
-image:../__assets/reserved-words.png[OpenGroup POSIX Spec&#44; on Reserved Words]
-----
-
-To this:
-
-[source,text]
-----
-image:__assets/reserved-words.png[OpenGroup POSIX Spec on Reserved Words].
-----
-
-Then the image preview worked as expected.
 
 === Ventilated Prose (aka "`one sentence per line`")
 

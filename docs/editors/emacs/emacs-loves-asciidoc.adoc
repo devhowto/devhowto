@@ -1,0 +1,50 @@
+= Emacs Loves AsciiDoc
+:experimental:
+
+== Intro AsciiDoc on Emacs
+
+* https://irreal.org/blog/?p=13871
+
+== adoc-mode
+
+Check https://github.com/bbatsov/adoc-mode[adoc-mode].
+
+[source,elisp]
+----
+;;;;
+;; https://github.com/bbatsov/adoc-mode
+;;
+(use-package adoc-mode
+  :ensure t
+  :custom-face
+  (adoc-title-0-face ((t (:height 1.2 :weight bold))))
+  (adoc-title-1-face ((t (:height 1.1 :weight bold))))
+  (adoc-title-2-face ((t (:height 1.0 :weight bold))))
+  :config
+  (add-hook 'adoc-mode-hook (lambda ()
+                              (turn-off-auto-fill)
+                              (visual-line-mode -1))))
+----
+
+=== adoc-mode image preview not working
+
+I had a problem where the image preview was not working.
+
+The reason was the characters ++&#44;++ inside the alt description of the image that causing some parsing issue or something.
+Removing some of those symbols caused the image preview to start working as expected.
+
+I ended up turning this:
+
+[source,text]
+----
+image:../__assets/reserved-words.png[OpenGroup POSIX Spec&#44; on Reserved Words]
+----
+
+To this:
+
+[source,text]
+----
+image:__assets/reserved-words.png[OpenGroup POSIX Spec on Reserved Words].
+----
+
+Then the image preview worked as expected.

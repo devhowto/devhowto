@@ -13,3 +13,4 @@ The docs mention one `++kbd:[]++` macro per keys which are pressed together, lik
 Note the use of `N` in uppercase, and `Ctrl` and `Shift`.
 But editors and IDEs also have the concept of sequences of keys, like a combination of “chords” and _arpeggios_ mixed or followed with single keys, and their own documentation and communities have their own idioms for describing keyboard-related stuff.
 Let's cover some examples.
+

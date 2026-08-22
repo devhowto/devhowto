@@ -1,0 +1,15 @@
+= Emacs Manual and Info Pages
+:experimental:
+
+== Quick info tutorial
+
+Start with kbd:[C-h i] to get into the info pages, then kbd:[m Emacs RET] to get the Emacs info pages.
+From there, kbd:[m] again and then type some topic of interest, like “spelling”, “hooks” or “tramp”, followed by kbd:[RET] again.
+
+Alternatively, open the Emacs manual directly with kbd:[C-h r].
+
+Type kbd:[C-h r] or kbd:[C-h R] go directly to the Emacs info pages.
+
+
+
+Can switch info pages and go back to the last position you were readign with l.

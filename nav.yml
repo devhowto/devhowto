@@ -71,6 +71,8 @@ Editors:
   Emacs:
     - editors/emacs/emacs.adoc
     - editors/emacs/my-workflow.adoc
+    - editors/emacs/manual-and-info-pages.adoc
+    - editors/emacs/emacs-loves-asciidoc.adoc
 
 Miscellaneous:
   - misc/archlinux.adoc
