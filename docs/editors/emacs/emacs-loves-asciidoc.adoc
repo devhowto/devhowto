@@ -5,6 +5,11 @@
 
 * https://irreal.org/blog/?p=13871
 
+Currently, there are two packages for working with AsciiDoc in Emacs:
+
+* adoc-mode. Older (but well maintained) package, more features.
+* asciidoc-mode. Tree-sitter based, less features.
+
 == adoc-mode
 
 Check https://github.com/bbatsov/adoc-mode[adoc-mode].

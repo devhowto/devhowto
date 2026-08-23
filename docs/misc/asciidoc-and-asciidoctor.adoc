@@ -29,7 +29,7 @@ It is as simple as Markdown for the simple things, while also offering way more 
 
 == Editors
 
-See link:../editors/emacs/emacs-loves-asciidoc.adoc[Emacs Loves AsciiDoc].
+See xref:../editors/emacs/emacs-loves-asciidoc.adoc[Emacs Loves AsciiDoc].
 
 == Preview current .adoc file in the browser
 

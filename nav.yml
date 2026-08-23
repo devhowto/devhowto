@@ -73,6 +73,7 @@ Editors:
     - editors/emacs/my-workflow.adoc
     - editors/emacs/manual-and-info-pages.adoc
     - editors/emacs/emacs-loves-asciidoc.adoc
+    - editors/emacs/mode-line.adoc
 
 Miscellaneous:
   - misc/archlinux.adoc
