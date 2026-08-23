@@ -41,8 +41,9 @@ For example, this is what I have in my `init.el` as of now:
       )))
 ----
 
-With point anywhre inside the `set-face-attribute` expression or even anywhere inside the `cond`, simply press kbd:[C-M-x], or kbd:[M-x eval-defun RET] to try different fonts on the fly.
+With point anywhere inside the `set-face-attribute` expression or even anywhere inside the `cond`, simply press kbd:[C-M-x], or kbd:[M-x eval-defun RET] to try different fonts on the fly.
 
 Here's when the font supports the save icon correctly:
 
 image::../../__assets/emacs-mode-line-save-icon-correct.png[Emacs broken save icon on the mode line]
+
