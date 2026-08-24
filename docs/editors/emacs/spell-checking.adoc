@@ -2,4 +2,20 @@
 :page-tags: emacs spell flyspell
 :experimental:
 
+== The manual
 
+TODO
+
+== Most common spell checking commands
+
+* kbd:[M-$] (or kbd:[Esc $], or kbd:[C-[ $]) to run `ispell-word`.
+It checks the spelling of the word under the cursor, and offer suggestions.
+Press kbd:[i] to _insert_ the word to your personal dictionary.
+
+[NOTE]
+====
+Even though the command is `ispell-word`, on my Arch Linux system, inserted/saved words are saved to `~/.hunspell_en_US`.
+====
+
+* kbd:[C-;] to run `flyspell-auto-correct-previous-word` when the point is some chars _after_ the word to be corrected.
+Keep pressing kbd:[C-;] to loop through the suggestions.

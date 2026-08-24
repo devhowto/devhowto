@@ -74,6 +74,7 @@ Editors:
     - editors/emacs/manual-and-info-pages.adoc
     - editors/emacs/emacs-loves-asciidoc.adoc
     - editors/emacs/mode-line.adoc
+    - editors/emacs/spell-checking.adoc
 
 Miscellaneous:
   - misc/archlinux.adoc
