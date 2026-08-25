@@ -45,20 +45,20 @@ builtin: builtin [shell-builtin [arg ...]]
 ----
 
 One such use case is with `cd`.
-We may find it useful to have a function `cd` that when executed first does some other thing, like checking for the existence and reading an `.env` file in the `cd`ed directory, and *then* actually invoking the builtin `cd` to that directory.
+We may find it useful to have a function `cd` that when executed first does some other thing, like checking for the existence and reading an `.env` file in the ``cd``ed directory, and *then* actually invoking the builtin `cd` to that directory.
 Something like:
 
 [source,bash]
 ----
 ##
-# Read .env.txt (if it exists) when changing to a directory.
+# Read .env (if it exists) when changing to a directory.
 #
 cd () {
   builtin cd "$@"
 
-  if [[ -f ./.env.txt ]]
+  if [[ -f ./.env ]]
   then
-    cat .env.txt
+    cat .env
   fi
 }
 ----
