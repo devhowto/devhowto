@@ -107,6 +107,22 @@ In short:
 $ npx downdoc -o ./intro.md ./intro.adoc
 ----
 
+Or all `.adoc` files in the current directory:
+
+[source,bash]
+----
+#!/bin/bash
+
+mapfile -td '' files < <(find . -name '*.adoc' -print0)
+printf %s\\0 "${files[@]}"
+
+for file in "${files[@]}"
+do
+  npx downdoc -o "${file/.adoc/.md}" "$file"
+done
+----
+
+
 == Insert filename as title
 
 [,bash]

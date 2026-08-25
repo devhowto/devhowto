@@ -208,6 +208,14 @@ Some people on #bash IRC claim that it makes more sense to use `\n` as field sep
 
 [source,shell-session]
 ----
-$ mapfile -td '' files < <(find ... -print0)
+$ mapfile -td '' files < <(find . -print0)
 $ printf %s\\0 "${files[@]}"
+----
+
+Or files with a specific extension:
+
+[source,shell-session]
+----
+$ mapfile -td '' adocs < <(find . -name '*.adoc' -print0)
+$ printf '%s\\0 "${adocs[@]}"
 ----
