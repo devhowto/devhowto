@@ -107,6 +107,7 @@ Scheme:
 
 Ruby:
  - ruby/rspec.adoc
+ - ruby/install-info.adoc
 
 JavaScript:
   - javascript/index.adoc

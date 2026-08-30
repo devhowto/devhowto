@@ -1,0 +1,10 @@
+= Tree Sitter
+:page-subject: nvim
+:page-tags: nvim tree-sitter indentation syntax
+
+== Known issues
+
+=== Wrong indentation on JSDoc comments
+
+* https://github.com/nvim-treesitter/nvim-treesitter/issues/1167[Wrong indentation on JSDoc block].
+
