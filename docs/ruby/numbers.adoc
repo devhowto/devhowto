@@ -1,0 +1,18 @@
+= Ruby Numbers
+:page-tags: ruby number
+
+.Least significant bit
+[TIP]
+====
+The _least significant bit_ is sometimes called the _bottom bit_.
+If it is 0 (zero), it means it is an even number.
+If it is 1 (one), it means it is an odd number.
+The odds are reserved to represent small integers (which used to be `Fixnum` in older versions of Ruby).
+====
+
+.Integer, Bignum and Fixnum
+[NOTE]
+====
+While internally Integer up to 62 bit are stored as immediate values the distinction between `Fixnum` and `Bignum` is not longer exposed to the user.
+In the old days we had the classes `Fixnum` and `Bignum` as subclasses of `Integer`, but in modern Ruby `5.class` will return `Integer`, for example.
+====

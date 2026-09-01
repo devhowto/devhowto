@@ -23,7 +23,7 @@ What is going on here?
 
 Any given value in ruby is a pointer to the ruby object.
 In this case, integers “cheat” and are encoded directly into the pointer value itself.
-The bottom (least significant) bit is set to 1 to say “I'm an immediate value”; something regular pointers never do because of pointer alignment.
+The least significant bit is set to 1 to say “I'm an immediate value”; something regular pointers never do because of pointer alignment.
 
 For comparison, when we do `s = "foo"`, the string “foo” gets created and `s` gets assigned a pointer to a struct that holds the metadata and the string data.
 On the other hand, when we do `n = 42`, `n` gets assigned `(42 << 1) | 1` and it is done.
@@ -55,4 +55,14 @@ In any case, let's take the `(-7..7)` for a spin with the `(n << 1) | 1` algorit
   7 => 15}
 ----
 
-Thanks to zenspider on Ruby discord for explaining this.
+We should also add that this trick exploits that on most machines pointers will not point to odd addresses.
+While technically one can access each single byte in memory it is not very efficient (we have a 64 bit or 128 bit data bus).
+In Ruby, the minimum size of an object is 8 bytes.
+So we know the lowest bits of an address pointer will always be 0. So Ruby knows: if ptr & 11 == 0 then use it as pointer to the object. If ptr & 1 == 1 then it is an Integer.
+
+=== References
+
+* https://engineering.appfolio.com/appfolio-engineering/2019/6/25/how-ruby-encodes-references-ruby-tiny-objects-explained
+* https://ruby-doc.org/core-trunk/Fixnum.html
+
+Also thanks to zenspider and Lapizistik on Ruby discord for helping explaining all of this!

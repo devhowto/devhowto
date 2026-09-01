@@ -108,6 +108,7 @@ Scheme:
 Ruby:
  - ruby/rspec.adoc
  - ruby/install-info.adoc
+ - ruby/numbers.adoc
  - ruby/object-id.adoc
 
 JavaScript:
