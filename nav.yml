@@ -92,7 +92,7 @@ Miscellaneous:
   - misc/unicode-utf8.adoc
   - misc/virtualbox.adoc
   - misc/weechat.adoc
-
+  - misc/writing-code-by-hands-and-brains.adoc
 C:
  - C/structs.adoc
  - C/undefined-behavior.adoc

@@ -1,0 +1,17 @@
+= Writing Code by Hands and Brains
+
+== Interesting websites and posts
+
+* https://handcraftedcode.org/
+* https://meatproxy.me/
+* https://dieggsy.com/writing-code.html
+
+== Joanna Maciejewska, artist and writer
+
+I want AI to do my laundry and dishes so that I can do art and writing, not for AI to do my art and writing so that I can do my laundry and dishes.
+
+image::../__assets/genai-do-laundry-dishes-so-i-can-do-art-and-writing.png[AI, do my laundry and dishes so I can do art and writing]
+
+== Unlock your full potential with premium
+
+image::../__assets/software-gen-ai-unlock-full-potential-with-premium.png[Software: unlock your full potential with our GenAI premium]
