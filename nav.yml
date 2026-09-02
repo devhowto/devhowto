@@ -110,6 +110,7 @@ Ruby:
  - ruby/install-info.adoc
  - ruby/numbers.adoc
  - ruby/object-id.adoc
+ - ruby/yaml.adoc
 
 JavaScript:
   - javascript/index.adoc

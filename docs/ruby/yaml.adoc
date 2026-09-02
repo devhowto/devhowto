@@ -1,0 +1,6 @@
+= YAML in Ruby
+:page-tags: ruby yaml
+
+== YAML 1.2
+
+* https://rubystacknews.com/2026/07/21/ruby-may-finally-fix-the-famous-norway-problem/
