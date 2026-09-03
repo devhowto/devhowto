@@ -1,0 +1,28 @@
+= Ruby Collections
+:page-tags: ruby collection
+
+== Arrays
+
+=== Filter out nil values
+
+Remember this very common JavaScript snippet?
+
+[source,javascript]
+----
+[1, undefined, 2, undefined, 3, undefined].filter(e => e).join(" :: ");
+//=> "1 :: 2 :: 3"
+----
+
+There are a few ways to achieve the same in Ruby:
+
+[source,ruby]
+----
+[1, nil, 2, nil, 3, nil].select(&:itself).join(' :: ')
+#=> "1 :: 2 :: 3"
+
+[1, nil, 2, nil, 3, nil].filter { it }.join(' :: ')
+#=> "1 :: 2 :: 3"
+
+>> [1, nil, 2, nil, 3, nil].compact.join(' :: ')
+=> "1 :: 2 :: 3"
+----

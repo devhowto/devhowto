@@ -109,6 +109,7 @@ Ruby:
  - ruby/rspec.adoc
  - ruby/install-info.adoc
  - ruby/numbers.adoc
+ - ruby/collections.adoc
  - ruby/object-id.adoc
  - ruby/yaml.adoc
 
