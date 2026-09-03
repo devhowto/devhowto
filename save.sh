@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./optimg.sh && git add . && ./gitcommit.sh && git push glgh -U HEAD
+./optimg.sh && git add . && ./gitcommit.sh && git push -u glgh HEAD
