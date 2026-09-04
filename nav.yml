@@ -105,6 +105,9 @@ Scheme:
  - scheme/debugging.adoc
  - scheme/functions.adoc
 
+Haskell:
+ - haskell/lazy-evaluation.adoc
+
 Ruby:
  - ruby/rspec.adoc
  - ruby/install-info.adoc

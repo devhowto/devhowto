@@ -1,0 +1,7 @@
+= Lazy Evaluation
+:subject: Haskell
+:page-tags: haskell lazy evaluation
+
+== Resources
+
+* https://apfelmus.nfshost.com/articles/lazy-eval.html
