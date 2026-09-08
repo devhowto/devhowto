@@ -1,4 +1,5 @@
 = Shell Built-In Commands
+:page-subject: Bash
 :toc: left
 :icons: font
 

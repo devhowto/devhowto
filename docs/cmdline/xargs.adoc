@@ -1,0 +1,47 @@
+= xargs
+:page-subject: Unix Command Line
+
+== Quotes treated differently
+
+`xargs` treats quotes differently than the shell (bash).
+
+[source,shell-session]
+----
+$ printf '"foo"bar"' | xargs printf %s\\n
+xargs: unmatched double quote; by default quotes are special
+to xargs unless you use the -0 option
+----
+
+.Excerpt from man 1 xargs
+[source,text
+----
+-0
+--null
+
+  Input items are terminated by a null character instead of by
+  whitespace, and the quotes and backslash are not special (every
+  character is taken literally). Disables the end-of-file string,
+  which is treated like any other argument. Useful when input items
+  might contain white space, quote marks, or backslashes. The GNU find
+  (and from POSIX Issue 8, IEEE Std 1003.1, 2024) -print0 option
+  produces input suitable for this mode.
+----
+
+Therefore:
+
+[source,shell-session]
+----
+$ printf '"foo"bar"' | xargs --null printf %s\\n
+"foo"bar"
+----
+
+And, if we escape a quote with a backslash, nothing changes from the output above:
+
+[source,shell-session]
+----
+$ printf '"foo\"bar"' | xargs --null printf %s\\n
+"foo"bar"
+----
+
+Note that the backslash is not printed.
+As far as I understand it, when a backslash scape escapes a character that is not treated in a special way, the escape does nothing.

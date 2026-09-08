@@ -1,7 +1,17 @@
 = Emacs
+:page-subject: Text Editor
 :icons: font
 :toc: left
 :experimental:
+
+== Packages & extensions
+
+On #emacs IRC channel, type “,plugin”, and you get this explanation:
+
+[,packages vs modules vs plugins, fsbot on #emacs IRC channel]
+____
+Emacs extensions written in Emacs Lisp are called “packages”, extensions written in C are called “modules”, and there is no such thing as a “plugin”.
+____
 
 == Read from STDIN
 

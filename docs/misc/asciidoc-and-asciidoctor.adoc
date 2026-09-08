@@ -371,7 +371,6 @@ In the examples below, literal keys that must be pressed without kbd:[Shift] are
 |Vim Insert mode sequence: Presses the kbd:[Ctrl+R] chord, followed by the literal lowercase kbd:[f] key to paste the contents of register `f`.
 |===
 
-
 == My preferred Asciidoctor style overrides
 
 image::../__assets/hackers-black-terminals-with-green-font-colors-2.png[Black use black terminals with green font colors]
