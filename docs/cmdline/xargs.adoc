@@ -1,9 +1,9 @@
 = xargs
 :page-subject: Unix Command Line
 
-== Quotes treated differently
+== xargs & quotes
 
-`xargs` treats quotes differently than the shell (bash).
+`xargs` treats quotes differently than the shell (bash, for example).
 
 [source,shell-session]
 ----
@@ -51,6 +51,7 @@ And there is also `--delimiter=delim`:
 .Excerpt from man 1 xargs
 ----
 [source,text]
+----
 --delimiter=delim
 -d delim
 
