@@ -13,7 +13,7 @@ to xargs unless you use the -0 option
 ----
 
 .Excerpt from man 1 xargs
-[source,text
+[source,text]
 ----
 -0
 --null
@@ -45,3 +45,32 @@ $ printf '"foo\"bar"' | xargs --null printf %s\\n
 
 Note that the backslash is not printed.
 As far as I understand it, when a backslash scape escapes a character that is not treated in a special way, the escape does nothing.
+
+And there is also `--delimiter=delim`:
+
+.Excerpt from man 1 xargs
+----
+[source,text]
+--delimiter=delim
+-d delim
+
+  Input items are terminated by the specified character. The specified
+  delimiter may be a single character, a C-style character escape such
+  as \n, or an octal or hexadecimal escape code. Octal and hexadecimal
+  escape codes are understood as for the printf command. Multibyte
+  characters are not supported. When processing the input, quotes and
+  backslash are not special; every character in the input is taken
+  literally. The -d option disables any end-of-file string, which is
+  treated like any other argument. You can use this option when the
+  input consists of simply newline-separated items, although it is
+  almost always better to design your program to use --null where this
+  is possible.
+----
+
+So if we use `--delimiter`, “quotes and backslashes are not special; every character in the input is taken literally”:
+
+[source,shell-session]
+----
+$ printf '"foo\"bar"' | xargs -d \\0 printf %s\\n
+"foo"bar"
+----
