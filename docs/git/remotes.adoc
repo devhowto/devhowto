@@ -36,7 +36,7 @@ $ git push gl HEAD
 
 But it is possible to create a pseudo-remote (here named "`myrepos`") that "`points to`" those real remotes:
 
-[,bash]
+[source,shell-session]
 ----
 $ git remote add myrepos \
     git@gitlab.com/example/repo.git
@@ -47,7 +47,7 @@ $ git remote set-url myrepos --add \
 
 We then set the pseudo-remote "`myrepos`" as the default target by pushing with these options:
 
-[,bash]
+[source,shell-session]
 ----
 git push --set-upstream myrepos HEAD
 ----

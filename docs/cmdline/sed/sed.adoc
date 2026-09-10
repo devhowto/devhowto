@@ -1,0 +1,14 @@
+= SED, The Stream Editor
+:page-subject: Command Line
+
+== Resources and interesting sed projects
+
+=== Aurelio Jargas Sokoban SED implementation
+
+https://aurelio.net/projects/sedsokoban/
+
+===  Sed-based MarkDown viewer and linter
+
+* https://codeberg.org/johann1764/smd/src/branch/main
+
+Amazing piece of work and shows a lot of sed techniques.

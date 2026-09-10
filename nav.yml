@@ -48,6 +48,7 @@ Command Line:
   - cmdline/bash-scripts.adoc
   - cmdline/hackerrank-shell.adoc
   - SED:
+    - cmdline/sed/sed.adoc
     - cmdline/sed/sed-tasks-1.adoc
     - cmdline/sed/sed-insert.adoc
   - Terminal:
