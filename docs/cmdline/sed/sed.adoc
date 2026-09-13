@@ -1,4 +1,5 @@
 = SED, The Stream Editor
+:doc-title: The Amazing SED (Stream EDitor)
 :page-subject: Command Line
 
 == Resources and interesting sed projects
