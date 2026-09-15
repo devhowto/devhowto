@@ -22,6 +22,7 @@ Command Line:
   - cmdline/bash-brace-expansion.adoc
   - cmdline/du.adoc
   - cmdline/bash-conditionals.adoc
+  - cmdline/bash-variables.adoc
   - cmdline/performance-benchmark.adoc
   - cmdline/gnu-utils-macos.adoc
   - cmdline/grep.adoc

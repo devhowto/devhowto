@@ -1,0 +1,25 @@
+= Bash Variables
+:page-subject: Command Line
+
+== Store result of cat to a variable
+
+[source,shell-session]
+----
+query=$(cat << EOF
+SELECT
+    id
+  , name
+  , email
+FROM users
+LIMIT 7;
+EOF
+)
+
+PGPASSWORD=h4ck3r \
+  psql \
+  --host=127.0.0.1 \
+  --port=5432 \
+  --user=devy \
+  --dbname=hotfixes \
+  --command="$query"
+----

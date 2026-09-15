@@ -55,7 +55,7 @@ $ POSTGRES_PASSWORD=h4ck3r \
     --port=5432 \
     --user=devy \
     --command='SELECT 1 AS num';
----- 
+----
 
 But imagine the query would be long and take multiple lines.
 In that case, we could use `cat` with a Bash's _Here Document_:
@@ -73,7 +73,7 @@ query=$(cat << EOF
 EOF
 )
 
-POSTGRES_PASSWORD=h4ck3r \ 
+POSTGRES_PASSWORD=h4ck3r \
   psql \
   --host=127.0.0.1 \
   --port=5432 \
