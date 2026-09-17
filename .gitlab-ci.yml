@@ -5,13 +5,7 @@ workflow:
     - if: $CI_COMMIT_BRANCH
 
 stages:
-# - test
-- deploy
-
-# sast:
-#   stage: test
-# include:
-# - template: Security/SAST.gitlab-ci.yml
+  - deploy
 
 pages:
   stage: deploy
