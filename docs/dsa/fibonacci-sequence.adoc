@@ -4,6 +4,11 @@
 
 == Intro to the Fibonacci sequence
 
+[NOTE]
+====
+For these examples, we are going to use the sequence that includes the zeroth element as in link:https://oeis.org/A000045[OEIS A000045^].
+====
+
 The Fibonacci sequence is a series of numbers.
 The next number in the sequence is the sum of its previous two numbers.
 Here's a sample of the sequence, starting at 0:
@@ -61,25 +66,36 @@ function fib(n) {
     return 0;
 
   if (n === 2)
-    return 1
+    return 1;
 
-
-  // If n > 2, then we can start applying the addition rule
-  // of the two numbers that come before.
+  //
+  // If n > 2, then we can start applying the addition
+  // rule of the two numbers that come before.
+  //
 }
 ----
 
 == Sum the previous two numbers
 
-Let's visualize the sequence this way: the first row are the fibonacci numbers, the second row is the index or position (starting at 1 as we say things “what is the _first_ number of the sequence”):
+Let's visualize the sequence this way: the first row are the Fibonacci numbers, the second row is the index or position (starting at 1 as we say things “what is the _first_ number of the sequence”):
 
 [source,text]
 ----
-fib:  0   1   1   2   3   5   8   13   21   34   55   ...
+fib:  0   1   1   2   3   5   8   13   21   34   55   89   ...
 
-pos:  1   2   3   4   5   6   7    8    9   10   11   ...
+idx:  0   1   2   3   4   5   6    7    8    9   10   11   ...
 ----
 
 So what is the 9th number of the sequence?
-The answer is 21 as that is the sum of 13 and 8, which are the numbers at position 8 and 7.
+The answer is 34 as that is the sum of 21 and 13, which are the numbers at position 8 and 7.
 
+And the algorithm can be something like this:
+
+[stem]
+++++
+\begin{cases}
+f_{0} = 0 \\
+f_{1} = 1 \\
+f_{n} = f_{n - 1} + f_{n - 2}
+\end{cases}
+++++
