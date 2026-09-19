@@ -35,3 +35,20 @@ We don't.
 *It is _defined_f that the first two numbers in the Fibonacci sequence are 0 and 1*, and then, the remaining numbers in the sequence can be determined by following the rule:
 
 The next number in the Fibonacci sequence is the sum the two numbers that came before.
+
+== Algorithm to determine the nth number of the Fibonacci sequence
+
+I ask you, “What is the first number of the Fibonacci sequence?”, an you answer 0 (zero).
+The second number of the sequence?
+1.
+
+The third?
+1 as well.
+
+The fourth number of the sequence?
+2.
+
+And so on and so forth.
+
+But because the first two numbers of the sequence are _defined_ to be 0 and 1, an algorithm to produce the first and second numbers of the sequence does not apply the logic of adding the two numbers before, but simply, conditionally return 0 if the first number as asked for, and 1 if the second number is asked for.
+
