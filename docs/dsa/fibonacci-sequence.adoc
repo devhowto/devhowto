@@ -37,21 +37,24 @@ How do we get the first 1?
 Sum 0 and... And there is nothing before zero to sum with, so how come we get the first 1?
 We don't.
 
-*It is _defined_f that the first two numbers in the Fibonacci sequence are 0 and 1*, and then, the remaining numbers in the sequence can be determined by following the rule:
+*It is _defined_ that the first two numbers in the Fibonacci sequence are 0 and 1*, and then, the remaining numbers in the sequence can be determined by following the rule:
 
 The next number in the Fibonacci sequence is the sum the two numbers that came before.
 
 == Algorithm to determine the nth number of the Fibonacci sequence
 
-I ask you, “What is the first number of the Fibonacci sequence?”, an you answer 0 (zero).
-The second number of the sequence?
+I ask you, “What is the zeroth number of the Fibonacci sequence?”, an you answer 0 (zero).
+The first number of the sequence?
 1.
 
-The third?
+The second?
 1 as well.
 
-The fourth number of the sequence?
+The third?
 2.
+
+The fourth?
+3.
 
 And so on and so forth.
 
@@ -62,10 +65,10 @@ So, we could have an initial implementation covering those cases like this:
 [source,javascript]
 ----
 function fib(n) {
-  if (n === 1)
+  if (n === 0)
     return 0;
 
-  if (n === 2)
+  if (n === 1)
     return 1;
 
   //
@@ -74,6 +77,15 @@ function fib(n) {
   //
 }
 ----
+
+.On code style
+[TIP]
+====
+The conditionals can be simplified an many different ways, depending on the programming language.
+The goal here is to show the logic.
+Readers may make the code more performant, concise or elegant in any way that suits their styles and preferences.
+====
+
 
 == Sum the previous two numbers
 
