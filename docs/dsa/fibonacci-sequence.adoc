@@ -1,0 +1,37 @@
+= Fibonacci Sequence
+:page-subject: Data Structures and Algorithms
+:stem: latexmath
+
+== Intro to the Fibonacci sequence
+
+The Fibonacci sequence is a series of numbers.
+The next number in the sequence is the sum of its previous two numbers.
+Here's a sample of the sequence, starting at 0:
+
+[stem]
+++++
+[0, 1, 1, 2, 3, 5, 8, 13, 21, ...]
+++++
+
+For example, how do we get to 8?
+Sum 5 and 3 (the two numbers before 8 in the sequence).
+
+How do we get to 5?
+Sum 3 and 2 (the two numbers before 5 in the sequence).
+
+How do we get 3?
+Sum 2 and 1 (the two numbers before 3 in the sequence).
+
+How do we get 2?
+Sum 1 and 1 (the two numbers before 2 in the sequence).
+
+How do we get 1 (the second 1 in the sequence)?
+Sum 1 and 0 (the two numbers before 1 in the sequence).
+
+How do we get the first 1?
+Sum 0 and... And there is nothing before zero to sum with, so how come we get the first 1?
+We don't.
+
+*It is _defined_f that the first two numbers in the Fibonacci sequence are 0 and 1*, and then, the remaining numbers in the sequence can be determined by following the rule:
+
+The next number in the Fibonacci sequence is the sum the two numbers that came before.
