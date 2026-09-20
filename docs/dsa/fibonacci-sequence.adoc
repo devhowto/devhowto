@@ -34,7 +34,8 @@ How do we get 1 (the second 1 in the sequence)?
 Sum 1 and 0 (the two numbers before 1 in the sequence).
 
 How do we get the first 1?
-Sum 0 and... And there is nothing before zero to sum with, so how come we get the first 1?
+Sum 0 and... Oops. There is nothing before zero to sum with, so how come we get the first 1?
+Or even 0?
 We don't.
 
 *It is _defined_ that the first two numbers in the Fibonacci sequence are 0 and 1*, and then, the remaining numbers in the sequence can be determined by following the rule:
@@ -43,22 +44,22 @@ The next number in the Fibonacci sequence is the sum the two numbers that came b
 
 == Algorithm to determine the nth number of the Fibonacci sequence
 
-I ask you, “What is the zeroth number of the Fibonacci sequence?”, an you answer 0 (zero).
+I ask you, “What is the zeroth number of the Fibonacci sequence?”, and you answer: “Zero.”
 The first number of the sequence?
-1.
+“One”.
 
 The second?
-1 as well.
+“One” as well.
 
 The third?
-2.
+“Two.”
 
 The fourth?
-3.
+“Three.”
 
 And so on and so forth.
 
-But because the first two numbers of the sequence are _defined_ to be 0 and 1, an algorithm to produce the first and second numbers of the sequence does not apply the logic of adding the two numbers before, but simply, conditionally return 0 if the first number as asked for, and 1 if the second number is asked for.
+But because the first two numbers of the sequence are _defined_ to be 0 and 1, an algorithm to produce the first and second numbers of the sequence does not apply the logic of adding the two numbers before, but simply returns 0 if the zeroth number of the sequence as asked for, and 1 if the first number of the sequence is asked for.
 
 So, we could have an initial implementation covering those cases like this:
 
@@ -77,6 +78,9 @@ function fib(n) {
   //
 }
 ----
+
+And those are the two base cases we need to handle the specific cases.
+The remainder of the algorithm follows the “add the two numbers that come before” logic.
 
 .On code style
 [TIP]
@@ -111,3 +115,74 @@ f_{1} = 1 \\
 f_{n} = f_{n - 1} + f_{n - 2}
 \end{cases}
 ++++
+
+[source,javascript]
+----
+function fib(n) {
+  if (n === 0)
+     return 0;
+
+  if (n === 1)
+     return 1;
+
+  return fib(n - 1) + fib(n - 2);
+----
+
+== Improving the conditionals
+
+Just as an example, we can use an _or_ and compact the two base cases to a single return:
+
+[source,javascript]
+----
+if (n === 0 || n === 1)
+  return n;
+----
+
+Or return `n` if stem:[n \le 1].
+
+[source,javascript]
+----
+if (n <= 1)
+  return n;
+----
+
+And even using `includes()` or a similar function (depending on the language):
+
+[source,javascript]
+----
+if ([0, 1].includes(n))
+  return n;
+----
+
+As can see, some implementation approaches follow the algorithm logic more closely, while some others feel a bit more clever to make the code shorter and appear to deviate from the algorithm logic.
+But they all get the same result in the end.
+
+Of course, the `[0, 1].includes(n)` creates an array, which is more costly than some other approaches, as there is more memory and garbage collection in involved, which also depends on the language being used.
+
+== Final, complete implementation
+
+Here's one complete final implementation that sounds reasonable to me:
+
+[source,javascript]
+----
+/**
+ * Returns the nth number of the Fibonacci sequence.
+ *
+ * NOTE: This implementation includes the zeroth element
+ * as in https://oeis.org/A000045.
+ *
+ * ASSUME: `n >= 0`.
+ *
+ * @param {number} n Which nth element of the sequence to return.
+ * @returns {number} The nth element of the sequence.
+ */
+function fib(n) {
+  if (n <= 1)
+    return n;
+
+  return fib(n - 1) + fib(n - 2);
+}
+----
+
+Note how JSDoc is properly used to make it clear that we include the zeroth element and that we assume stem:[n \ge 0], which imply the function doesn't handle invalid input.
+Garbage in, garbage out.
