@@ -184,5 +184,4 @@ function fib(n) {
 }
 ----
 
-Note how JSDoc is properly used to make it clear that we include the zeroth element and that we assume stem:[n \ge 0], which imply the function doesn't handle invalid input.
-Garbage in, garbage out.
+Note how JSDoc is properly used to make it clear that we include the zeroth element and that we assume stem:[n \ge 0], which implies the function doesn't handle invalid input (garbage in, garbage out).
