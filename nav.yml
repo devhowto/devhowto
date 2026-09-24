@@ -118,6 +118,7 @@ Ruby:
  - ruby/collections.adoc
  - ruby/object-id.adoc
  - ruby/yaml.adoc
+ - ruby/lsp.adoc
 
 JavaScript:
   - javascript/index.adoc

@@ -1,0 +1,47 @@
+= Ruby LSP
+
+== No documentation on hover in nvim
+
+Using Shopify ruby-lsp.
+
+.~/dotfiles/.config/nvim/lsp/ruby-lsp.lua
+[source,lua]
+----
+return {
+  cmd = {
+    "ruby-lsp",
+  },
+  filetypes = {
+    "ruby",
+  },
+  root_markers = {
+    "Gemfile",
+    ".git",
+  },
+  init_options = {
+    formatter = "standard",
+    linters = { "standard" },
+    hover = true,
+    documentHighlight = true,
+    addonSettings = {
+      ["Ruby LSP Rails"] = {
+        enablePendingMigrationsPrompt = false,
+      },
+    },
+  },
+}
+----
+
+Note that even with `hover = true`, kbd:[C-k] would say “No information available.”
+
+Try removing the cache and restarting LSP or the whole nvim:
+
+[source,shell-session]
+----
+$ rm -rv ~/.cache/nvim
+----
+
+Then, kbd:[C-k] works for the first time, but not a second or subsequent times.
+Same problem calling `:lua vim.lsp.buf.hover()` directly.
+
+TODO: Still investigating more.
