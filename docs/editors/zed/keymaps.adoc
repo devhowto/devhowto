@@ -1,0 +1,16 @@
+= Zed Editor
+
+== Moving between panes
+
+Open a terminal on the right side.
+Switch from the main editor buffer to the terminal with kbd:[C-w C-w].
+
+Map these:
+
+* “workspace: activate pane left” to kbd:[C-k h].
+* “workspace: activate pane right” to kbd:[C-k l].
+
+== Bottom dock
+
+When on the terminal, kbd:[C-j]  opens the “bottom dock”.
+Because I use `fzf` with its many vim-like keymaps, open the keymap editor and remove or change the keybinding for “toggle bottom dock”.

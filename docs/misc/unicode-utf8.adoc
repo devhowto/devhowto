@@ -164,3 +164,13 @@ ON col_a = col_b;
      ∅ |   108
 (5 rows)
 ----
+
+== Music notation snippets
+
+[source,text]
+----
+♫ ♩
+And the people bowed and prayed
+To the LLM models they made
+♬ ♭ ♪
+----

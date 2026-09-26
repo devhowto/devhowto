@@ -78,6 +78,8 @@ Editors:
     - editors/emacs/emacs-loves-asciidoc.adoc
     - editors/emacs/mode-line.adoc
     - editors/emacs/spell-checking.adoc
+  Zed:
+    - editors/zed/keymaps.adoc
 
 Miscellaneous:
   - misc/archlinux.adoc
