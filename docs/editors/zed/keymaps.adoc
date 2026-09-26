@@ -1,4 +1,5 @@
 = Zed Editor
+:experimental:
 
 == Moving between panes
 
