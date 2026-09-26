@@ -1,6 +1,14 @@
 = Zed Editor
 :experimental:
 
+== Intro
+
+.vim mode
+[NOTE]
+====
+Assume everything written here works with vim-mode enabled.
+====
+
 == Moving between panes
 
 Open a terminal on the right side.
@@ -15,3 +23,15 @@ Map these:
 
 When on the terminal, kbd:[C-j]  opens the “bottom dock”.
 Because I use `fzf` with its many vim-like keymaps, open the keymap editor and remove or change the keybinding for “toggle bottom dock”.
+
+== Git
+
+=== Next and previous changes (hunks)
+
+I set kbd:[C-[ n] and kbd:[C-[ p] to next and previous git change.
+Looks like the vim mode has kbd:[[-c] and kbd:[\]-c] for next and previous git changes by default.
+
+=== Diff current change under cursor (hunk)
+
+kbd:[C-'] diffs the current hunk.
+On my br-abnt2 keyboard, kbd:[C-S-~] does the same.
