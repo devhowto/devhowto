@@ -16,6 +16,7 @@ TypeScript:
 
 Command Line:
   - cmdline/command-line-intro.adoc
+  - cmdline/readline-tips-using-the-command-line.adoc
   - cmdline/help-info-man.adoc
   - cmdline/shell-redirections.adoc
   - cmdline/curl.adoc

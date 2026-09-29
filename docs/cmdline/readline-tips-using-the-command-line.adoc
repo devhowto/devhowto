@@ -1,0 +1,27 @@
+= Readline Tips & Using the Command Line with Bash
+:page-subject: Command Line
+
+== Intro
+
+Bash uses the link:https://www.gnu.org/software/bash/manual/bash.html#Command-Line-Editing[_readline_] library to provide command line editing features
+
+Readline provides both vi and emacs styles of keybindings.
+By default, emacs mode is on.
+
+== TDD workflow with vi style
+
+We are sometimes in a situation where we are using a terminal from an editor like VS Code, Zed, Goland, or similar.
+In some cases, hitting kbd:[Ctrl+p] or kbd:[Ctrl+n] for the previous or next command line in history doesn't work as those editors have other actions for those keymaps.
+Most of the time, it is configurable and we can restore the standard behavior of kbd:[Ctrl+p] and kbd:[Ctrl+n].
+Other times, we may not want to bother with it or spend time configuring it and simply go to `set -o vi` to use vi style keymaps.
+
+So, you edit a source file, jump to the terminal and try to hit kbd:[k] to bring the last command in the history, but the command line is in insert mode so `k` is inserted at the command line instead...
+
+The thing is, every time a command is run, the command prompt ends up in insert mode even though you may have been in normal mode when you hit kbd:[Enter] to run the command line.
+
+Easy enouogh, simply run the previous test command by first getting back into normal mode: kbd:[Esc k Enter], or kbd:[C-[ k Enter].
+But it gets annoying to having to get into normal mode with an extra keypress.
+Another option is to simply run `!!` to execute the last command line.
+Another option yet is to hold kbd:[Alt] while hitting kbd:[k] to bring the last command.
+So, kbd:[Alt-k Enter] brings the last command line entry into the prompt and runs it.
+No need to first get back to normal mode!

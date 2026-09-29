@@ -35,3 +35,9 @@ Looks like the vim mode has kbd:[[-c] and kbd:[\]-c] for next and previous git c
 
 kbd:[C-'] diffs the current hunk.
 On my br-abnt2 keyboard, kbd:[C-S-~] does the same.
+
+=== Open changed (modified) files.
+
+To open all new or changed files:
+
+* kbd:[A-g m]: git: open modified files
