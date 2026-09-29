@@ -1,5 +1,6 @@
 = Readline Tips & Using the Command Line with Bash
 :page-subject: Command Line
+:experimental
 
 == Intro
 
@@ -8,20 +9,32 @@ Bash uses the link:https://www.gnu.org/software/bash/manual/bash.html#Command-Li
 Readline provides both vi and emacs styles of keybindings.
 By default, emacs mode is on.
 
-== TDD workflow with vi style
+== Set emacs & vi keybinding style
 
-We are sometimes in a situation where we are using a terminal from an editor like VS Code, Zed, Goland, or similar.
-In some cases, hitting kbd:[Ctrl+p] or kbd:[Ctrl+n] for the previous or next command line in history doesn't work as those editors have other actions for those keymaps.
-Most of the time, it is configurable and we can restore the standard behavior of kbd:[Ctrl+p] and kbd:[Ctrl+n].
-Other times, we may not want to bother with it or spend time configuring it and simply go to `set -o vi` to use vi style keymaps.
+TODO
 
-So, you edit a source file, jump to the terminal and try to hit kbd:[k] to bring the last command in the history, but the command line is in insert mode so `k` is inserted at the command line instead...
+== Re-run the last command
 
-The thing is, every time a command is run, the command prompt ends up in insert mode even though you may have been in normal mode when you hit kbd:[Enter] to run the command line.
+=== Emacs style
 
-Easy enouogh, simply run the previous test command by first getting back into normal mode: kbd:[Esc k Enter], or kbd:[C-[ k Enter].
-But it gets annoying to having to get into normal mode with an extra keypress.
-Another option is to simply run `!!` to execute the last command line.
-Another option yet is to hold kbd:[Alt] while hitting kbd:[k] to bring the last command.
-So, kbd:[Alt-k Enter] brings the last command line entry into the prompt and runs it.
-No need to first get back to normal mode!
+Press kbd:[C-p] (“p” is the mnemonic for “previous”) to bring the last command line into the prompt and then press kbd:[Enter] to run the command.
+
+=== Vi style
+
+[NOTE]
+====
+With vi style, even if we are in normal mode, as soon as we submit a command, we always end up in insert mode again.
+====
+
+Enter normal mode with kbd:[Esc] or kbd:[C-[], then press kbd:[k] to bring the last command line into the prompt, and execute it with kbd:[Enter].
+
+If you need to re-run the same command again (like when you are doing TDD and changed the test or implementation), you'll have enter “normal mode” before kbd:[k] brings the previous command into the prompt instead of _inserting_ kbd:[k] into the prompt.
+If that is annoying, you can use kbd:[Alt-k] instead.
+
+[INFO]
+====
+Often, kbd:[Alt] (also known as kbd:[Meta]) sends kbd:[Esc] in most environments, so kbd:[Alt-k] is akin to kbd:[Esc] followed by kbd:[k].
+====
+
+Another way to run the last command with bash & readline is with kbd:[!!].
+gg
