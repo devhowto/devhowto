@@ -80,6 +80,7 @@ Editors:
     - editors/emacs/mode-line.adoc
     - editors/emacs/spell-checking.adoc
   Zed:
+    - editors/zed/intro.adoc
     - editors/zed/keymaps.adoc
 
 Miscellaneous:
