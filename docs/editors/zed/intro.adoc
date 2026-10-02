@@ -1,4 +1,5 @@
 = Zed Editor
+:experimental:
 
 == Intro
 
@@ -10,4 +11,4 @@ All things related to my Zed editor notes assume vim-mode is enabled.
 == Spell checker
 
 Installed the “codebook” extension.
-On Arch Linux, had to `pacman -S codebook-lsp` to have kbd:[g.]
+On Arch Linux, had to `pacman -S codebook-lsp` to have kbd:[g.] code actions show options to add the word to the dictionary.
