@@ -1,4 +1,5 @@
-= Zed Editor
+= Keymaps
+:page-subject: Zed Editor
 :experimental:
 
 == Intro
