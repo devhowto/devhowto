@@ -1,0 +1,10 @@
+= Vim
+
+== A bit of history
+
+* https://thenewstack.io/a-look-at-vim-a-text-editor-for-the-ages/
+
+== Vimscript
+
+According to @m_ben on #vim IRC, there is no vimL (“vim language”).
+Looks like Bram said that a number of times.

@@ -22,3 +22,10 @@ In vim, kbd:[h] goes to the left and kbd:[l] goes to the right, as kbd:[h] _is_ 
 
 * kbd:[Option+Ctrl+Shift+\]]: Go to Next Problem (Error, Warning, Info)
 * kbd:[Option+Ctrl+Shift+[]: Go to Previous Problem (Error, Warning, Info)
+
+== LSP
+
+kbd:[Alt+r] opens references in a sort of inline preview. With vim keys, can navigate with kbd:[j] an kbd:[j], an open collapsed resutls with kbd:[o].
+
+kbd:[Ctrl+Alt+r] opens references in the sidebar.
+

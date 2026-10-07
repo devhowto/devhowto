@@ -1,0 +1,42 @@
+= Arch Linux Boot
+:page-subject: Linux
+
+== TPM NvPCR failed
+
+[source,shell-session]
+----
+$ systemctl --failed
+  UNIT                             LOAD   ACTIVE SUB    DESCRIPTION
+● systemd-pcrlogin@1000.service    loaded failed failed TPM NvPCR Measurement of User Record for UID 1000
+● systemd-pcrlogin@956.service     loaded failed failed TPM NvPCR Measurement of User Record for UID 956
+● systemd-pcrproduct.service       loaded failed failed TPM NvPCR Product ID Measurement
+● systemd-tpm2-setup-early.service loaded failed failed Early TPM SRK Setup
+----
+
+After some research, it seems that Systemd now expects a UKI with signed PCR policies and a special "initrd" policy that is used to anchor the NvPCRs now.
+Doing a proper (and very complex) LUKUS2 + TPM + UKI configuration is hard and not really important for me.
+
+Solution is to clear the broken anchors and mask the failing services to avoid those failures, and I unlock my lukus2 disk by manually typing the password anyway.
+
+[source,shell-session]
+----
+$ sudo rm -vf \
+    /boot/EFI/systemd/credentials/nvpcr-anchor.*.cred \
+    /efi/EFI/systemd/credentials/nvpcr-anchor.*.cred
+
+$ sudo systemctl mask \
+    systemd-tpm2-setup-early.service \
+    systemd-pcrproduct.service \
+    systemd-pcrlogin@1000.service \
+    systemd-pcrlogin@956.service
+
+Created symlink '/etc/systemd/system/systemd-tpm2-setup-early.service' → '/dev/null'.
+Created symlink '/etc/systemd/system/systemd-pcrproduct.service' → '/dev/null'.
+Created symlink '/etc/systemd/system/systemd-pcrlogin@1000.service' → '/dev/null'.
+Created symlink '/etc/systemd/system/systemd-pcrlogin@956.service' → '/dev/null'.
+----
+
+=== References:
+
+* https://bbs.archlinux.org/viewtopic.php?id=315084
+* https://www.reddit.com/r/archlinux/comments/1wpldsg/systemd_262_seems_to_be_causing_systemdpcrproduct/

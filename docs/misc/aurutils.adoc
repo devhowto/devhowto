@@ -1,0 +1,13 @@
+= Aurutils
+:page-subject: Arch Linux
+
+== already exists
+
+==> Extracting sources...
+==> Starting prepare()...
+Creating directory NVIDIA-Linux-x86_64-580.178.04
+The directory 'NVIDIA-Linux-x86_64-580.178.04' already exists.  Please either
+move the existing directory out of the way, or specify a
+different directory with the '--target' option.
+==> ERROR: A failure occurred in prepare().
+    Aborting...
