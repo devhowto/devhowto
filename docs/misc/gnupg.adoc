@@ -102,6 +102,26 @@ $ gpg --import user@example.dev.privkey.asc
 
 * link:https://wiki.archlinux.org/index.php/GnuPG#Key_maintenance
 
+== Export public key
+
+Most Git services like Codeberg, Source Hut, Gitlab or Github allow one to sign commits with the private key, which are then validated with the public key we share with their platform.
+
+Export the public key:
+
+[source,shell-session]
+----
+$ gpg --armor --export <GPG-KEY-ID> | tee >(xsel -ib)
+----
+
+Then paste the full output, including the delimiters and any empty lines between the delimiters and the public key content (I have seen some services fail to parse and validate the public key if even empty lines are removed or added):
+
+[source,text]
+----
+-----BEGIN PGP PUBLIC KEY BLOCK-----
+(public key)
+-----END PGP PUBLIC KEY BLOCK-----
+----
+
 == Run encrypted shell script
 
 [WARNING]
