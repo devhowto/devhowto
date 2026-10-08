@@ -1,0 +1,49 @@
+= Clipboard
+
+== Linux
+
+On Linux, the clipboard can be manipulated from the command line with `xclip` and `xsel` on Xorg, and with `wl-copy` and `wl-paste` (from the `wl-clipboard` package) on Wayland.
+
+For Arch Linux:
+
+[source,shell-session]
+----
+$ sudo pacman --sync --refresh --needed \
+    xclip \
+    xsel \
+    wl-clipboard
+----
+
+== See output on stdout and also copy it to the clipboard
+
+When studying and taking notes, or when writting tutorials or documentation in general, I somtimes want to run a program, see its output on STDOUT and also already copy that output to the clipboard at the same time (to avoid having to manually copying the output afterwards, as if we do this repeatedly, it becomes boring and time-consuming).
+It can be done with the combination of the programs mentioned above, `tee` and a few pipes or redirections.
+
+=== xclip
+
+.Examples with xclip
+[source,shell-session]
+----
+$ echo hello | tee /dev/tty | xclip -in -sel clip
+
+$ ruby -w ./main.rb | tee /dev/tty | xclip -in -sel clip
+----
+
+=== xsel
+
+.Examples with xsel
+[source,shell-session]
+----
+$ echo hello | tee /dev/tty | xsel -ib
+
+$ ruby -w ./main.rb | tee /dev/tty | xsel -ib
+----
+
+=== wl-copy
+
+[source,shell-session]
+----
+$ echo hello | tee /dev/tty | wl-copy
+
+$ ruby ./main.rb | tee /dev/tty | wl-copy
+----

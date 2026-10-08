@@ -20,6 +20,7 @@ Command Line:
   - cmdline/help-info-man.adoc
   - cmdline/shell-redirections.adoc
   - cmdline/curl.adoc
+  - cmdline/clipboard.adoc
   - cmdline/bash-brace-expansion.adoc
   - cmdline/du.adoc
   - cmdline/bash-conditionals.adoc
