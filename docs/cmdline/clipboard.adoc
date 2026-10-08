@@ -26,11 +26,11 @@ It can be done with the combination of the programs mentioned above, `tee` and a
 ----
 $ echo hello | tee /dev/tty | xclip -in -sel clip
 
-$ echo hello | tee 1>(xsel -in -sel -clip)
+$ echo hello | tee >(xsel -in -sel -clip)
 
 $ ruby -w ./main.rb | tee /dev/tty | xclip -in -sel clip
 
-$ ruby -w ./main.rb | tee 1>(xclip -in -sel clip)
+$ ruby -w ./main.rb | tee >(xclip -in -sel clip)
 ----
 
 === xsel
@@ -40,11 +40,11 @@ $ ruby -w ./main.rb | tee 1>(xclip -in -sel clip)
 ----
 $ echo hello | tee /dev/tty | xsel -ib
 
-$ echo hello | tee 1>(xsel -ib)
+$ echo hello | tee >(xsel -ib)
 
 $ ruby -w ./main.rb | tee /dev/tty | xsel -ib
 
-$ ruby -w ./main.rb | tee 1>(xsel -ib)
+$ ruby -w ./main.rb | tee >(xsel -ib)
 ----
 
 === wl-copy
@@ -53,9 +53,9 @@ $ ruby -w ./main.rb | tee 1>(xsel -ib)
 ----
 $ echo hello | tee /dev/tty | wl-copy
 
-$ echo hello | tee 1>(wl-copy)
+$ echo hello | tee >(wl-copy)
 
 $ ruby -w ./main.rb | tee /dev/tty | wl-copy
 
-$ ruby -w ./main.rb | tee 1>(wl-copy)
+$ ruby -w ./main.rb | tee >(wl-copy)
 ----
