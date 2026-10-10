@@ -1,8 +1,14 @@
 = Aurutils
 :page-subject: Arch Linux
 
-== already exists
+== Directory X already exists
 
+.With aur version 20.5.8 in 2026
+[source,shell-session]
+----
+$ aur sync --upgrades
+
+...
 ==> Extracting sources...
 ==> Starting prepare()...
 Creating directory NVIDIA-Linux-x86_64-580.178.04
@@ -11,3 +17,43 @@ move the existing directory out of the way, or specify a
 different directory with the '--target' option.
 ==> ERROR: A failure occurred in prepare().
     Aborting...
+...
+----
+
+One option is to use the `--force` option:
+
+.Excerpt from man aur-sync
+[source,text]
+----
+-f, --force
+       Continue  the build process if a package with the same
+       name exists. (aur build -f)
+----
+
+In the past, I had similar problem with Dropbox.
+
+[source,shell-session]
+----
+$ aur sync --upgrades
+...
+==> Verifying source file signatures with gpg...
+    dropbox-lnx.x86_64-211.4.6008.tar.gz ... Passed
+==> Extracting sources...
+  -> Extracting dropbox-lnx.x86_64-211.4.6008.tar.gz with bsdtar
+==> Starting prepare()...
+[dropbox]                         Generating desktop file... no
+dropbox.desktop already exists. Use -f as the first argument to overwrite it.
+==> ERROR: A failure occurred in prepare().
+    Aborting...
+----
+
+Not it recomments using `-f`.
+At that time, it was possible to resolve the problem by removing tht directory:
+
+[source,shell-session]
+----
+$ rm -rf ~/.cache/aurutils/sync/dropbox
+----
+
+But I could not find the directory that tht nvidia thing.
+Maybe it was in some other place instead of in `~/.cache`.
