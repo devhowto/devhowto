@@ -121,6 +121,8 @@ Haskell:
 Ruby:
  - ruby/rspec.adoc
  - ruby/install-info.adoc
+ - ruby/ri.adoc
+ - ruby/rvm.adoc
  - ruby/numbers.adoc
  - ruby/collections.adoc
  - ruby/object-id.adoc

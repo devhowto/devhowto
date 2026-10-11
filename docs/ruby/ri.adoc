@@ -1,0 +1,40 @@
+= ri (Ruby Information)
+:page-subject: Ruby
+
+== Intro
+
+`ri` stands for “Ruby Information”.
+A command line utility (bundled together in any ruby install) that provides easy access to ruby documentation.
+
+https://ruby.github.io/rdoc/RI_md.html
+
+[source,shell-session]
+----
+$ ri --help
+$ ri --help | less
+$ ri --help | vim -
+----
+
+== Usage examples
+
+If the output is large, it is possible to pipe it to a pager or even an editor for easier navigation:
+
+[source,shell-session]
+----
+$ ri Math.sin
+$ ri Math | less
+$ ri Math | vim -
+----
+
+Or dump the result to stdout while also copying it to the clipboard (in case we want to paste it somewhere):
+
+[source,shell-session]
+----
+$ ri Math | tee >(xclip -in -sel -clip)
+$ ri Math | tee >(xsel -bi)
+----
+
+[TIP]
+====
+See xref:../cmdline/clipboard.adoc[Clipboard] for further examples and other command line clipboard utilities.
+====

@@ -1,4 +1,6 @@
-= RVM :: Ruby
+= rvm (Ruby Version Manager)
+:page-subject: Ruby
+:short-title: rvm
 
 == `rvm list known’ not showing latest rubies
 
