@@ -57,3 +57,22 @@ $ rm -rf ~/.cache/aurutils/sync/dropbox
 
 But I could not find the directory that tht nvidia thing.
 Maybe it was in some other place instead of in `~/.cache`.
+
+
+== Remove package from repo
+
+Even if we uninstall a package like `sudo pacman --remove pkg-name`, `aur sync --upgrades` will continue building it when new versions are available.
+Therefore, we may also want to remove it from our custom aurutils repository.
+
+So, if the repository DB is in ++/home/aurpkgs/aurpkgs.db.tar.gz++, the command to remove it is:
+
+[source,shell-session]
+----
+$ repo-remove /home/aurpkgs/aurpkgs.db.tar.gz pkg-name
+
+==> Extracting aurpkgs.db.tar.gz to a temporary location...
+==> Extracting aurpkgs.files.tar.gz to a temporary location...
+==> Searching for package 'pkg-name'...
+  -> Removing existing entry 'pkg-name-0.3.0-1'...
+==> Creating updated database file '/home/aurpkgs/aurpkgs.db.tar.gz'
+----
