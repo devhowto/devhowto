@@ -1,0 +1,39 @@
+= Fonts and Colors
+:page-subject: Emacs
+
+== Disable italics
+
+=== Doom themes with italics disabled but enabled for org-mode
+
+I dislike italics for source code with my guts.
+Not for comments, not for interfaces or methods anything else.
+NO ITALICS in source code.
+
+But for Org-mode, where we have bold, italic, etc., then I keep italics enabled otherwise the `/italic/` markup doesn't italicize the fonts, while others like `*bold*` does, so it feels wrong.
+Here's one way to achieve “no italics for all major modes except for Org”.
+
+First, configure the theme to disable italics:
+
+[source,elisp]
+----
+(use-package doom-themes
+  :ensure t
+  :custom
+  (doom-themes-enable-italic nil)
+  :config
+  (load-theme 'doom-gruvbox-light t))
+----
+
+Then, use the `org-mode-hook` to add italics back just for `org-mode`:
+
+[source,elisp]
+----
+(add-hook 'org-mode-hook
+  (lambda ()
+    (set-face-attribute 'italic nil :slant 'italic)))
+----
+
+
+
+
+
