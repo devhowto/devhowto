@@ -82,6 +82,7 @@ Editors:
     - editors/emacs/emacs-loves-asciidoc.adoc
     - editors/emacs/mode-line.adoc
     - editors/emacs/spell-checking.adoc
+    - editors/emacs/emacs-31.1-lexical-binding-error.adoc
   Zed:
     - editors/zed/intro.adoc
     - editors/zed/keymaps.adoc
