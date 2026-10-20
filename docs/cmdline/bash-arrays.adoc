@@ -3,6 +3,34 @@
 :math: latexmath
 :toc: left
 
+== Get output lines of a command into an array
+
+Consider a command that generates multiple lines of output, and for some reason we want to store them in a bash array:
+
+[source,shell-session]
+----
+$ wmctrl -lx | grep emacs | cut -d ' ' -f 1
+0x07e00094
+0x08400094
+----
+
+We'll use bash's built-in `mapfile` with its `-t` option to remove the trailing delimiter for each line (which defaults to newline).
+And we'll combine that with `< <(...)` process substitution, `grep` and `cut`.
+
+[source,shell-session]
+----
+$ mapfile -t win_ids < <(wmctrl -lx | grep emacs | cut -d ' ' -f 1)
+----
+
+Now `win_ids` is an array where each item is a window ID from the `wmctrl` command output.
+
+[source,shell-session]
+----
+$ printf 'ID: %s\n' "${win_ids[@]}"
+ID: 0x07e00094
+ID: 0x08400094
+----
+
 == Serialize and Store Bash Array to a File
 
 Let's save the array `nums` below as NUL-separated values in `nums.dat`
@@ -20,7 +48,7 @@ If you `less nums-arr.dat` or open it in vim or emacs, it'll show up something l
 1^@2^@3^@4^@
 ----
 
-The numbers are the numbers we stored (duh 🤣), and the "^@" is not a caret followed by an at sign, but a visual representation of the NUL byte.
+The numbers are the numbers we stored (duh 🤣), and the `^@` is not a caret followed by an at sign, but a visual representation of the NUL byte.
 When some tools want to display them, they (the tools) have to use something visible and the convention is to use "^@", which many tools do.
 Not all tools will display something visually in place of those chars (or at least, not by default), though.
 
