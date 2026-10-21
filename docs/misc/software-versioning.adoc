@@ -1,0 +1,10 @@
+= Software Versioning
+:page-subject: Software
+
+== Semantic versioning
+
+* https://semver.org/
+
+== Intentional versioning
+
+* https://intver.org/
