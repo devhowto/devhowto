@@ -1,0 +1,63 @@
+= Git Config
+:page-subject: Git
+
+== Local config per repository
+
+When `git config` is provided the `--local` option, the configs apply only to the current directory repository.
+
+For example:
+
+[source,shell-session]
+----
+$ mkdir -pv ~/source/myproj
+$ cd !$
+$ git init --initial-branch=devel
+$ git config --local user.name 'Master Yoda'
+$ git config --local user.email 'yoda@theforce.dev'
+----
+
+This will place the user name and email config in `~/source/myproj/.git/config`:
+
+.Exerpt from a .git/config
+[source,text]
+----
+[user]
+	name = Master Yoda
+	email = yoda@theforce.dev
+----
+
+And it will apply only to the repository in `~/source/myproj`.
+
+== Apply git config from a text file
+
+Because we often have lots of personal and work repositories, and have our own preferences, and may want to, or be required to sign commits with a GPG key, or company requirements, it is possible to keep a private file like `~/priv/work-git-config.txt` with git configs.
+Something like this:
+
+Because we often have several personal and work repositories which may require different git configs, such as different email, GPG signing of commits, etc, one approach is to keep git config text files such as `~/.s3cr37/work-git.config.txt` and `~/.s3cr37/personal-git-config.txt` with default configs for each case.
+For example:
+
+.Exerpt of work-git-config.txt
+[source,shell-session]
+----
+git config --local user.name 'Master Yoda'
+git config --local user.email yoda@theforce.dev
+git config --local commit.gpgsign true
+git config --local user.signkey yoda-gpg-sign-key
+----
+
+Then, for every new clone or new repo, instead of opening the file, or copying to the clipboard with a command line tool like `xsel`, `xclip`, `wl-copy`, etc., then pasting on the command line, we can instead point STDIN to the .txt file so that bash executes the lines from the file as command lines:
+
+.Sample execution with output
+[source,shell-session]
+----
+$ 0< ~/source/local/work-git-config.txt bash -x -
++ git config --local user.name 'Master yoda'
++ git config --local user.email yoda@theforce.dev
++ git config --local commit.gpgsign true
++ git config --local user.signkey yoda-gpg-sign-key
+----
+
+[TIP]
+====
+The `-x` flag is not needed, but it is useful as it causes bash print each command being executed, providing a means of visualizing what is going on.
+====

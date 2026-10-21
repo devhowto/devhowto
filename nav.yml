@@ -58,6 +58,10 @@ Command Line:
     - cmdline/terminal/index.adoc
     - cmdline/terminal/kitty.adoc
 
+Git:
+  - git/config.adoc
+  - git/remotes.adoc
+
 Databases:
   - dbsql/databases-intro.adoc
   - dbsql/basic-sql-1.adoc
