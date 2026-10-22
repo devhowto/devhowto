@@ -1,0 +1,13 @@
+= Managing Projects in Emacs
+:page-subject: Emacs
+
+== Intro
+
+It is possible to work with multiple projects in a single Emacs session (as opposed to having multiple running instances of Emacs, each for a different project).
+The main benefit is that then we can perform searches for text, buffers, etc. contained in a given project instead of a messy mix of buffers from different projects.
+
+== Projectile
+
+With Projectile, kbd:[C-c p p] (`helm-projectile-switch-project)` to switch to a different project.
+With two or more open projects, and buffers open in multiple projects, kbd:[C-x b] (`switch-to-buffer`) will show all the buffers, not only the ones from the current project.
+Therefore, it is generally more recommended to use Projectile's kbd:[C-c p b] (`help-projectile-switch-to-buffer`) instead, so that only buffers from the current project are shown.

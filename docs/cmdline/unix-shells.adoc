@@ -1,0 +1,8 @@
+= Unix Shells
+:page-subject: Unix
+
+== scsh man page intro (acknowledgements: I did it all by myself)
+
+
+image::../__assets/scsh-acknowledgements-i-did-it-all-by-myself.png[SCSH acknowledgements I did it all by myself]
+
