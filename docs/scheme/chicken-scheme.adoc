@@ -1,6 +1,5 @@
 = CHICKEN Scheme
-:page-subtitle: 
-:page-tags: 
+:page-subject: Scheme
 :favicon: https://fernandobasso.dev/cmdline.png
 :icons: font
 :sectlinks:
@@ -31,10 +30,12 @@ Search for identifiers on this page:
 
 === Chicken 6
 
-* https://lists.nongnu.org/archive/html/chicken-users/2026-08/msg00017.html[ANN CHICKEN 6.0.0 has been released, Felix Winkelmann^]
+* https://lists.nongnu.org/archive/html/chicken-users/2026-08/msg00017.html[ANN CHICKEN 6.0.0 has been released, Felix Winkelmann^].
 
 == Other resources on CHICKEN Scheme
 
 * https://mail.gnu.org/archive/html/chicken-users/2010-08/msg00044.html[Why the name CHICKEN Scheme].
-* https://en.wikipedia.org/wiki/Chicken_(Scheme_implementation)
-* https://www.more-magic.net/posts/chicken-6.html[What to expect from CHICKEN 6]
+* https://bugs.call-cc.org/ticket/t71/714a3c0d875b00f27d708ef5599588940539ff1e/[Officiel CHICKEN capitalization “bug” discussion with mario-goular, sjamaan and felix].
+* https://spin.atomicobject.com/chicken-scheme-spock-part-2/[Interview with Felix Winkelmann, CHICKEN creator and maintainer].
+* https://en.wikipedia.org/wiki/Chicken_(Scheme_implementation).
+* https://www.more-magic.net/posts/chicken-6.html[What to expect from CHICKEN 6].
