@@ -4,6 +4,18 @@
 :toc: left
 :experimental:
 
+== Learning Emacs
+
+[quote, gkoebel-ext on #emacs IRC channel]
+____
+Learning Emacs is a lifelong process. Thee sooner you start, the longer it will take.
+____
+
+[quote, Nature]
+____
+And by opening their editor's config file, the programmer is indicating no intent of doing any productive work for the rest of the day.
+____
+
 == Packages & extensions
 
 On #emacs IRC channel, type “,plugin”, and you get this explanation:
