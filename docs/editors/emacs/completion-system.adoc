@@ -1,0 +1,19 @@
+= Completion System in Emacs
+:page-subject: Emacs
+:experimental:
+
+== Vertico
+
+* https://github.com/minad/vertico
+
+After installed, every time Emacs shows a list of files, commands, etc., vertico takes over and displays a searcheable, vertical list of items.
+Same examples of when vertico shows up:
+
+* When running kbd:[M-x] (`execute-extended-command`).
+* When running Projectile commands.
+* When describing variables, functions, keymaps.
+
+By default, vertico will match items that start with the chars being typed.
+For example, if one types kbd:[M-x load-theme RET] followed by the chars “light”, it will only show themes that _start_ with “light”.
+To match “light” anywhere in the theme name, prepend “*” glob to the chars, so it reads like “*light”, and then vertico will show any items that have the subsring “light” in their name, so it would match theme names like “light-blue”, “tsdh-light”, “doom-gruvbox-light” or “doom-one-light”.
+
