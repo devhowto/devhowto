@@ -53,3 +53,7 @@ image:__assets/reserved-words.png[OpenGroup POSIX Spec on Reserved Words].
 ----
 
 Then the image preview worked as expected.
+
+=== adoc-mode font size
+
+* link::https://github.com/bbatsov/adoc-mode/discussions/87[How to have the same font size for everything? (question on adoc-mode repo)^]
