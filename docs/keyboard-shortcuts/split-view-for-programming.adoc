@@ -1,0 +1,34 @@
+= Split View for Programming
+:page-subjedct: Programming
+:experimental:
+
+== Left and right splits
+
+No matter if I'm using Vim, Emacs or VS Code, depending on what I am studying or working on, I often like to have the editor with the code on the left, and a a shell on the right.
+
+This layout provides good context while programming or debugging, as the code and output (of a test, compilation, linter, etc.) can be seen at a glance without requiring back and forth switching applications with kbd:[Alt+Tab] or similar.
+
+On VS Code, one can open a terminal on the right from the command pallet (kbd:[Ctrl+Shift+p] or kbd:[Cmd+Shift+p]) and then typing “Terminal: Create New Terminal in Editor Area to the Side”.
+
+To switch between the editor text on the left and the terminal on the right, one can set shortcuts like:
+
+* kbd:[Ctrl+Shift+Super+l]: View: Focus Right Editor Group
+* kbd:[Ctrl+Shift+Super+h]: View: Focus Left Editor Group
+* kbd:[Ctrl+Shift+Super+;]: View: Focus Next Editor Group.
+This one allows one to keep looping on all editor groups, not only left or right.
+
+In vim, kbd:[h] goes to the left and kbd:[l] goes to the right, as kbd:[h] _is_ to the left and kbd:[l] _is_ to the right considering the _home keys_ on most keyboard layouts.
+
+I also noticed that versions of VS Code in 2026 also provide kbd:[Ctrl+k] kbd:[Ctrl+h] and kbd:[Ctrl+k] kbd:[Ctrl+l] by default.
+
+== Next and Previous Error, Warning
+
+* kbd:[Option+Ctrl+Shift+\]]: Go to Next Problem (Error, Warning, Info)
+* kbd:[Option+Ctrl+Shift+[]: Go to Previous Problem (Error, Warning, Info)
+
+== LSP
+
+kbd:[Alt+r] opens references in a sort of inline preview. With vim keys, can navigate with kbd:[j] an kbd:[j], an open collapsed resutls with kbd:[o].
+
+kbd:[Ctrl+Alt+r] opens references in the sidebar.
+

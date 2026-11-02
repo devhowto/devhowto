@@ -111,6 +111,10 @@ Miscellaneous:
   - misc/virtualbox.adoc
   - misc/weechat.adoc
   - misc/writing-code-by-hands-and-brains.adoc
+
+Keyboard Shortcuts:
+  - keyboard-shortcuts/split-view-for-programming.adoc
+
 C:
  - C/structs.adoc
  - C/undefined-behavior.adoc
