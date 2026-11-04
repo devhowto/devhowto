@@ -1,7 +1,6 @@
 = Blocks, Procs and Lambdas
+:page-subject: Ruby
 :toc: left
-:icons: font
-
 
 == to_proc
 
@@ -73,3 +72,10 @@ h = { one: 1, two: 2 }
 p [:one, :two].map(&h)
 #=> [2, 3]
 ----
+
+== References
+
+* https://ruby-doc.org/4.0.6/Proc.html
+* https://ruby-doc.org/4.0.6/Kernel.html#method-i-lambda
+* https://docs.ruby-lang.org/en/master/syntax/calling_methods_rdoc.html#block-argument
+* https://www.rubyguides.com/2016/02/ruby-procs-and-lambdas/
