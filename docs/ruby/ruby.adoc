@@ -148,3 +148,7 @@ $ irb --simple-prompt
 >> Enumerator.produce(Class, &:superclass).take_while(&:itself)
 => [Class, Module, Object, BasicObject]
 ----
+
+== Some interesting posts and resources
+
+* https://www.aha.io/engineering/articles/moment-of-ruby-an-argument-for-nothing
