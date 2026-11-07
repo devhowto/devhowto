@@ -1,7 +1,17 @@
 = GNU Info Manuals
 :page-subject: Command Line
 
-== info
+== Texinfo
+
+GNU Texinfo is a documentation system used for producing either digital or printed manuals.
+Among other things, it provides the `info` command.
+
+Read more at about Texinfo at:
+
+* https://www.gnu.org/software/texinfo/
+* https://wiki.archlinux.org/title/Texinfo
+
+== The ‘info’ command
 
 First:
 
@@ -12,14 +22,10 @@ $ man info
 $ info --help
 ----
 
-The first one is the full-blown manual for the whole Info system.
-Takes some time to read.
-
 .Installing Info packages on your distribution
 [NOTE]
 ====
-Arch Linux doesn't split the packages as much as Debian/Ubuntu, so the info manuals generally come installed with as a dependency of any package that has info manuals.
-
+On Arch Linux, the `texinfo` package is generally installed as a dependency of `base-devel` (since almost all Arch users install `base-devel` as it is required for a lot of things), or as a dependency of some other package.
 But if for some reason it is not installed:
 
 [source,shell-session]
@@ -43,7 +49,7 @@ $ sudo dnf install texinfo
 ====
 
 Generally, info pages are more user-friendly and tutorial-like than man pages.
-To read info pages, do
+To read info pages, do:
 
 [source,shell-session]
 ----
@@ -51,13 +57,18 @@ $ info <program or command>
 $ info ed
 $ info sed
 $ info bash
+$ info find
+$ info xargs
 ----
 
 [NOTE]
-.Note
 ====
-Not all programs and commands have info pages, and when an info page does not exist for a given command, `info` shows the man page instead.
-`vi`, `vim` and `rsync` are some such programs.
+Not all programs and commands provide an info manual.
+In the past, `info <program-that-does-not-have-info-manual` would display the man page for that program instead.
+Some examples include `vi`, `vim`, and `rsync`.
+
+I noticed in 2026 that trying `info vi` brings the info on some program that matches part of the name, while others that have no match, still show the man page instead.
+For example, `info vi` shows the info manual for Viper (an Emacs package), while for `vim` and `rsync` (which have no partial match on the name of program), it still displays their man pages instead.
 ====
 
 You can also open info directly into a section of an info document (if you know the name of the section), something like:
@@ -87,15 +98,23 @@ From GNU Emacs, you can read the info pages with:
 
 [source,text]
 ----
-C-h i m <command>
+C-h i m PROGRAM_NAME
+----
 
-# For example:
+Some examples:
+
+[source,text]
+----
+C-h i m info
+C-h i m ed
 C-h i m sed
+C-h i m find
 ----
 
 Info has a lot of nomenclature, concepts and commands.
-`info info` explains about commands to find stuff inside info, navigate documents, etc.
-It is a somewhat complex system. Yet, a powerful one.
+`info info` explains about commands to find stuff inside info manuals, navigate documents, etc.
+It is a somewhat complex system.
+Yet, a powerful and very useful one.
 
 === info summary
 
@@ -114,12 +133,8 @@ $ info emacs 'user input'
 Run `info info 'moving the cursor'`.
 
 [NOTE]
-.Note
 ====
-`META` (or `ALT`) can also be achieved by hitting `ESC`, e.g. `ESC-f`
-for `forward-word`. And `ESC` itself can be produced with `C-[`. `DEL`
-is `Backspace`.
+`META` (or `ALT`) can also be achieved by hitting `ESC`, e.g. `ESC-f` for `forward-word`.
+And `ESC` itself can be produced with `C-[`.
+`DEL` is `Backspace`.
 ====
-
-For a quick glance at _all_ info commands and key bindings, open any
-info page, and press `C-h`.
