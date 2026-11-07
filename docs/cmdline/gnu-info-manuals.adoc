@@ -1,0 +1,125 @@
+= GNU Info Manuals
+:page-subject: Command Line
+
+== info
+
+First:
+
+[source,shell-session]
+----
+$ info info
+$ man info
+$ info --help
+----
+
+The first one is the full-blown manual for the whole Info system.
+Takes some time to read.
+
+.Installing Info packages on your distribution
+[NOTE]
+====
+Arch Linux doesn't split the packages as much as Debian/Ubuntu, so the info manuals generally come installed with as a dependency of any package that has info manuals.
+
+But if for some reason it is not installed:
+
+[source,shell-session]
+----
+$ sudo pacman --sync --refresh --needed texinfo
+----
+
+On Debian-based distros, you may need this:
+
+[source,shell-session]
+----
+$ sudo apt install texinfo-doc-nonfree
+----
+
+On Fedora:
+
+[source,shell-session]
+----
+$ sudo dnf install texinfo
+----
+====
+
+Generally, info pages are more user-friendly and tutorial-like than man pages.
+To read info pages, do
+
+[source,shell-session]
+----
+$ info <program or command>
+$ info ed
+$ info sed
+$ info bash
+----
+
+[NOTE]
+.Note
+====
+Not all programs and commands have info pages, and when an info page does not exist for a given command, `info` shows the man page instead.
+`vi`, `vim` and `rsync` are some such programs.
+====
+
+You can also open info directly into a section of an info document (if you know the name of the section), something like:
+
+[source,shell-session]
+----
+$ info sed 'execution cycle'
+----
+
+Programs in the _coreutils_ group have an _invocation_ section:
+
+[source,shell-session]
+----
+$ info coreutils
+
+$ info '(coreutils) echo invocation'
+$ info coreutils 'echo invocation'
+
+$ info '(coreutils) printf invocation'
+$ info coreutils 'printf invocation'
+
+$ info '(coreutils) kill invocation'
+$ info coreutils 'kill invocation'
+----
+
+From GNU Emacs, you can read the info pages with:
+
+[source,text]
+----
+C-h i m <command>
+
+# For example:
+C-h i m sed
+----
+
+Info has a lot of nomenclature, concepts and commands.
+`info info` explains about commands to find stuff inside info, navigate documents, etc.
+It is a somewhat complex system. Yet, a powerful one.
+
+=== info summary
+
+[source,shell-session]
+----
+$ info emacs --node Files
+$ info '(emacs)Files'
+
+$ info /usr/local/share/info/bash.info
+$ info ~/docs/doc.info
+
+$ info sed 'sed scripts' 'the "s" command'
+$ info emacs 'user input'
+----
+
+Run `info info 'moving the cursor'`.
+
+[NOTE]
+.Note
+====
+`META` (or `ALT`) can also be achieved by hitting `ESC`, e.g. `ESC-f`
+for `forward-word`. And `ESC` itself can be produced with `C-[`. `DEL`
+is `Backspace`.
+====
+
+For a quick glance at _all_ info commands and key bindings, open any
+info page, and press `C-h`.

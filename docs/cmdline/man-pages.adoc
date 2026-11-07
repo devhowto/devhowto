@@ -1,0 +1,73 @@
+= Man Pages
+:page-subject: Command Line
+
+[source,shell-session]
+----
+$ man man
+$ man --help
+$ man foo
+----
+
+When someone tells you something like "`it is documented in _some-command (3)_`", they mean it is in section 3 of the man pages.
+Then you would do `man 3 some-command` or `man some-command.3`:
+
+A real example of that could be with the `printf(1)` command or `printf(3)` from the C Standard Library:
+
+[source,shell-session]
+----
+$ man 1 printf
+$ man printf.1
+
+$ man 3 printf
+$ man printf.3
+----
+
+If we don't know what a man page name would be, we can search the man page names and their sort descriptions by using `-k`, which accepts a regular expression.
+By the way, `man -k pattern` is the same as `apropos pattern`.
+
+[TIP]
+====
+If `apropos` or `man -k` says "`nothing appropriate`", read `man mandb` and then run `mandb` as root.
+====
+
+[source,shell-session]
+----
+$ man -k bc
+... produces to many results...
+----
+
+So, let's match commands that start with "`bc`".
+Results on Ubuntu as of 2019:
+
+[source,shell-session]
+----
+$ man -k ^bc
+bc (1)      - An arbitrary precision calculator language
+bccmd (1)   - Utility for the CSR BCCMD interface
+bcmp (3)    - compare byte sequences
+bcopy (3)   - copy byte sequence
+----
+
+Results on Arch Linux as of 2019:
+
+[source,shell-session]
+----
+$ man -k ^bc
+BC (3x)      - direct curses interface to the terminfo capability dat...
+bc (1)       - An arbitrary precision calculator language
+bc (1p)      - arbitrary-precision arithmetic language
+bcmp (3)     - compare byte sequences
+bcomps (1)   - biconnected components filter for graphs
+bcopy (3)    - copy byte sequence
+----
+
+____
+[!NOTE] On Ubuntu, _bc (1p)_ wasn't available, but it was on Arch Linux.
+____
+
+____
+[!TIP] A "`p`" right after a section number of a man page means the standard POSIX program/behavior.
+"`bc (1p)`" refers to the POSIX specs and behavior.
+____
+
+Section numbers are more or less standard across Unix-like OSes, but the letters may vary.

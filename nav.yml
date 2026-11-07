@@ -1,24 +1,12 @@
 Home:
   - index.adoc
-TypeScript:
-  - typescript/index.adoc
-  - typescript/tsconfig-examples.adoc
-  - typescript/structural-typing.adoc
-  - typescript/type-aliases-and-interfaces.adoc
-  - typescript/functions.adoc
-  - typescript/union-types.adoc
-  - typescript/intersection-types.adoc
-  - typescript/object-types.adoc
-  - typescript/tuples.adoc
-  - typescript/any-unknown-top-types.adoc
-  - typescript/keyof.adoc
-  - typescript/infer.adoc
 
 Command Line:
   - cmdline/command-line-intro.adoc
   - cmdline/unix-shells.adoc
   - cmdline/readline-tips-using-the-command-line.adoc
   - cmdline/help-info-man.adoc
+  - cmdline/gnu-info-manuals.adoc
   - cmdline/shell-redirections.adoc
   - cmdline/curl.adoc
   - cmdline/clipboard.adoc
@@ -147,6 +135,20 @@ JavaScript:
   - Do It With Ramda:
     - javascript/async-examples-with-ramda.adoc
     - javascript/do-it-with-ramda-part-1.adoc
+
+TypeScript:
+  - typescript/index.adoc
+  - typescript/tsconfig-examples.adoc
+  - typescript/structural-typing.adoc
+  - typescript/type-aliases-and-interfaces.adoc
+  - typescript/functions.adoc
+  - typescript/union-types.adoc
+  - typescript/intersection-types.adoc
+  - typescript/object-types.adoc
+  - typescript/tuples.adoc
+  - typescript/any-unknown-top-types.adoc
+  - typescript/keyof.adoc
+  - typescript/infer.adoc
 
 Data Structures & Algorithms:
   - dsa/recursion.adoc
