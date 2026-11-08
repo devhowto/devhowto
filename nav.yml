@@ -39,7 +39,6 @@ Command Line:
   - cmdline/od.adoc
   - cmdline/bash-scripts.adoc
   - cmdline/hackerrank-shell.adoc
-  - cmdline/mailing-lists.adoc
   - SED:
     - cmdline/sed/sed.adoc
     - cmdline/sed/sed-tasks-1.adoc
@@ -99,6 +98,7 @@ Miscellaneous:
   - misc/unicode-utf8.adoc
   - misc/virtualbox.adoc
   - misc/weechat.adoc
+  - cmdline/mailing-lists.adoc
   - misc/writing-code-by-hands-and-brains.adoc
 
 Keyboard Shortcuts:
