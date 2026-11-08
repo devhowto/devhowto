@@ -142,6 +142,100 @@ And `ESC` itself can be produced with `C-[`.
 
 == List of info keymaps
 
-Here we list the “info” keymaps without annotating what they do.
-The goal is to exercise memory.
+Access the info reader either in Emacs with kbd:[C-h i] or on the shell with `info info`, then type kbd:[H] (uppercase “h”) to show a list of all keymaps avaiable.
 
+image::../../__assets/2026-11-08-info-info-H-list-of-keymaps.png[info info on the shell then H to see list of keymaps]
+
+And here is the online documentation for the standalone GNU info reader:
+
+* https://www.gnu.org/software/texinfo/manual/info-stnd/info-stnd.html
+
+This is what it shows in Emacs 31.1 on Arch Linux as of Nov 2026:
+
+[source,text]
+----
+  Major mode Info-mode
+
+The major mode is Info mode defined in info.el:
+
+Info mode provides commands for browsing through the Info documentation tree.
+Documentation in Info is divided into "nodes", each of which discusses
+one topic and contains references to other nodes which discuss related
+topics.  Info has commands to follow the references and show you other nodes.
+
+h	Invoke the Info tutorial.
+q	Quit Info: reselect previously selected buffer.
+
+Selecting other nodes:
+<mouse-2>
+	Follow a node reference you click on.
+	  This works with menu items, cross references, and
+	  the "next", "previous" and "up", depending on where you click.
+RET	Follow a node reference near point, like <mouse-2>.
+n	Move to the "next" node of this node.
+p	Move to the "previous" node of this node.
+^	Move "up" from this node.
+m	Pick menu item specified by name (or abbreviation).
+	  Picking a menu item causes another node to be selected.
+d	Go to the Info directory node.
+<	Go to the Top node of this file.
+>	Go to the final node in this file.
+[	Go backward one node, considering all nodes as forming one sequence.
+]	Go forward one node, considering all nodes as forming one sequence.
+TAB	Move cursor to next cross-reference or menu item.
+C-M-i	Move cursor to previous cross-reference or menu item.
+f	Follow a cross reference.  Reads name of reference.
+l	Move back in history to the last node you were at.
+r	Move forward in history to the node you returned from after using l.
+L	Go to menu of visited nodes.
+T	Go to table of contents of the current Info file.
+
+Moving within a node:
+SPC	Normally, scroll forward a full screen.
+	  Once you scroll far enough in a node that its menu appears on the
+	  screen but after point, the next scroll moves into its first
+	  subnode.  When after all menu items (or if there is no menu),
+	  move up to the parent node.
+DEL	Normally, scroll backward.  If the beginning of the buffer is
+	  already visible, try to go to the previous menu entry, or up
+	  if there is none.
+b	Go to beginning of node.
+e	Go to end of node.
+
+Advanced commands:
+s	Search through this Info file for specified regexp,
+	  and select the node in which the next occurrence is found.
+S	Search through this Info file for specified regexp case-sensitively.
+C-s, C-M-s	Use Isearch to search through multiple Info nodes.
+i	Search for a topic in this manual’s Index and go to index entry.
+,	(comma) Move to the next match from a previous i command.
+I	Look for a string and display the index node with results.
+M-x info-apropos	Look for a string in the indices of all manuals.
+g	Move to node specified by name.
+	  You may include a filename as well, as (FILENAME)NODENAME.
+1 .. 9	Pick first ... ninth item in node’s menu.
+	  Every third ‘*’ is highlighted to help pick the right number.
+c	Put name of current Info node in the kill ring.
+M-n	Select a new cloned Info buffer in another window.
+C-u C-h i	Move to new Info file with completion.
+C-u N C-h i	Select Info buffer with prefix number in the name *info*<N>.
+
+In addition to any hooks its parent mode ‘special-mode’ might have run,
+this mode runs the hook ‘Info-mode-hook’, as the final or penultimate
+step during initialization.
+
+Other commands for this mode, not bound to any keys:
+
+`Info-history-back-menu'
+`Info-history-forward-menu'
+`Info-last-menu-item'
+`Info-last-preorder'
+`Info-mouse-follow-link'
+`Info-mouse-scroll-down'
+`Info-mouse-scroll-up'
+`Info-next-menu-item'
+`Info-next-preorder'
+`Info-search-backward'
+`Info-search-next'
+`Info-undefined'
+----
