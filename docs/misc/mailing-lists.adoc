@@ -1,0 +1,17 @@
+= Mailing Lists
+:page-subject: Contributing
+
+== GNU Coreutils
+
+* https://lists.gnu.org/
+* https://lists.gnu.org/mailman/options/coreutils
+* https://lists.gnu.org/mailman/options/coreutils-announce
+
+To subscribe and unsubscribe, go to the `/mailman/options/<list-name>`.
+There will be a few forms to login, subscribe and unsubscribe.
+I only got the path above by a web search.
+Couldn't find the links to `/mailman/options/<list-name>` in the home page or its linked pages.
+
+On lists.gnu.org there is a https://lists.gnu.org/mailman/listinfo/[the listinfo page] URL.
+There, search for the list of interest and click its link.
+There you'll also have a form to subscribe to the mailing list.

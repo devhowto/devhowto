@@ -1,5 +1,6 @@
 = GNU Info Manuals
 :page-subject: Command Line
+:experimental:
 
 == Texinfo
 
@@ -138,3 +139,9 @@ Run `info info 'moving the cursor'`.
 And `ESC` itself can be produced with `C-[`.
 `DEL` is `Backspace`.
 ====
+
+== List of info keymaps
+
+Here we list the “info” keymaps without annotating what they do.
+The goal is to exercise memory.
+
