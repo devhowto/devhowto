@@ -1,5 +1,6 @@
 = The Scheme Programming Language
-:page-subject: scheme
+:page-subject: Scheme
+:short-title: Scheme Intro
 
 == Books and other references
 
