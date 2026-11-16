@@ -1,0 +1,16 @@
+= The Scheme Programming Language
+:page-subject: scheme
+
+== Books and other references
+
+=== Software Design for Flexibility
+
+By Gerald Jay Sussman.
+People say it is an interesting and still very relevant.
+Recommended by didi and Sheilong on #lisp-br IRC on Libera.
+
+=== A Scheme Primer
+
+* https://files.spritely.institute/papers/scheme-primer.html
+
+Recommended by didi and Sheilong on #lisp-br IRC on Libera.

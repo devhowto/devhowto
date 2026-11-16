@@ -111,6 +111,7 @@ C:
  - C/gcc.adoc
 
 Scheme:
+ - scheme/intro.adoc
  - scheme/chicken-scheme.adoc
  - scheme/chicken-install.adoc
  - scheme/debugging.adoc
