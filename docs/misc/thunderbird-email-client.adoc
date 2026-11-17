@@ -1,0 +1,15 @@
+= Thunderbird Email Client
+:page-subject: Email
+
+== Thunderbird for mailing lists
+
+On advanced settings, set `mailnews.display.prefer_plaintext` to 72 so plain text emails sent hard-wrap lines at 72 columns.
+
+Then, Thunderbird itself shows (visually) long lines, even though the text was sent as hard-wrapped lines.
+
+Set `mailnews.display.disable_format_flowed_support` to false and lines _display_ respecting the hard-wraps.
+
+=== References
+
+* https://www.fastmail.com/blog/format-flowed/
+

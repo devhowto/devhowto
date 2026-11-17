@@ -10,6 +10,7 @@ Command Line:
   - cmdline/shell-redirections.adoc
   - cmdline/curl.adoc
   - cmdline/clipboard.adoc
+  - cmdline/naming-and-renaming-files.adoc
   - cmdline/bash-brace-expansion.adoc
   - cmdline/du.adoc
   - cmdline/bash-conditionals.adoc
@@ -99,6 +100,7 @@ Miscellaneous:
   - misc/virtualbox.adoc
   - misc/weechat.adoc
   - misc/mailing-lists.adoc
+  - misc/thunderbird-email-client.adoc
   - misc/writing-code-by-hands-and-brains.adoc
 
 Keyboard Shortcuts:

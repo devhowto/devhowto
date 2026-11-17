@@ -1,0 +1,133 @@
+= Naming and Renaming Files
+:page-subject: Command Line
+
+== Numerically incrementing names example
+
+In this example, we are studying a book and creating files with incremental digits so we have a history of the progress in order.
+Good for review or for sharing with others since the order and the improvements or advancements made in the implementation were done in a particular order.
+So far we have these files:
+
+[source,shell-session]
+----
+$ ls -1
+gear_1.scm
+gear_2.scm
+...
+gear_9.scm
+----
+
+Then we progress in the chapters and end up with a few more incrementally named `gear_??.rb` files:
+
+[source,shell-session]
+----
+$ ls
+gear_10.rb  gear_12.rb  gear_1.rb  gear_3.rb  gear_5.rb  gear_7.rb  gear_9.rb
+gear_11.rb  gear_13.rb  gear_2.rb  gear_4.rb  gear_6.rb  gear_8.rb
+
+$ ls -1
+gear_10.rb
+gear_11.rb
+gear_12.rb
+gear_13.rb
+gear_1.rb
+gear_2.rb
+gear_3.rb
+gear_4.rb
+gear_5.rb
+gear_6.rb
+gear_7.rb
+gear_8.rb
+gear_9.rb
+----
+
+Oh noes!
+`gear_10.rb` to `gear_13.rb` all come before `gear_1.rb` to `gear_9.rb`.
+Even though we can review the files in order, it would be nice if the were really listed from 1 to 13 instead of from 10 to 13 and from 1 to 9.
+
+The thing is that the “gear_” substring all have the same ordering because all the files have that common substring.
+So the algorithm needs to compare more chars to figure out the order.
+1 ends in a tie for both “gear_1.rb” and “gear_10.rb”, because so far it has compared “gear_1” an “gear_1”.
+The algorithm has to take a look further chars.
+For “gear_1.rb” the next char is the “.” (dot), and for “gear_10.rb” it is the “0” (zero).
+
+Now type `man ascii` (https://man.archlinux.org/man/ascii.7[man 7 ascii^]) on your Unix-like operating system and you'll see “0” has a lower value than “.”.
+
+[source,text]
+----
+Oct   Dec   Hex   Char                      │ Oct   Dec   Hex   Char
+────────────────────────────────────────────┼───────────────────────────
+000   0     00    NUL '\0' (null character) │ 100   64    40    @
+...
+056   46    2E    .                         │ 156   110   6E    n
+....
+----
+
+Let's pretend we are the algorithm:
+
+[source,text]
+----
+g e a r _ 1 . r b
+- - - - - -
+          ^
+
+g e a r _ 1 0 . r b
+- - - - - -
+          ^
+----
+
+Thehe substring up to “gear_1” in both filenames is not enough to determine the order.
+Try the next char:
+
+[source,text]
+----
+g e a r _ 1 . r b
+- - - - - -
+            ^
+
+g e a r _ 1 0 . r b
+- - - - - - -
+            ^
+----
+
+We finally have different chars to compare, and “0” comes _before_ “.” in ASCII/UTF-8, so “gear_10.rb” is listed before “gear_1.rb”.
+
+[NOTE]
+====
+UTF-8 is compatible with ASCII so it will work the same on our modern UTF-8 enabled systems and applications.
+====
+
+So now that we know that, we can rename the files so they always have two incrementing digits (assuming there will be no more than 99 files for a chapter or an entire book, as when we get to 100, the problem would show up again).
+
+=== Using the `rename' command
+
+The parameters for our case are these:
+
+* `gear_` which means the substring we want to keep untouched.
+* `gear_0` to mean we wan to add a “0” after the “_”.
+* `gear_?.rb` which means we only want to rename the files that had the single digit between “_” and “.rb”
+
+[source,shell-session]
+----
+$ rename gear_ gear_0 gear_?.scm
+
+$ ls -1
+gear_01.scm
+gear_02.scm
+gear_03.scm
+gear_04.scm
+gear_05.scm
+gear_06.scm
+gear_07.scm
+gear_08.scm
+gear_09.scm
+gear_10.scm
+gear_11.scm
+gear_12.scm
+gear_13.scm
+----
+
+==== References
+
+* `man rename`
+* https://man.archlinux.org/man/rename.1
+* https://man.archlinux.org/man/ascii.7
