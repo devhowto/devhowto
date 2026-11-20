@@ -15,5 +15,31 @@ Same examples of when vertico shows up:
 
 By default, vertico will match items that start with the chars being typed.
 For example, if one types kbd:[M-x load-theme RET] followed by the chars “light”, it will only show themes that _start_ with “light”.
-To match “light” anywhere in the theme name, prepend “*” glob to the chars, so it reads like “*light”, and then vertico will show any items that have the subsring “light” in their name, so it would match theme names like “light-blue”, “tsdh-light”, “doom-gruvbox-light” or “doom-one-light”.
+To match “light” anywhere in the theme name, prepend “*” glob to the chars, that is, you type “*light”, and then vertico will show any items that have the subsring “light” in their name, so it would match theme names like “light-blue”, “tsdh-light”, “doom-gruvbox-light” or “doom-one-light”.
 
+Alternativelly, there are completion styles that are fuzzy-like:
+
+[source,elisp]
+----
+(setq completion-styles '(basic substring partial-completion flex)))
+----
+
+This is how I integrate it with the rest of my current vertico setup as I write this on 2026-11-20 07:43:
+
+[source,elisp]
+----
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+
+  ;; Display vertico like a regular, large buffer, either on
+  ;; the left, right, top or bottom (depending on the current
+  ;; layout and where point is).
+  (vertico-buffer-mode)
+
+  :config
+  (setq completion-styles '(basic substring partial-completion flex)))
+----
+
+With this config, no need to prefix the search with “*”.
