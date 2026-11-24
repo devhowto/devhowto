@@ -82,6 +82,9 @@ Editors:
     - editors/zed/intro.adoc
     - editors/zed/keymaps.adoc
 
+Web Browsers:
+  - docs/web-browsers/google-chrome.adoc
+
 Miscellaneous:
   - misc/archlinux.adoc
   - misc/archlinux-boot.adoc

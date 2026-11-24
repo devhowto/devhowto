@@ -1,0 +1,36 @@
+= Google Chrome
+:page-subject: Web Brwoser
+
+
+== GraphQL Network Inspector started debugging this browser
+
+To stop that annoying banner to show up every time we go to the GraphQL Network, start the browser with this option:
+
+[source,text]
+----
+--silent-debugger-extension-api
+----
+
+On Arch Linux, with `google-chrome` from AUR (which provides the executable `google-chrome-stable`, it can be started from the command line with:
+
+[source,shell-session]
+----
+$ google-chrome-stable --silent-debugger-extension-api &
+----
+
+Or copy the .desktop file to `$HOME/.local/share/applications/`:
+
+[source,shell-session]
+----
+$ cp -v \
+    /usr/share/applications/google-chrome.desktop \
+    ~/.local/share/applications
+----
+
+Then edit the copied version of the file and add the option to the `Exec` line:
+
+.Excerpt from ~/.local/share/applications/google-chrome.desktop
+[source,text]
+----
+Exec=/usr/bin/google-chrome-stable --silent-debugger-extension-api %U
+----
