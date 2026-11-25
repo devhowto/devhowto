@@ -21,7 +21,27 @@ Use kbd:[C-c p s] to get search-related which-key suggestions.
 
 === diff-hl package
 
-* kbd:[C-x v [] for `diff-hl-next-hunk`.
-* kbd:[C-x v \]] for `diff-hl-previous-hunk`.
-* kbd:[C-x v }] for `diff-hl-show-hunk-next`.
-* kbd:[C-x v {] for `diff-hl-show-previous-hunk`.
+* kbd:[C-x v []: `diff-hl-next-hunk`.
+* kbd:[C-x v \]]: `diff-hl-previous-hunk`.
+* kbd:[C-x v }]: `diff-hl-show-hunk-next`.
+* kbd:[C-x v {]: `diff-hl-show-previous-hunk`.
+
+== Language servers (LSP)
+
+Lsp-mode integrates with Flymake (since it is built into Emacs) to show LSP diagnostics on the minibufer.
+Flycheck is another option.
+
+* kbd:[M-n]: `flymake-goto-next-error`.
+* kbd:[M-p]: `flymake-goto-prev-error`.
+
+Other LSP-related keymaps are prefixed with kbd:[C-c l].
+From there, further keys are possible for code actions, goto definitions/references/etc., and others.
+
+For example, kbd:[C-c l g g] is `lsp-find-definition`.
+kbd:[M-x lsp-find] shows this for me in the vertico buffer:
+
+image::../../__assets/2026-11-25-emacs-lsp-find-in-vertico-bufffer.png[Emacs lsp-find results in vertico buffer].
+
+And `which-key` results after typing kbd:[C-c l] to see available keymaps for LSP:
+
+image::../../__assets/2026-11-25-07-emacs-which-key-results-after-c-c-l-to-trigger-lsp-keymaps.png[Emacs which-key results after C-c l to trigger LSP-related-keymaps]
