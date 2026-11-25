@@ -83,7 +83,7 @@ Editors:
     - editors/zed/keymaps.adoc
 
 Web Browsers:
-  - docs/web-browsers/google-chrome.adoc
+  - web-browsers/google-chrome.adoc
 
 Miscellaneous:
   - misc/archlinux.adoc
