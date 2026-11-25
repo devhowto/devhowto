@@ -40,7 +40,7 @@ From there, further keys are possible for code actions, goto definitions/referen
 For example, kbd:[C-c l g g] is `lsp-find-definition`.
 kbd:[M-x lsp-find] shows this for me in the vertico buffer:
 
-image::../../__assets/2026-11-25-emacs-lsp-find-in-vertico-bufffer.png[Emacs lsp-find results in vertico buffer].
+image::../../__assets/2026-11-25-emacs-lsp-find-in-vertico-bufffer.png[Emacs lsp-find results in vertico buffer]
 
 And `which-key` results after typing kbd:[C-c l] to see available keymaps for LSP:
 
