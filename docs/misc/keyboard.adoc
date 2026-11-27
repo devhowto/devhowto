@@ -37,3 +37,15 @@ In short, `Ctrl` doesn't work with some special chars, while `Alt` does work mos
 In Kitty, `cat` then kbd:[Ctrl+;] just prints `;` (like in VTE-based terminals mentioned above), but for some reason, kbd:[Ctrl+;] still work inside vim, probably because its (advance and amazing) https://sw.kovidgoyal.net/kitty/keyboard-protocol/[keyboard protocol^].
 
 It also happens that in some applications inside a terminal, pressing kbd:[Ctrl+Enter] produces a new line without submitting the text to the application, while in some other cases, we need kbd:[Alt+Enter] to produce new lines without submitting the text o he application.
+
+== Caret notation “^” to mean Ctrl
+
+Many applications and documents use the caret kbd:[^] to mean the kbd:[Ctrl] key.
+
+For example, `journalctl -b` to debug a problem, and saw this ++^X++ mention:
+
+image::../__assets/2026-11-27-journalctl-caret-notation-for-ctrl.png[journalctl mention of ^x (Ctrl+X)]
+
+It is also how `nano`'s (editor) shows its help section for shortcuts:
+
+image::../__assets/2026-11-27-nano-caret-notation-for-ctrl.png[nano editor caret notation for the Ctrl key]
