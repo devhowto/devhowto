@@ -1,7 +1,7 @@
 = Pacman
 :page-subject: Arch Linux
 
-== pacman not enough free disk space
+== Error: not enough free disk space
 
 [source,text]
 ----
