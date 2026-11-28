@@ -1,0 +1,61 @@
+= Pacman
+:page-subject: Arch Linux
+
+== pacman not enough free disk space
+
+[source,text]
+----
+$ aur sync --upgrades && \
+  sudo pacman --sync --refresh --sysupgrade
+
+(redacted output)
+
+:: Proceed with installation? [Y/n]
+error: Partition / too full: 400344 blocks needed, 39166 blocks free
+error: failed to commit transaction (not enough free disk space)
+Errors occurred, no packages were upgraded.
+
+$ lsblk -f /dev/nvme0n1
+NAME        FSTYPE      FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+nvme0n1
+├─nvme0n1p1 vfat        FAT32       3D6B-C149                             853.2M    17% /efi
+├─nvme0n1p2 ext4        1.0         60b9e567-4bf5-46ee-8fb2-7ebccb8103d6    153M    95% /
+└─nvme0n1p3 crypto_LUKS 2           ea9f5a54-72d1-401f-a3d7-90cf5c528ca9
+  └─home    ext4        1.0         002c5d3b-14e0-411a-8091-525f3663873e  144.7G    78% /home
+----
+
+The solution is to clean the pacman cache.
+
+[WARNING]
+==== 
+Clearing the pacman chache right before a system upgrade is dangerous.
+If something goes wrong and for example, we might need to downgrade to a previous kernel version, it will no longer be available in the local cache.
+
+See:
+
+* https://wiki.archlinux.org/title/Downgrading_packages
+* https://wiki.archlinux.org/title/Pacman#Cleaning_the_package_cache
+====
+
+[source,shell-session]
+----
+$ sudo pacman --sync --clean --clean
+[sudo] password for devy:
+
+Cache directory: /var/cache/pacman/pkg/
+:: Do you want to remove ALL files from cache? [y/N] y
+removing all files from cache...
+
+Database directory: /var/lib/pacman/
+:: Do you want to remove unused repositories? [Y/n] y
+removing unused sync repositories...
+
+dotfiles [devel *%|u=]
+$ lsblk -f /dev/nvme0n1
+NAME        FSTYPE      FSVER LABEL UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+nvme0n1
+├─nvme0n1p1 vfat        FAT32       3D6B-C149                             853.2M    17% /efi
+├─nvme0n1p2 ext4        1.0         60b9e567-4bf5-46ee-8fb2-7ebccb8103d6   31.8G    61% /
+└─nvme0n1p3 crypto_LUKS 2           ea9f5a54-72d1-401f-a3d7-90cf5c528ca9
+  └─home    ext4        1.0         002c5d3b-14e0-411a-8091-525f3663873e  144.7G    78% /home
+----

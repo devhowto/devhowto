@@ -87,6 +87,7 @@ Web Browsers:
 
 Miscellaneous:
   - misc/archlinux.adoc
+  - misc/archlinux-pacman.adoc
   - misc/archlinux-boot.adoc
   - misc/keyboard.adoc
   - misc/asciidoc-and-asciidoctor.adoc
